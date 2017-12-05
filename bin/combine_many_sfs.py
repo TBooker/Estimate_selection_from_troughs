@@ -1,4 +1,4 @@
-import argparse, pandas as pd
+import argparse, pandas as pd, gzip
 import site_frequency_spectrum as SFS_tools
 
 
@@ -20,7 +20,7 @@ def main():
 
 	sfs_dict = {}
 
-	for i in open(args.input):
+	for i in gzip.open(args.input):
 		z = i.split('[')
 		region = z[1].strip("'").replace("'", '')
 		sfs_temp = map(int , z[2].replace(']', '').replace(',', '').strip(). split(' '))
@@ -45,9 +45,9 @@ def main():
 		
 		mid = mult*sum(dist)/2
 
-		data.append([mid, SFS_tools.pi(sfs)])
+		data.append([mid, SFS_tools.pi(sfs),SFS_tools.tajima(sfs) ])
 
-	pd.DataFrame(data, columns = ['dist','pi']).to_csv(args.output)
+	pd.DataFrame(data, columns = ['dist','pi', 'TD']).to_csv(args.output)
 
 if '__name__':
 	main()
