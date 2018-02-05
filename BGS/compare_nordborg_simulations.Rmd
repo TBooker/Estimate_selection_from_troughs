@@ -1,0 +1,64 @@
+---
+title: "Plot BGS from simulations V. Nordmorg"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Nordborg V simulations
+
+Here I'll plot simulation results to examine what BGS looks like in simulations versus theoretical expectation
+
+```{r}
+library(ggplot2)
+```
+
+## Reading in the data
+
+### Nordborg results
+```{r exp}
+
+r1<-read.csv('~/project/15.Estimate_Selection_From_Trough/BGS/rho0.009.csv')
+r1$lab <- 'Rho = 0.009'
+r2<-read.csv('~/project/15.Estimate_Selection_From_Trough/BGS/rho0.0045.csv')
+r2$lab <- 'Rho = 0.0045'
+r3<-read.csv('~/project/15.Estimate_Selection_From_Trough/BGS/rho0.0009.csv')
+r3$lab <- 'Rho = 0.0009'
+
+nordborg <- rbind(r1, r2 ,r3) 
+```
+
+### Simulation results
+```{r sims}
+
+s1<-read.csv('~/project/15.Estimate_Selection_From_Trough/simulations/BGS.Exponential/BGS.Rho0.009.csv')
+s1$lab <- 'Rho = 0.009'
+s1$g_dist  <- s1$dist * 0.009
+s1$B  <- s1$pi / 0.01
+
+s2<-read.csv('~/project/15.Estimate_Selection_From_Trough/simulations/BGS.Exponential/BGS.Rho0.0045.csv')
+s2$lab <- 'Rho = 0.0045'
+s2$g_dist  <- s2$dist * 0.0045
+s2$B  <- s2$pi / 0.01
+
+s3<-read.csv('~/project/15.Estimate_Selection_From_Trough/simulations/BGS.Exponential/BGS.Rho0.0009.csv')
+s3$lab <- 'Rho = 0.0009'
+s3$g_dist  <- s3$dist * 0.0009
+s3$B  <- s3$pi / 0.01
+
+sims <- rbind(s1, s2 ,s3) 
+
+
+```
+
+### plot the data now, please
+```{r pressure, echo=T}
+
+ggplot(data = sims, aes(x= g_dist, y = B), col = 'black')+
+  geom_line()+
+  geom_line(data = nordborg, aes(x= g_dist, y = B), col = 'red')+
+  facet_grid(~lab, scales = 'free_x')
+
+```
