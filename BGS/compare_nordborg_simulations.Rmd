@@ -20,11 +20,11 @@ library(ggplot2)
 ### Nordborg results
 ```{r exp}
 
-r1<-read.csv('~/project/15.Estimate_Selection_From_Trough/BGS/rho0.009.csv')
+r1<-read.csv('~/project/15.Estimate_Selection_From_Trough/BGS/Rho0.009.csv')
 r1$lab <- 'Rho = 0.009'
-r2<-read.csv('~/project/15.Estimate_Selection_From_Trough/BGS/rho0.0045.csv')
+r2<-read.csv('~/project/15.Estimate_Selection_From_Trough/BGS/Rho0.0045.csv')
 r2$lab <- 'Rho = 0.0045'
-r3<-read.csv('~/project/15.Estimate_Selection_From_Trough/BGS/rho0.0009.csv')
+r3<-read.csv('~/project/15.Estimate_Selection_From_Trough/BGS/Rho0.0009.csv')
 r3$lab <- 'Rho = 0.0009'
 
 nordborg <- rbind(r1, r2 ,r3) 
@@ -55,10 +55,10 @@ sims <- rbind(s1, s2 ,s3)
 
 ### plot the data now, please
 ```{r pressure, echo=T}
-
+str(nordborg)
 ggplot(data = sims, aes(x= g_dist, y = B), col = 'black')+
   geom_line()+
-  geom_line(data = nordborg, aes(x= g_dist, y = B), col = 'red')+
+  geom_line(data = nordborg, aes(x= rho_dist, y = B), col = 'red')+
   facet_grid(~lab, scales = 'free_x')
 
 ```

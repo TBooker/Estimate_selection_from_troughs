@@ -1,0 +1,93 @@
+---
+title: "Plot Exons and CNEs With Recombination Distance comparing to Physical distance"
+output: html_document
+---
+  
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Let's plot the pattern of diversity around Exons
+First I'm going to read in the data that I have analysed and parsed in Python
+I used the 'castaneus_map_analysis.py' script to generate the data
+ 
+Start with the exons
+
+```{r readData1}
+x <- read.csv('~/project/15.Estimate_Selection_From_Trough/mouse_analysis/castaneusMap/exons/Autosome.summary.csv')
+x$div <- x$pi/x$rat_div_jc
+y <- read.csv('~/project/1.stats_from_exons/intervals/analysis/strategy_2/exons_1000_noncpg_unfolded.summary.csv')
+y$div <- y$pi/y$t2
+y<-y[y$dist>0,]
+library(ggplot2)
+
+TommyTheme <-   theme(
+axis.title.x = element_text(size=14,angle=0),
+axis.title.y = element_text(size=17,vjust=0.5),
+axis.text.x = element_text(size=12,angle=0),
+axis.text.y = element_text(size=12,angle=0),
+strip.text.y = element_text(size = 15)
+)
+
+
+```
+
+## Plot diversity
+
+
+```{r diversity, echo=FALSE}
+
+ggplot(data = x, aes( x = distance, y = pi*100, col = 'Genetic Distance'))+
+  geom_line(lty = 1)+
+  geom_line(data = y, aes(x = 0.009*abs(dist), y = 100*pi, col = 'Physical Distance'))+
+  scale_x_continuous(limits = c(0,1500) )+
+  scale_y_continuous(limits = c(0.5,1.05) )+
+  scale_color_discrete('')+
+  ylab(expression(pi*' (%)'))+
+  xlab(expression(italic('4'*N[e]*r)))+
+  theme_bw()+
+  TommyTheme
+
+
+```
+
+```{r readData2}
+rm(list=ls())
+x <- read.csv('~/project/15.Estimate_Selection_From_Trough/mouse_analysis/castaneusMap/cne/Autosome.summary.csv')
+x$div <- x$pi/x$rat_div_jc
+y <- read.csv('~/project/1.stats_from_exons/intervals/analysis/strategy_2/cne/subtracted_beds/CNE_nCpG_unfolded.stats.4.csv')
+y$div <- y$pi/y$t2
+y<-y[y$dist>0,]
+library(ggplot2)
+
+TommyTheme <-   theme(
+axis.title.x = element_text(size=14,angle=0),
+axis.title.y = element_text(size=17,vjust=0.5),
+axis.text.x = element_text(size=12,angle=0),
+axis.text.y = element_text(size=12,angle=0),
+strip.text.y = element_text(size = 15)
+)
+
+
+```
+
+## Plot diversity
+
+
+```{r diversity2, echo=FALSE}
+mean(y[y$dist>4000,]$t2)
+mean(x[x$distance>75,]$rat_div_jc)
+
+ggplot(data = x, aes( x = distance, y = pi/rat_div_jc*100, col = 'Genetic'))+
+  geom_line(lty = 1)+
+  geom_line(data = y, aes(x = 0.009*abs(dist), y = 100*pi/t2, col = 'Physical'))+
+#  scale_x_continuous(limits = c(0,1500) )+
+#  scale_y_continuous(limits = c(0.5,1.05) )+
+  scale_color_discrete('')+
+  ylab(expression(pi/d[rat]*' (%)'))+
+  xlab(expression(italic('4'*N[e]*r)))+
+  theme_bw()+
+  TommyTheme
+
+
+```

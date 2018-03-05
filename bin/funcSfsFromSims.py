@@ -1,4 +1,4 @@
-import subprocess, argparse, site_frequency_spectrum as SFS
+import subprocess, argparse, glob, site_frequency_spectrum as SFS
 
 def getSFSfromSLiM(inp):
 	polymorphisms = []
@@ -21,12 +21,11 @@ def getSFSfromSLiM(inp):
 def main():
 	parser = argparse.ArgumentParser(description="Extract the SFS from a binch of merged SLiM output files")
 
-	parser.add_argument("-i","--inpout", 
+	parser.add_argument("-i","--input", 
 		required = True,
 		dest = "input",
 		type =str, 
-		help = "The name of the SLiM output",
-		nargs = '+')
+		help = "The name of the directory containing the SLiM output")
 
 	parser.add_argument("-o","--output", 
 		required = True,
@@ -37,24 +36,28 @@ def main():
 	args = parser.parse_args()
 
 
-	output = []
-	for m in range(4,9):
+#	output = []
+	for m in range(1,9):
 		print 'm'+str(m)
 		full_sfs = []
-		for i in args.input:
-			print '\t',i
+		for i in glob.glob(args.input+'/R*'):
+			num = i.split('/')[-1].split('.')[2]
+			
 			process = subprocess.Popen(['zgrep', 'm'+str(m), i], stdout = subprocess.PIPE).communicate()[0]
 			fixations, sfs = getSFSfromSLiM(process)
 			if fixations == None:continue
 			polymorphs = sum(sfs)	
 			sfs[-1] +=fixations	
 			sfs[0] = 0
+			print SFS.pi(sfs)/140000.
+			print ':'.join(map(str,sfs))
+			continue
 			if len(full_sfs) == 0:
 				full_sfs = sfs
 			else:
 				full_sfs = SFS.merge_SFS(full_sfs,sfs)
-		output.append(['m'+str(m),full_sfs])
-		
+#		output.append(['m'+str(m),full_sfs])
+	return		
 
 
 	txt = open(args.output, 'w')

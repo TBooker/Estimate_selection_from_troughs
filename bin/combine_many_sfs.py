@@ -9,12 +9,12 @@ def main():
 	parser.add_argument("-i","--input", 
 		required = True,
 		dest = "input",
-		type =str, 
+		type = str, 
 		help = "The name of the file that contains the sfs files")
 	parser.add_argument("-o","--output", 
 		required = True,
 		dest = "output",
-		type =str, 
+		type = str, 
 		help = "The name of the output file")
 	args = parser.parse_args()
 
@@ -29,7 +29,7 @@ def main():
 		except KeyError:
 			sfs_dict[region] = [sfs_temp]
 
-
+	
 	data = []
 
 	for i in sfs_dict.keys():

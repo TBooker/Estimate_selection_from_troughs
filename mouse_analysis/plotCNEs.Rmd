@@ -1,0 +1,169 @@
+---
+title: "Plot CNEs With Recombination Distance"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Let's plot the pattern of diversity around Cnes
+First I'm going to read in the data that I have analysed and parsed in Python
+I used the 'castaneus_map_analysis.py' script to generate the data
+
+```{r readData }
+rm(list=ls())
+x <- read.csv('~/project/15.Estimate_Selection_From_Trough/mouse_analysis/castaneusMap/cne/chrs1-19.csv')
+library(ggplot2)
+
+cs <- c('chr1' , 'chr2' , 'chr3' , 'chr4' , 'chr5' , 'chr6' , 'chr7' , 'chr8' , 'chr9' , 'chr10' , 'chr11' , 'chr12' , 'chr13' , 'chr14' , 'chr15' , 'chr16' , 'chr17' , 'chr18' , 'chr19')
+x$label <- factor(x$label, levels = cs,
+                  labels = cs)
+
+TommyTheme <-   theme(
+    axis.title.x = element_text(size=14,angle=0),
+    axis.title.y = element_text(size=17,vjust=0.5),
+    axis.text.x = element_text(size=12,angle=0),
+    axis.text.y = element_text(size=12,angle=0),
+    strip.text.x = element_text(size = 15, face = 'bold')
+  )
+
+
+```
+
+## Plot diversity
+
+
+```{r diversity, echo=FALSE}
+ggplot(data = x, aes( x = distance, y = pi*100, col= label))+
+  geom_line()+
+  scale_x_continuous(limits = c(0,100) )+
+#  scale_y_continuous(limits = c(0.5,1.05) )+
+  scale_color_discrete('')+
+  ylab(expression(pi*' (%)'))+
+  xlab(expression('Distance to CNE ('*italic('4'*N[e]*r*')')))+
+  theme_bw()+
+  TommyTheme
+
+```
+
+## Plot diversity/divergence
+
+```{r diversityByDivergence, echo=FALSE}
+ggplot(data = x, aes( x = distance, y = 100*pi/rat_div_jc, col= label))+
+  geom_line()+
+  scale_x_continuous(limits = c(0,100) )+
+  scale_y_continuous(limits = c(3,7) )+
+  scale_color_discrete('')+
+  ylab(expression(pi/d[rat]*' (%)'))+
+  xlab(expression('Distance to CNE ('*italic('4'*N[e]*r*')')))+
+  theme_bw()+
+  TommyTheme
+
+ggplot(data = x[x$label != 'chr19',], aes( x = distance, y = 100*pi/rat_div_jc, col= label))+
+  geom_line()+
+  ggtitle('minus chr19')+
+  scale_x_continuous(limits = c(0,100) )+
+  scale_y_continuous(limits = c(3,7) )+
+  scale_color_discrete('')+
+  ylab(expression(pi/d[rat]*' (%)'))+
+  xlab(expression('Distance to CNE ('*italic('4'*N[e]*r*')')))+
+  theme_bw()+
+  TommyTheme
+
+
+```
+
+## Plot divergence
+
+
+```{r Divergence, echo=FALSE}
+print('mean divergence')
+mean(x[x$distance > 25,]$rat_div_jc)
+
+ggplot(data = x, aes( x = distance, y = rat_div_jc*100, col= label))+
+  geom_line()+
+  scale_x_continuous(limits = c(0,100) )+
+  scale_y_continuous(limits = c(10,25) )+
+  scale_color_discrete('')+
+  ylab(expression(d[rat]*' (%)'))+
+  xlab(expression('Distance to CNE ('*italic('4'*N[e]*r*')')))+
+  theme_bw()+
+  TommyTheme
+
+
+```
+
+## Plot Tajima's D
+
+```{r tajima, echo=FALSE}
+
+ggplot(data = x, aes( x = distance, y = tajima, col= label))+
+  geom_line()+
+  scale_x_continuous(limits = c(0,100) )+
+#  scale_y_log10()+
+  scale_color_discrete('')+
+  ylab("Tajima's D")+
+  xlab(expression('Distance to CNE ('*italic('4'*N[e]*r*')')))+
+  theme_bw()+
+  TommyTheme
+
+
+```
+
+## Plot the number of sites
+
+```{r sites, echo=FALSE}
+
+ggplot(data = x, aes( x = distance, y = sites/1e6, col= label))+
+  geom_line()+
+  scale_x_continuous(limits = c(0,100) )+
+  scale_y_log10()+
+  scale_color_discrete('')+
+  ylab('Sites (Mbp)')+
+  xlab(expression('Distance to CNE ('*italic('4'*N[e]*r*')')))+
+  theme_bw()+
+  TommyTheme
+
+
+```
+
+
+
+
+``` {r plot CNEs+Exons}
+
+x$source = 'CNEs'
+
+y <- read.csv('~/project/15.Estimate_Selection_From_Trough/mouse_analysis/castaneusMap/exons/PerChromosome.summary.csv')
+y$source = 'Exons'
+z <- rbind(y,x)
+z$source <- factor(z$source, levels = c('Exons', 'CNEs'),
+                  labels = c('Exons', 'CNEs'))
+
+
+ggplot(data = z, aes( x = distance, y = 100*pi/rat_div_jc, col= label))+
+  geom_line()+
+#  scale_x_continuous(limits = c(0,100) )+
+  scale_y_continuous(limits = c(3,7) )+
+  scale_color_discrete('')+
+  facet_grid(~source)+
+  ylab(expression(pi/d[rat]*' (%)'))+
+  xlab(expression(italic('4'*N[e]*r)))+
+  theme_bw()+
+  TommyTheme
+
+
+ggplot(data = z, aes( x = distance, y = 100*pi/rat_div_jc, col= label))+
+  geom_line()+
+#  scale_x_continuous(limits = c(0,100) )+
+  scale_y_continuous(limits = c(3,7) )+
+  scale_color_discrete('')+
+  facet_grid(~source, scales = 'free')+
+  ylab(expression(pi/d[rat]*' (%)'))+
+  xlab(expression(italic('4'*N[e]*r)))+
+  theme_bw()+
+  TommyTheme
+
+
+```
