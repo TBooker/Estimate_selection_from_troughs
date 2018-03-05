@@ -1,0 +1,4 @@
+identifier,NeSa1,NeSa2,pa1,pa2
+Bimodal,400,20,0.001,0.009
+Bimodal_div10,400,20,0.0001,0.0009
+Bimodal_div100,400,20,0.00001,0.00009
