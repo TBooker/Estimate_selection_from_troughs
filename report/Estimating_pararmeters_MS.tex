@@ -1,0 +1,84 @@
+\documentclass{article}
+\usepackage{authblk}
+
+\setlength{\parskip}{\baselineskip}%
+\setlength{\parindent}{30pt}%
+
+\title{Estimating the parameters of selective sweeps from patterns of genetic diversity in the house mouse}
+\author[1,*]{Tom R. Booker}
+\author[1]{Brian Charlesworth}
+\author[1]{Peter D. Keightley}
+\affil[1]{Institute of Evolutionary Biology, University of Edinburgh, Edinburgh}
+\affil[*]{\emph{t.r.booker@sms.ed.ac.uk}}
+
+
+
+\begin{document}
+\maketitle
+\begin{abstract}
+Woah! Selective sweeps are neat. Let's look at a model for estimating their strength and frequency from pop. gen. data using a mosre developed version of the approach adopted by Wiehe and Stephan in 1993. Let's go on to compare the strength and frequnecy of new mutations occuring in protein-coding versus regulatory regions and see which one will contribute more to phenotypic change.
+
+\end{abstract}
+
+\section*{Introduction}
+Let's introduce the topic and what we're going to do!
+
+\section*{Materials and Methods}
+
+	\subsection*{Model of Recurrent Sweeps and Background Selection}
+Background selection (BGS) is often modelled as the reduction in diversity experienced by a focal neutral site caused by deleterious mutations occurring at linked selected sites. An approximation for the reduction in diversity caused by background selection:
+\begin{equation}
+B = \frac{N_{e}}{N_{0}} \approx exp\Bigg[- \sum \limits_{x} \int \limits_{0}^1 \frac{u_{x}f_x(t)\mathop{dt}}{t \Big( 1 + \frac{(1-t)r_{x,y}}{t} \Big)^2} \Bigg]
+\end{equation}
+Where the sum is over all linked selected sites, the integral is over the distribution of fitness effects for deleterious mutations, \emph{$u_{x}$} is the deleterious mutation rate, \emph{t} is the reduction in fitness for heterozygotes (assumed to be \(\frac{s}{2}\) ), $r_{x,y}$  is the recombination distance between the focal neutral site and the selected site and fx(t) is the proportion of sites in the DFE with a selection coefficient of t.
+
+	Background selection (BGS) and selective sweeps (SSWs) are processes that induce coalescence. If we assume that the two are independent exponential processes, then the rates at which they induce coalescence can simply be summed (KIM AND STEPHAN 2000). While this assumption has been shown to hold reasonably well, in reality BGS may influence the effects of selective sweeps and \emph{vice versa}
+	The assumption that selective sweeps and background selection are independent has been made before (KIM AND STEPHAN 2000; CORBETT-DETIG et al. 2015; ELYASHIV et al. 2016; CAMPOS et al. 2017) but in reality, BGS may influence the fixation probabilities of new advantageous mutations (REF?). 
+
+The model we use here is an extension to the model used by CAMPOS et al. (2017) suggested by Charlesworth (unpublished). 
+\begin{equation}
+\frac{\pi_{j}}{\pi_{0}} = \frac{1}{B_{j}^{-1}  + B2N_eP_{sc,j}}
+\end{equation}
+	Where \(\frac{\pi_{j}}{\pi_{0}}\) is the reduction in neutral genetic diversity at site j relative to the expectation in the absence of selection at linked sites. The differences between our model and that used by Campos et al (2017) is that B is in the second term in the denominator of Equation 1. B is the reduction in pairwise coalescence times due to the effects of background selection which is calculated using Equation 1. Multiplying the rate of sweep induced coalescence ($P_{sj}$) by B reflects the reduction in fixation probability of new mutations caused by background selection. 
+
+\begin{equation}
+P_{sc,j} \approx V_a \tau\gamma_j^{\frac{-4r_{i,j}}{s}} 
+\end{equation}
+The term $V_{a}$ = $2\mu$ $p_{a}\gamma_{a}$ is the rate of sweeps per generation, where 𝜇 is the per-base pair per generation mutation rate (assumed to be $5.4 \times 10^{-9}$ (UCHIMURA et al. 2015)), $p_a$ is the fraction of new mutations occurring within a focal element that are advantageous and $\gamma_a$  is the scaled selection coefficient of a new mutation. It is straightforward to incorporate a distribution of advantageous mutation effects to Equation 3:
+		\begin{equation}
+P_{sc,j} \approx \int \limits_{0}^{1} f_x(\gamma)   V_a \tau\gamma_j^{\frac{-4r_{i,j}}{s}} \mathop{d\gamma}
+\end{equation}	
+In this study, we assume an exponential distribution for the distribution of fitness effects for advantageous mutations. 
+
+	We estimate $\gamma_a$ and $p_a$ by fitting the relationship between nucleotide diversity and distance to functional elements by non-linear least squares using the \emph{lmfit} (0.9.7) package for Python 2.7.
+
+	\subsection*{Analysis of the uSFS}
+
+	We estimate the strength and frequency of new mutations using the uSFS. We analyse the uSFS using either the method of Schneider et al. (2011) as implemented in DFE-alpha, or the methods of Tataru et al. (2017) as implemented in polyDFE. Both methods estimate the rate and strength of advantageous mutations using the unfolded site frequency spectrum (uSFS). However, the models implemented in the two differ in their underlying assumptions. The Schneider et al. (2011) approach builds upon the Wright-Fisher transition matrix methods developed by Keightley and Eyre-Walker (2007) to estimate the distribution of fitness effects for harmful mutations. The methods implemented by Tataru et al. (2017) build upon Sawyer and Hartl’s Poisson random field model.
+Throughout the rest of the paper, we will refer to these methods by the names of the programs in which they are implemented.
+
+	\subsection*{Analysis of Mouse Data}
+
+Halligan et al. (2013) sequenced the genomes of 10 wild-caught \emph{Mus musculus castaneus} individuals to high coverage using Illumina paired-end reads. We used the variants called in that study to obtain estimates nucleotide diversity.
+
+From the edges of exons (CNEs), I extracted the SFS in windows of 1Kbp (100bp) extending to distances of 100 Kbp (5Kbp). All non-CpG sites in these windows were extracted, and mouse-rat divergence was calculated. Using either the LD-based map or the Cox-map I calculated the genetic distance between an analysis window and the centre of the focal element. 
+
+	In mice, there is either non-crossover gene conversion, or gene conversion associated with crossing over events. It has been shown that the average gene conversion tract length differs in crossover or non-crossover gene conversion so we extended the recombination distance used 
+
+	There are two types of genetic maps available for mice, those constructed by performing crosses and those inferred from patterns of linkage disequilibrium. The two maps will have benefits and drawbacks. Firstly, maps based on pedigree information are unbiased. They give a description of the locations and rates of crossing over events in the genome,. However, pedigree-based maps require a large number of individuals to be genotyped, which has meant that researchers have often been limited to using a relatively small number of genetic markers. Recombination maps based on linkage disequilibrium, on the other hand, use patterns of linkage disequilibrium to infer the populiaton-scaled recombination rates ($4N_er$) across the genome. LD-based approaches can provide inferences of recombination rates at very fine-scales across the genome, enabling researchers to locate recombination hotspots (reference to a review? – necessary?). A drawback of LD-based approaches is that the recombination rate estimates they produce are confounded with the level of genetic diversity, since both are functions of the effective population size ($N_e$). In this study, we incorporate genetic distances using both pedigree-based and LD-based recombination maps constructed for \emph{Mus musculus}. We use the (COX et al. 2009) genetic map, which was constructed with 10,195 SNPs genotyped in 3,546 meioses. 
+
+	Rates of initiation of gene conversion in mice are known in mice.
+A difficulty is that genetic 
+ 
+	\subsection*{Simulations}
+	We simulated background selection and selective sweeps using the forward-time simulation package SLiM (v1.8; Messer 2012). We performed simulations of a single 1Kbp protein-coding exon, flanked up and downstream by 70Kbp of strictly neutral sequence. 75\% of sites in the simulated exon were subject to selection (i.e. nonsynonymous sites) and the remainder were strictly neutral (i.e. synonymous sites). The population-scaled mutation rate (\emph{$4N_{e}\mu$}) was set to 0.01 and the population-scaled recombination rate (\emph{$4N_{e}r$}) was set to either 0.009, 0.0045 or 0.001. For a given distribution of fitness effects, see below, we performed 1,000 replicate simulations at each recombination rate resulting in 3,000 replicates per set of selection parameters. We ran simulations of 1,000 individuals for 20,000 generations to ensure that equilibrium conditions have been reached. At the final generation, 20 haploid genomes were sampled from the population. From these, we extracted the patterns of diversity around the exon or the uSFSs for nonsynonymous and synonymous sites within the exon itself.
+
+
+\section*{Results}
+These are the results
+
+\section*{Discussion}
+And this is what I think of them
+
+
+\end{document}
