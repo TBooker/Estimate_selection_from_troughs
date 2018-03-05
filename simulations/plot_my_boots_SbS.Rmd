@@ -1,0 +1,357 @@
+---
+title: "Plot Estimates From Simulations, side-by-side"
+author: "Tom Booker"
+date: "05/03/2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+rm(list=ls())
+```
+
+Start by reading in the libraries necessary for plotting the data and make my theme
+```{r libraryPrep}
+library(reshape2)
+library(ggplot2)
+library(wesanderson)
+
+pal <- wes_palette(n = 5, name = "Darjeeling2", type = "continuous")
+TommyTheme <-   
+    theme_bw()+
+    theme(
+    axis.title.x = element_text(size=14,angle=0),
+    axis.title.y = element_text(size=17,vjust=0.5),
+    axis.text.x = element_text(size=12,angle=90),
+    axis.text.y = element_text(size=12,angle=0),
+    strip.text.y = element_text(size = 20, face = 'italic'),
+    strip.text.x = element_text(size = 20)
+  )
+
+
+
+```
+
+Now i'm going to read in the data and prepare it for plotting 
+
+```{r dataPrepBimodal_Both}
+
+rawBoots <- read.csv('analysis/BimodalSims.csv')
+rawBoots$product1 <- rawBoots$NeSa1 * rawBoots$pa1
+rawBoots$product2 <- rawBoots$NeSa2 * rawBoots$pa2
+Boots<-melt(rawBoots, id = c('identifier'))
+
+rawSims1 <- read.csv('analysis/BGS+SWEEPS/BimodalDFE.analysis.txt')
+rawSims1$product1 <- rawSims1$NeSa1 * rawSims1$pa1
+rawSims1$product2 <- rawSims1$NeSa2 * rawSims1$pa2
+Sims1<-melt(rawSims1, id = c('identifier','X','rep', 'AIC'))
+Sims1$identifier <- 'Bimodal'
+
+rawSims2 <- read.csv('analysis/BGS+SWEEPS/BimodalDFE_div10.analysis.txt')
+rawSims2$product1 <- rawSims2$NeSa1 * rawSims2$pa1
+rawSims2$product2 <- rawSims2$NeSa2 * rawSims2$pa2
+Sims2<-melt(rawSims2, id = c('identifier','X','rep', 'AIC'))
+Sims2$identifier <- 'Bimodal - div10'
+
+rawSims3 <- read.csv('analysis/BGS+SWEEPS/BimodalDFE_div100.analysis.txt')
+rawSims3$product1 <- rawSims3$NeSa1 * rawSims3$pa1
+rawSims3$product2 <- rawSims3$NeSa2 * rawSims3$pa2
+
+Sims3<-melt(rawSims3, id = c('identifier','X','rep', 'AIC'))
+Sims3$identifier <- 'Bimodal - div100'
+
+
+
+Sims_both <- rbind(Sims1,Sims2,Sims3)
+Sims_both$class <- 'BGS+SWEEPS'
+```
+
+```{r dataPrepBimodal_bgs_null}
+
+rawBoots <- read.csv('analysis/BimodalSims.csv')
+rawBoots$product1 <- rawBoots$NeSa1 * rawBoots$pa1
+rawBoots$product2 <- rawBoots$NeSa2 * rawBoots$pa2
+Boots<-melt(rawBoots, id = c('identifier'))
+Boots
+rawSims1 <- read.csv('analysis/bgs_null/BimodalDFE.analysis.txt')
+rawSims1$product1 <- rawSims1$NeSa1 * rawSims1$pa1
+rawSims1$product2 <- rawSims1$NeSa2 * rawSims1$pa2
+Sims1<-melt(rawSims1, id = c('identifier','X','rep', 'AIC'))
+Sims1$identifier <- 'Bimodal'
+
+rawSims2 <- read.csv('analysis/bgs_null/BimodalDFE_div10.analysis.txt')
+rawSims2$product1 <- rawSims2$NeSa1 * rawSims2$pa1
+rawSims2$product2 <- rawSims2$NeSa2 * rawSims2$pa2
+Sims2<-melt(rawSims2, id = c('identifier','X','rep', 'AIC'))
+Sims2$identifier <- 'Bimodal - div10'
+
+rawSims3 <- read.csv('analysis/bgs_null/BimodalDFE_div100.analysis.txt')
+rawSims3$product1 <- rawSims3$NeSa1 * rawSims3$pa1
+rawSims3$product2 <- rawSims3$NeSa2 * rawSims3$pa2
+Sims3<-melt(rawSims3, id = c('identifier','X','rep', 'AIC'))
+Sims3$identifier <- 'Bimodal - div100'
+
+
+Sims_bgs_null <- rbind(Sims1,Sims2,Sims3)
+Sims_bgs_null$class <- 'SWEEPS'
+```
+
+```{r combine_DataFrames_Bimodal}
+
+Sims <- rbind(Sims_bgs_null, Sims_both)
+bimLabs <- c("NeSa1","NeSa2","pa1","pa2","product1","product2")
+
+Sims$variable <- factor(Sims$variable, levels = bimLabs,
+                 labels = bimLabs)
+Boots$variable <- factor(Boots$variable, levels = bimLabs,
+                 labels = bimLabs)
+
+vnames <-list(
+  'NeSa1' = expression(gamma[a(1)]),
+  'NeSa2' = expression(gamma[a(2)]),
+  'pa1' = expression(p[a(1)]),
+  'pa2' = expression(p[a(2)]),
+  'product1' = expression(gamma*p[a(1)]),
+  'product2' = expression(gamma*p[a(2)]),
+  'SWEEPS' = 'SWEEPS',
+  'BGS+SWEEPS' = 'BGS+SWEEPS')
+
+
+vlabeller <- function(variable,value){
+  return(vnames[value])
+}
+
+```
+
+Let's get this show on the road and plot the suckers
+
+```{r fig.width=8, fig.height=14,echo=FALSE}
+Sims$value <- round(Sims$value*1e7)/1e7
+
+ggplot(data = Sims, aes( x = identifier, y =  value, col = 'Estimates'))+
+  geom_point(alpha = 0.7)+
+  stat_summary(fun.y = "median", geom = "point", shape = '-',size= 20, color= pal[3]) +
+  geom_point(data= Boots, aes( x = identifier, y = value, col = 'True\nValue'), shape = '-', size = 15)+
+  scale_y_log10('')+
+  scale_x_discrete('')+
+  scale_color_manual('',values = pal)+
+  ggtitle('Bimodal DFE')+
+  facet_grid(variable~class , scales = 'free', labeller = vlabeller)+
+  TommyTheme
+
+
+```
+
+
+```{r dataPrepFixed_both}
+
+rawBoots <- read.csv('analysis/fixedClassSims.csv')
+rawBoots$product <- rawBoots$NeSa * rawBoots$pa
+Boots<-melt(rawBoots, id = c('identifier'))
+
+rawSims1 <- read.csv('analysis/BGS+SWEEPS/Nes10_dDFE.Exponential_div10.analysis.txt')
+rawSims1$product <- rawSims1$NeSa * rawSims1$pa
+Sims1<-melt(rawSims1, id = c('identifier','X','rep', 'AIC'))
+Sims1$identifier <- 'Nes10 - div10'
+
+rawSims2 <- read.csv('analysis/BGS+SWEEPS/Nes10_dDFE.Exponential.analysis.txt')
+rawSims2$product <- rawSims2$NeSa * rawSims2$pa
+Sims2<-melt(rawSims2, id = c('identifier','X','rep', 'AIC'))
+Sims2$identifier <- 'Nes10'
+
+rawSims3 <- read.csv('analysis/BGS+SWEEPS/Nes200_dDFE.Exponential_div10.analysis.txt')
+rawSims3$product <- rawSims3$NeSa * rawSims3$pa
+Sims3<-melt(rawSims3, id = c('identifier','X','rep', 'AIC'))
+Sims3$identifier <- 'Nes200 - div10'
+
+rawSims4 <- read.csv('analysis/BGS+SWEEPS/Nes200_dDFE.Exponential.analysis.txt')
+rawSims4$product <- rawSims4$NeSa * rawSims4$pa
+Sims4<-melt(rawSims4, id = c('identifier','X','rep', 'AIC'))
+Sims4$identifier <- 'Nes200'
+
+Sims_both <- rbind(Sims1,Sims2,Sims3,Sims4)
+Sims_both$class <- 'BGS+SWEEPS'
+
+
+```
+
+
+```{r dataPrepFixed}
+
+rawBoots <- read.csv('analysis/fixedClassSims.csv')
+rawBoots$product <- rawBoots$NeSa * rawBoots$pa
+Boots<-melt(rawBoots, id = c('identifier'))
+
+rawSims1 <- read.csv('analysis/bgs_null/Nes10_dDFE.Exponential_div10.analysis.txt')
+rawSims1$product <- rawSims1$NeSa * rawSims1$pa
+Sims1<-melt(rawSims1, id = c('identifier','X','rep', 'AIC'))
+Sims1$identifier <- 'Nes10 - div10'
+
+rawSims2 <- read.csv('analysis/bgs_null/Nes10_dDFE.Exponential.analysis.txt')
+rawSims2$product <- rawSims2$NeSa * rawSims2$pa
+Sims2<-melt(rawSims2, id = c('identifier','X','rep', 'AIC'))
+Sims2$identifier <- 'Nes10'
+
+rawSims3 <- read.csv('analysis/bgs_null/Nes200_dDFE.Exponential_div10.analysis.txt')
+rawSims3$product <- rawSims3$NeSa * rawSims3$pa
+Sims3<-melt(rawSims3, id = c('identifier','X','rep', 'AIC'))
+Sims3$identifier <- 'Nes200 - div10'
+
+rawSims4 <- read.csv('analysis/bgs_null/Nes200_dDFE.Exponential.analysis.txt')
+rawSims4$product <- rawSims4$NeSa * rawSims4$pa
+Sims4<-melt(rawSims4, id = c('identifier','X','rep', 'AIC'))
+Sims4$identifier <- 'Nes200'
+
+Sims_bgs_null <- rbind(Sims1,Sims2,Sims3,Sims4)
+Sims_bgs_null$class <- 'SWEEPS'
+```
+
+```{r combine_DataFrames_fixed}
+
+Sims <- rbind(Sims_bgs_null, Sims_both)
+
+vnames <-list(
+
+  'NeSa' = expression(gamma[a]),
+  'pa' = expression(p[a]),
+  'product' = expression(gamma*p[a]),
+  'SWEEPS' = 'SWEEPS',
+  'BGS+SWEEPS' = 'BGS+SWEEPS')
+
+
+vlabeller <- function(variable,value){
+  return(vnames[value])
+}
+
+
+```
+
+Now plot'em
+```{r fig.width=8, fig.height=14,echo=FALSE}
+Sims$value <- round(Sims$value*1e7)/1e7
+
+ggplot(data = Sims, aes( x = identifier, y =  value, col = 'Estimates'))+
+  geom_point(alpha = 0.7)+
+  stat_summary(fun.y = "median", geom = "point", shape = '-',size= 20, color= pal[3]) +
+  geom_point(data= Boots, aes( x = identifier, y = value, col = 'True\nValue'), shape = '-', size = 15)+
+  scale_y_log10('')+
+  scale_x_discrete('')+
+  scale_color_manual('',values = pal)+
+  ggtitle('Fixed Class')+
+  facet_grid(variable~class , scales = 'free', labeller = vlabeller)+
+  TommyTheme
+
+
+```
+
+
+
+
+```{r dataPrepExp_both}
+
+rawBoots <- read.csv('analysis/expSims.csv')
+rawBoots$product <- rawBoots$NeSa * rawBoots$pa
+str(rawBoots)
+Boots<-melt(rawBoots, id = c('identifier'))
+
+rawSims1 <- read.csv('analysis/BGS+SWEEPS/Exp.Nes10_dDFE.Exponential_div10.analysis.txt')
+rawSims1$product <- rawSims1$NeSa * rawSims1$pa
+Sims1<-melt(rawSims1, id = c('identifier','X','rep', 'AIC'))
+Sims1$identifier <- 'Exp10 - div10'
+
+rawSims2 <- read.csv('analysis/BGS+SWEEPS/Exp.Nes10_dDFE.Exponential.analysis.txt')
+rawSims2$product <- rawSims2$NeSa * rawSims2$pa
+Sims2<-melt(rawSims2, id = c('identifier','X','rep', 'AIC'))
+Sims2$identifier <- 'Exp10'
+
+rawSims3 <- read.csv('analysis/BGS+SWEEPS/Exp.Nes100_dDFE.Exponential_div10.analysis.txt')
+rawSims3$product <- rawSims3$NeSa * rawSims3$pa
+Sims3<-melt(rawSims3, id = c('identifier','X','rep', 'AIC'))
+Sims3$identifier <- 'Exp100 - div10'
+
+rawSims4 <- read.csv('analysis/BGS+SWEEPS/Exp.Nes100_dDFE.Exponential.analysis.txt')
+rawSims4$product <- rawSims4$NeSa * rawSims4$pa
+Sims4<-melt(rawSims4, id = c('identifier','X','rep', 'AIC'))
+Sims4$identifier <- 'Exp100'
+
+Sims_both <- rbind(Sims1,Sims2,Sims3,Sims4)
+Sims_both$class <- 'BGS+SWEEPS'
+
+```
+
+```{r dataPrepExp}
+
+rawBoots <- read.csv('analysis/expSims.csv')
+rawBoots$product <- rawBoots$NeSa * rawBoots$pa
+str(rawBoots)
+Boots<-melt(rawBoots, id = c('identifier'))
+
+rawSims1 <- read.csv('analysis/bgs_null/Exp.Nes10_dDFE.Exponential_div10.analysis.txt')
+rawSims1$product <- rawSims1$NeSa * rawSims1$pa
+Sims1<-melt(rawSims1, id = c('identifier','X','rep', 'AIC'))
+Sims1$identifier <- 'Exp10 - div10'
+
+rawSims2 <- read.csv('analysis/bgs_null/Exp.Nes10_dDFE.Exponential.analysis.txt')
+rawSims2$product <- rawSims2$NeSa * rawSims2$pa
+Sims2<-melt(rawSims2, id = c('identifier','X','rep', 'AIC'))
+Sims2$identifier <- 'Exp10'
+
+rawSims3 <- read.csv('analysis/bgs_null/Exp.Nes100_dDFE.Exponential_div10.analysis.txt')
+rawSims3$product <- rawSims3$NeSa * rawSims3$pa
+Sims3<-melt(rawSims3, id = c('identifier','X','rep', 'AIC'))
+Sims3$identifier <- 'Exp100 - div10'
+
+rawSims4 <- read.csv('analysis/bgs_null/Exp.Nes100_dDFE.Exponential.analysis.txt')
+rawSims4$product <- rawSims4$NeSa * rawSims4$pa
+Sims4<-melt(rawSims4, id = c('identifier','X','rep', 'AIC'))
+Sims4$identifier <- 'Exp100'
+
+Sims_bgs_null <- rbind(Sims1,Sims2,Sims3,Sims4)
+Sims_bgs_null$class <- 'SWEEPS'
+
+```
+
+
+```{r combine_DataFrames_exp}
+
+Sims <- rbind(Sims_bgs_null, Sims_both)
+
+vnames <-list(
+
+  'NeSa' = expression(gamma[a]),
+  'pa' = expression(p[a]),
+  'product' = expression(gamma*p[a]),
+  'SWEEPS' = 'SWEEPS',
+  'BGS+SWEEPS' = 'BGS+SWEEPS')
+
+
+vlabeller <- function(variable,value){
+  return(vnames[value])
+}
+
+
+```
+
+Now plot'em
+```{r fig.width=8, fig.height=14,echo=FALSE}
+Sims$value <- round(Sims$value*1e7)/1e7
+
+ggplot(data = Sims, aes( x = identifier, y =  value, col = 'Estimates'))+
+  geom_point(alpha = 0.7)+
+  stat_summary(fun.y = "median", geom = "point", shape = '-',size= 20, color= pal[3]) +
+  geom_point(data= Boots, aes( x = identifier, y = value, col = 'True\nValue'), shape = '-', size = 15)+
+  scale_y_log10('')+
+  scale_x_discrete('')+
+  scale_color_manual('',values = pal)+
+  ggtitle('Exponential DFE')+
+  facet_grid(variable~class , scales = 'free', labeller = vlabeller)+
+  TommyTheme
+
+
+```
+
+
+
+
+
+
