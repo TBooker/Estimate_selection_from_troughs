@@ -7,6 +7,9 @@ RANGE=1000
 number2=$RANDOM
 number3=$RANDOM
 number4=$RANDOM
+number2=123
+number3=321
+number4=554
 
 let 'number2%=RANGE'
 let 'number3%=RANGE'
@@ -24,7 +27,7 @@ EOF
 
 mv est_dfe.out $1/pointEstimate/1-epoch/
 mv neut_* $1/pointEstimate/1-epoch/
-
+~/
 # Do the 2-epoch model
 
 ~/project/8.SFS_inference/dfe-alpha-release-2.16/est_dfe << EOF
