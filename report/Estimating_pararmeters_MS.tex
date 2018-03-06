@@ -1,5 +1,7 @@
 \documentclass{article}
 \usepackage{authblk}
+\usepackage{arydshln}
+
 
 \setlength{\parskip}{\baselineskip}%
 \setlength{\parindent}{30pt}%
@@ -12,6 +14,8 @@
 \affil[*]{\emph{t.r.booker@sms.ed.ac.uk}}
 
 
+\usepackage{authblk}
+\usepackage{multirow}
 
 \begin{document}
 \maketitle
@@ -72,7 +76,7 @@ A difficulty is that genetic
  
 	\subsection*{Simulations}
 	We simulated background selection and selective sweeps using the forward-time simulation package SLiM (v1.8; Messer 2012). We performed simulations of a single 1Kbp protein-coding exon, flanked up and downstream by 70Kbp of strictly neutral sequence. 75\% of sites in the simulated exon were subject to selection (i.e. nonsynonymous sites) and the remainder were strictly neutral (i.e. synonymous sites). The population-scaled mutation rate (\emph{$4N_{e}\mu$}) was set to 0.01 and the population-scaled recombination rate (\emph{$4N_{e}r$}) was set to either 0.009, 0.0045 or 0.001. For a given distribution of fitness effects, see below, we performed 1,000 replicate simulations at each recombination rate resulting in 3,000 replicates per set of selection parameters. We ran simulations of 1,000 individuals for 20,000 generations to ensure that equilibrium conditions have been reached. At the final generation, 20 haploid genomes were sampled from the population. From these, we extracted the patterns of diversity around the exon or the uSFSs for nonsynonymous and synonymous sites within the exon itself.
-
+\input{/Users/s0784966/PhD/Coding/Estimate_selection_from_troughs/report/tables/DFE_table.tex}
 
 \section*{Results}
 These are the results

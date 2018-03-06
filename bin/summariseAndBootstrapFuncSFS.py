@@ -65,7 +65,7 @@ def main():
 		bootSFS['boot'] = str(i)
 		suitedAndBooted.append( pd.DataFrame.from_dict(bootSFS, orient = 'index').transpose() )
 	output = pd.concat(suitedAndBooted)
-	output.to_csv(args.output)
+	output.to_csv(args.output, index = False)
 
 
 if '__name__':

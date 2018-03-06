@@ -52,29 +52,30 @@ def main():
 	args = parser.parse_args()
 
 	data = pd.read_csv(args.input)
-	selMutations = [ i for  i in list(data) if i != args.intergenic and i != 'boot' and i != args.synonymous]
+	selMutations = [ i for  i in list(data) if i != args.intergenic and i != 'boot' and i != args.synonymous and i != 'Unnamed: 0']
 	print 'going to analyse:', selMutations
 
 	myOutput = {}
 
 	for index, row in data.iterrows(): 
 
-		print 'index:', row[ 'boot' ]
+		if row[ 'boot' ] != args.boot:
+			continue
 		
 		sel = combineMany([ row[k] for k in selMutations ] )
 		neu =map( int, row[args.synonymous].split(':') )
 		
-		sel[0] = ((3000.*1000.)  * 0.75 ) - sum(sel)  
-		neu[0] = ((3000.*1000.)  * 0.25 ) - sum(neu)
+		sel[0] = ( (3000.*1000.)  * 0.75 ) - sum(sel)  
+		neu[0] = ( (3000.*1000.)  * 0.25 ) - sum(neu)
 		
 		if not args.polyDFE:  # Save the data in DFE-alpha format
-			myOutput[ row['boot']] = DFEalphaConfig(sel,neu)
+			myOutput = DFEalphaConfig(sel,neu)
 			
 		elif notargs.polyDFE: # Save the data in polyDFE format
-			myOutput[ row['boot']] = DFEalphaConfig(sel,neu)			
-
-	pickle.dump( myOutput, open( args.output+'pkl', 'wb' ) )	
-	
+			myOutput = DFEalphaConfig(sel,neu)			
+	outters = open(args.output, 'w')
+	outters.write(myOutput)
+	outters.close()	
 	
 if '__name__':
 	main()
