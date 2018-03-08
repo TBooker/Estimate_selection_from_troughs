@@ -29,19 +29,20 @@ def main():
 		one_epoch['epochs'] = 1
 		two_epoch = parseDFEalpha(i+'/pointEstimate/2-epoch/est_dfe.out')
 		two_epoch['epochs'] = 2
-#		three_epoch = parseDFEalpha(i+'/pointEstimate/3-epoch/est_dfe.out')
-#		three_epoch['epochs'] = 3
-#		one_epoch['dL'] = three_epoch['L'][0] - one_epoch['L'][0]
-#		two_epoch['dL'] = three_epoch['L'][0] - two_epoch['L'][0]
-#		three_epoch['dL'] = 0
+		three_epoch = parseDFEalpha(i+'/pointEstimate/3-epoch/est_dfe.out')
+		three_epoch['epochs'] = 3
+		one_epoch['dL'] = three_epoch['L'][0] - one_epoch['L'][0]
+		two_epoch['dL'] = three_epoch['L'][0] - two_epoch['L'][0]
+		three_epoch['dL'] = 0
 		
-		one_epoch['dL'] = two_epoch['L'][0] - one_epoch['L'][0]
-		two_epoch['dL'] = 0		
+#		one_epoch['dL'] = two_epoch['L'][0] - one_epoch['L'][0]
+#		two_epoch['dL'] = 0		
 
-		temp = pd.DataFrame.from_dict(one_epoch).append(pd.DataFrame.from_dict(two_epoch))
+		temp = pd.DataFrame.from_dict(one_epoch)
+		temp = temp.append(pd.DataFrame.from_dict(two_epoch))
+		temp = temp.append(pd.DataFrame.from_dict(three_epoch))
 		temp['model'] = i
 		output.append(temp)
-		
 	pd.concat(output).to_csv(args.output, index = False)
 		
 if '__name__':
