@@ -6,7 +6,7 @@
 \setlength{\parskip}{\baselineskip}%
 \setlength{\parindent}{30pt}%
 
-\title{Estimating the parameters of selective sweeps from patterns of genetic diversity in the house mouse}
+\title{\textbf{Estimating the parameters of selective sweeps from patterns of genetic diversity in the house mouse}}
 \author[1,*]{Tom R. Booker}
 \author[1]{Brian Charlesworth}
 \author[1]{Peter D. Keightley}
@@ -20,12 +20,25 @@
 \begin{document}
 \maketitle
 \begin{abstract}
-Woah! Selective sweeps are neat. Let's look at a model for estimating their strength and frequency from pop. gen. data using a mosre developed version of the approach adopted by Wiehe and Stephan in 1993. Let's go on to compare the strength and frequnecy of new mutations occuring in protein-coding versus regulatory regions and see which one will contribute more to phenotypic change.
+Woah! Selective sweeps are neat. Let's look at a model for estimating their strength and frequency from pop. gen. data using a more developed version of the approach adopted by Wiehe and Stephan in 1993. Let's go on to compare the strength and frequnecy of new mutations occuring in protein-coding versus regulatory regions and see which one will contribute more to phenotypic change.
 
 \end{abstract}
 
 \section*{Introduction}
-Let's introduce the topic and what we're going to do!
+
+One of the biggest goals of evolutionary genetics is to understand the fitness consequences of new mutations. There is undoubtedly a distribution of fitness effects for new mutations, but this distribution may depend on a number of factors such as the genomic region where the mutations occur and the fitness of the population in question (Peter's Review?). Experimental approaches for estimating the DFE are limited to organisms which can be maintained in lab populations, which typically excludes mammals. 
+
+When advantageous mutations are driven to high frequencies by selection, they drag with them portions of the haplotype on which they are present. This process, termed a selective sweep, has been the subject of rigorous population genetic research (Maynard-Smith and Haigh, Hudson and Kaplan, Coop and Ralph, Hermisson and Pennings, Barton 2000). There are a number of models decribing the ways in which selective sweeps may proceed (reviewed in Booker \textit{et al.} 2017). One of the consequences of selective sweeps is a reduction in neutral diversity in the regions surrounding advantageous mutations. 
+
+The time it takes an advantageous mutation to sweep through a population is proportional to the strength of selection and this has an effect on the level of neutral diversity in genomic regions linked to the mutation. As a mutation sweeps, linked neutral variants may get trapped by the sweep and carried to high freuqency with the advantageous mutation. Corssing-over can break apart associations between neutral variants and sweeping mutations, but obviously if a mutation is swept rapidly, there are fewer chances for crossing-over to occur. Because of this, selective sweeps generate troughs in genetic diversity, centred on the site of the advantageous mutation. The width and depth of the trough are dependant on the rate of crossing-over but also, crucially, the strength and frequency of advantageous mutations.
+
+In wild mice, there are troughs in diversity surrounding functional elements. In a recent analysis, we estimated the frequnecy and selection coefficeients of advantageous mutations that occur in mice using distribution of derived allele frequencies (Booker and Keightley submitted). We showed that the parameters of selection obtained from the uSFS are unable to explain the patterns of selection observed in the genome.
+
+Recently, we have estimated the DFE using the uSFS for wild mice and shown that the parameters of selection that we infer do not explain the reductions in diversity observed around protein-coding exons. 
+
+In this study, we use a model of selective sweeps to estimate the strength and frequency of advantageosu mutations that occur within protein-coding exons and regulatory elements. The model we use incorporates the confounding effects of background selection as well as gene conversion as both processes are known to influence estimates of selection obtained from patterns of nucleotide polymorphism. We use simulations to validate our approach and to also demonstrate that uSFS-based methods fail to detect the strength and frequnecy of new mutations when they are rare.
+
+
 
 \section*{Materials and Methods}
 
@@ -55,11 +68,20 @@ P_{sc,j} \approx \int \limits_{0}^{1} f_x(\gamma)   V_a \tau\gamma_j^{\frac{-4r_
 In this study, we assume an exponential distribution for the distribution of fitness effects for advantageous mutations. 
 
 	We estimate $\gamma_a$ and $p_a$ by fitting the relationship between nucleotide diversity and distance to functional elements by non-linear least squares using the \emph{lmfit} (0.9.7) package for Python 2.7.
+ 
+	\subsection*{Simulations}
+	We simulated background selection and selective sweeps using the forward-time simulation package SLiM (v1.8; Messer 2012). We performed simulations of a single 1Kbp protein-coding exon, flanked up and downstream by 70Kbp of strictly neutral sequence. 75\% of sites in the simulated exon were subject to selection (i.e. nonsynonymous sites) and the remainder were strictly neutral (i.e. synonymous sites). The population-scaled mutation rate (\emph{$4N_{e}\mu$}) was set to 0.01 and the population-scaled recombination rate (\emph{$4N_{e}r$}) was set to either 0.009, 0.0045 or 0.001. For a given distribution of fitness effects, see below, we performed 1,000 replicate simulations at each recombination rate resulting in 3,000 replicates per set of selection parameters. We ran simulations of 1,000 individuals for 20,000 generations to ensure that equilibrium conditions have been reached. At the final generation, 20 haploid genomes were sampled from the population. From these, we extracted the patterns of diversity around the exon or the uSFSs for nonsynonymous and synonymous sites within the exon itself.
+\input{/Users/s0784966/PhD/Coding/Estimate_selection_from_troughs/report/tables/DFE_table.tex}
 
 	\subsection*{Analysis of the uSFS}
 
 	We estimate the strength and frequency of new mutations using the uSFS. We analyse the uSFS using either the method of Schneider et al. (2011) as implemented in DFE-alpha, or the methods of Tataru et al. (2017) as implemented in polyDFE. Both methods estimate the rate and strength of advantageous mutations using the unfolded site frequency spectrum (uSFS). However, the models implemented in the two differ in their underlying assumptions. The Schneider et al. (2011) approach builds upon the Wright-Fisher transition matrix methods developed by Keightley and Eyre-Walker (2007) to estimate the distribution of fitness effects for harmful mutations. The methods implemented by Tataru et al. (2017) build upon Sawyer and Hartl’s Poisson random field model.
 Throughout the rest of the paper, we will refer to these methods by the names of the programs in which they are implemented.
+
+DFE-alpha does not currently allow the user to estimate an exponential distribution of advantageous mutational effects. We use the PRF-based method polyDFE to infer the parameters of the DFE from the uSFS of simulations incorporating the 
+
+		\subsubsection*{1. DFE-alpha}
+		The methods of Schneider et al (2011) are implemented in the program DFE-alpha. We analyse the simulation data using DFE-alpha
 
 	\subsection*{Analysis of Mouse Data}
 
@@ -74,9 +96,7 @@ From the edges of exons (CNEs), I extracted the SFS in windows of 1Kbp (100bp) e
 	Rates of initiation of gene conversion in mice are known in mice.
 A difficulty is that genetic 
  
-	\subsection*{Simulations}
-	We simulated background selection and selective sweeps using the forward-time simulation package SLiM (v1.8; Messer 2012). We performed simulations of a single 1Kbp protein-coding exon, flanked up and downstream by 70Kbp of strictly neutral sequence. 75\% of sites in the simulated exon were subject to selection (i.e. nonsynonymous sites) and the remainder were strictly neutral (i.e. synonymous sites). The population-scaled mutation rate (\emph{$4N_{e}\mu$}) was set to 0.01 and the population-scaled recombination rate (\emph{$4N_{e}r$}) was set to either 0.009, 0.0045 or 0.001. For a given distribution of fitness effects, see below, we performed 1,000 replicate simulations at each recombination rate resulting in 3,000 replicates per set of selection parameters. We ran simulations of 1,000 individuals for 20,000 generations to ensure that equilibrium conditions have been reached. At the final generation, 20 haploid genomes were sampled from the population. From these, we extracted the patterns of diversity around the exon or the uSFSs for nonsynonymous and synonymous sites within the exon itself.
-\input{/Users/s0784966/PhD/Coding/Estimate_selection_from_troughs/report/tables/DFE_table.tex}
+ 
 
 \section*{Results}
 These are the results
@@ -84,5 +104,7 @@ These are the results
 \section*{Discussion}
 And this is what I think of them
 
+
+One of the enduring questions in evolutionary genetics concerns the contribution of protein-coding versus gene-regulatory variation to a species' fitness (REF DUMP). Evidence in multiple species suggests that selection is frequent in non-coding portions of the mammalian of the genome (Halligan \textit{et al.} 2013; Booker and Keightley \textit{submitted}; MORE MORE MORE). With the 
 
 \end{document}
