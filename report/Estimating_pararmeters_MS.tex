@@ -1,4 +1,4 @@
-\documentclass{article}
+\documentclass[11pt]{article}
 \input{packages.tex}
 
 
@@ -25,15 +25,14 @@ Woah! Selective sweeps are neat. Let's look at a model for estimating their stre
 
 \section*{Introduction}
 
-Random mutation is a fundamental force in evolution, it the ultimate source of all biodiversity. Populations may become better adapted to their environments (REF), experience 'mutational meltdown' (REF), undergo evolutionary rescue (REF) and become speciated all through the effects of new mutations (REF). In each of these processes, the fitness effects of the mutations in question is a fundamental parameter (REFS). In the case of adaptation, an enduring question has been whether mutations in regulatory or protein-coding portions of the genome have larger effects on fitness (King and Wilson etc.). Evidence in multiple species suggests that selection is frequent in non-coding portions of the mammalian genome (Halligan \textit{et al.} 2013; Booker and Keightley \textit{submitted}; MORE MORE MORE). With the 
+Random mutation is a fundamental force in evolution, it the ultimate source of all biodiversity Populations may become better adapted to their environments (REF), experience 'mutational meltdown' (REF), undergo evolutionary rescue (REF) and become speciated all through the effects of new mutations (REF). In each of these processes, the frequencies and fitness effects of new mutations is a key parameter. 
 
 In order to answer this question, however, methods are required for esitmating the rates of occurence and fitness effects of new mutations.
 
 One class of methods for inferring the strength and frequnecies of new mutations relies on the  assumption that selected mutations segregate in natural populations. The distributon of allele frequencies in a sample, the site frequency spectrum, for a class of sites subject to natural selection 
 
 
-
-In the past 30 years of population genetic research it has become clear that natural selection shapes patterns of genetic diversity across the genomes of many species (Corbett-Detig \textit{et al} 2015; Cutter and Payseur 2012). Because genetically linked sites in the genome do not evolve independantly, selection acting at one site may have consequences for linked sites. This process, which we shall term selection at linked sites, is intrinsically linked to the rate of recombiantion both by crossing-over and gene conversion (REF DUMP). 
+In the past 30 years of population genetic research it has become clear that natural selection shapes patterns of genetic diversity across the genomes of many species (Corbett-Detig \textit{et al} 2015; Cutter and Payseur 2012). Because genetically linked sites in the genome do not evolve independantly, selection acting at one site may have consequences for linked sites. This process, which we shall refer to as selection at linked sites, is intrinsically linked to the rate of recombination both by crossing-over and gene conversion (REF DUMP). 
 
 One of the biggest goals of evolutionary genetics is to understand the fitness consequences of new mutations. There is undoubtedly a distribution of fitness effects for new mutations, but this distribution may depend on a number of factors such as the genomic region where the mutations occur and the fitness of the population in question (Peter's Review?). Experimental approaches for estimating the DFE are limited to organisms which can be maintained in lab populations, which typically excludes mammals. 
 
@@ -79,7 +78,7 @@ In this study, we assume an exponential distribution for the distribution of fit
 	We estimate $\gamma_a$ and $p_a$ by fitting the relationship between nucleotide diversity and distance to functional elements by non-linear least squares using the \emph{lmfit} (0.9.7) package for Python 2.7.
  
 	\subsection*{Simulations}
-	We simulated background selection and selective sweeps using the forward-time simulation package SLiM (v1.8; Messer 2012). We performed simulations of a single 1Kbp protein-coding exon, flanked up and downstream by 70Kbp of strictly neutral sequence. 75\% of sites in the simulated exon were subject to selection (i.e. nonsynonymous sites) and the remainder were strictly neutral (i.e. synonymous sites). The population-scaled mutation rate (\emph{$4N_{e}\mu$}) was set to 0.01 and the population-scaled recombination rate (\emph{$4N_{e}r$}) was set to either 0.009, 0.0045 or 0.001. For a given distribution of fitness effects, see below, we performed 1,000 replicate simulations at each recombination rate resulting in 3,000 replicates per set of selection parameters. We ran simulations of 1,000 individuals for 20,000 generations to ensure that equilibrium conditions have been reached. At the final generation, 20 haploid genomes were sampled from the population. From these, we extracted the patterns of diversity around the exon or the uSFSs for nonsynonymous and synonymous sites within the exon itself.
+	We simulated background selection and selective sweeps using the forward-time simulation package SLiM (v1.8; Messer 2012). We performed simulations of a single 1Kbp protein-coding exon, flanked up and downstream by 70Kbp of strictly neutral sequence. 75\% of sites in the simulated exon were subject to selection (i.e. nonsynonymous sites) and the remainder were strictly neutral (i.e. synonymous sites). The population-scaled mutation rate ($\theta$ = \emph{$4N_{e}\mu$}) was set to 0.01 and the population-scaled recombination rate ($\rho$ = \emph{$4N_{e}r$}) was set to either 0.009, 0.0045 or 0.001. For a given distribution of fitness effects, see below, we performed 1,000 replicate simulations at each recombination rate resulting in 3,000 replicates per set of selection parameters. We ran simulations of 1,000 individuals for 20,000 generations to ensure that equilibrium conditions have been reached. At the final generation, 20 haploid genomes were sampled from the population. From these, we extracted the patterns of diversity around the exon or the uSFSs for nonsynonymous and synonymous sites within the exon itself.
 \input{tables/DFE_table.tex}
 
 	\subsection*{Analysis of the uSFS}
@@ -89,7 +88,10 @@ Throughout the rest of the paper, we will refer to these methods by the names of
 
 DFE-alpha does not currently allow the user to estimate an exponential distribution of advantageous mutational effects. We use the PRF-based method polyDFE to infer the parameters of the DFE from the uSFS of simulations incorporating the 
 
-		\subsubsection*{1. DFE-alpha}
+		\subsubsection*{DFE-alpha}
+		The methods of Schneider et al (2011) are implemented in the program DFE-alpha. We analyse the simulation data using DFE-alpha
+		
+		\subsubsection*{polyDFE}
 		The methods of Schneider et al (2011) are implemented in the program DFE-alpha. We analyse the simulation data using DFE-alpha
 
 	\subsection*{Analysis of Mouse Data}
@@ -106,6 +108,9 @@ From the edges of exons (CNEs), I extracted the SFS in windows of 1Kbp (100bp) e
 A difficulty is that genetic 
  
  
+\subsection*{Estimating the effects of background selection}
+
+We incorporated the effects of background selection into 
 
 \section*{Results}
 \subsection*{Estimating selection parameters from simulations}
@@ -117,6 +122,9 @@ A difficulty is that genetic
 	
 	Additionally, if selective sweeps occur frequently, the assumpiton that multiple sweeps do not interfere with each other may be violated. We found that correcting for multiple, competing sweeps did not make much difference on parameter estimates. This sugegsts that the rate of sweeps in mice is too low for the 
 
+Modelling the effects of BGS and selective sweeps on patterns of diversity at linked 
+
+
 \input{tables/Estimates_castaneusMap.tex}
 
 
@@ -124,9 +132,16 @@ A difficulty is that genetic
 
 The rate of sweeps we estiamted for 
 
+\subsection*{Estimating parameters of positive selection from the uSFS versus patterns of diversity}
+
+To our knowledge, there are currently no methods that estimate the DFE using the site frueqnecy spectrum expected under either backgorund selection or selective sweeps. Rather, nuisance parameters or demographic models are used to account for the conribution of selection at linked sites to the SFS while estimating the DFE. However, there is potentially information present in the uSFS that would be useul for estimating the fitness effects of new mutations. Approximations for the uSFS expected under both BGS and selective sweeps have been developed (REFS), so a potential avenue for further research would be to incorporate these for making inferences from population genetic data.
+
+In an earlier study, Teschke \textit{et al.} (2008) analysed patterns of variation at microsatelite loci across the \textit{M. m. domesticus} genome. In their study they estimated that selective sweeps driven by mutations with a selection coefficient of $s \approx 0.008$ occur at least every hundredth generation. If we assume an $N_e$ of 420,000, we estimate that selective sweeps in protein-coding exons are driven by mutations with $s \approx 0.0099$ and in CNEs $s \approx 0.00027$. 
+
+
 \subsection*{The contribution of adaptation in protein-coding and regulatory regions to phenotypic evolution in mice}
 
-An enduring question in evolutionary biology has been the extent to which protein-coding and regulatroy regions of the gneome contribute to fitness change. In this study we have found that the strenght of selection acting on new mutations occuring in protein-coding regions far exceeds that of those occuring in regulatory regions (Table X). However, the total contribution that the two classes of sites make to fitness changes will depend upon the total number of the different site types in a species' genome. In mice, there is a much large number of non-coding sites in the genome inferred to be targets of selection than there are sites that encode proteins (Halligan et al 2013; MORE MORE MORE). If the strenth of selection on advantageous mutations occuring in conserved non-coding regions was similar to the strength of mutations occuring in Equation \ref{eq:fitness}
+An enduring question in evolutionary biology has been the extent to which protein-coding and regulatroy regions of the gneome contribute to fitness change. In this study we have found that the strenght of selection acting on new mutations occuring in protein-coding regions far exceeds that of those occuring in regulatory regions (Table \ref{EstimatesCastaneus}). However, the total contribution that the two classes of sites make to fitness changes will depend upon the total number of the different site types in a species' genome. In mice, there is a much large number of non-coding sites in the genome inferred to be targets of selection than there are sites that encode proteins (Halligan et al 2013; MORE MORE MORE). 
 
 
 The rate of adaptive fitness change ($\Delta W$) generated by mutations occurring at a particular class of sites can be modelled as
@@ -142,7 +157,16 @@ where $\mu_a$ is the rate of advantageous mutations occuring at a particular cla
 
 A weakness of this study is that we did not estimate the strength of selection acting on the untranslated regions (UTRs) of protein-coding genes.
 
-To our knowledge, there are currently no methods that estimate the DFE using the site frueqnecy spectrum expected under either backgorund selection or selective sweeps. Rather, nuisance parameters or demographic models are used to account for the conribution of selection at linked sites to the SFS while estimating the DFE. However, there is potentially information present in the uSFS that would be useul for estimating the fitness effects of new mutations. Approximations for the uSFS expected under both BGS and selective sweeps have been developed (REFS), so a potential avenue for further research would be to incorporate these for making inferences from population genetic data.
+
+
+\section*{Conclusions}
+
+In this study we have shown that if advantageous mutations are infrequent and have, on average, strong effects on fitness, their parameters are very difficult to estimate from the site frequency spectrum. However, as has been shown previously (REF DUMP) the DFE for harmful mutations is estimated with precision from the SFS (RESULTS?).
+
 
 
 \end{document}
+
+
+
+
