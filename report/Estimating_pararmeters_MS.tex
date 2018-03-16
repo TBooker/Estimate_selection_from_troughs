@@ -1,6 +1,6 @@
 \documentclass{article}
-\usepackage{authblk}
-\usepackage{arydshln}
+\input{packages.tex}
+
 
 
 \setlength{\parskip}{\baselineskip}%
@@ -14,8 +14,7 @@
 \affil[*]{\emph{t.r.booker@sms.ed.ac.uk}}
 
 
-\usepackage{authblk}
-\usepackage{multirow}
+
 
 \begin{document}
 \maketitle
@@ -25,6 +24,16 @@ Woah! Selective sweeps are neat. Let's look at a model for estimating their stre
 \end{abstract}
 
 \section*{Introduction}
+
+Random mutation is a fundamental force in evolution, it the ultimate source of all biodiversity. Populations may become better adapted to their environments (REF), experience 'mutational meltdown' (REF), undergo evolutionary rescue (REF) and become speciated all through the effects of new mutations (REF). In each of these processes, the fitness effects of the mutations in question is a fundamental parameter (REFS). In the case of adaptation, an enduring question has been whether mutations in regulatory or protein-coding portions of the genome have larger effects on fitness (King and Wilson etc.). Evidence in multiple species suggests that selection is frequent in non-coding portions of the mammalian genome (Halligan \textit{et al.} 2013; Booker and Keightley \textit{submitted}; MORE MORE MORE). With the 
+
+In order to answer this question, however, methods are required for esitmating the rates of occurence and fitness effects of new mutations.
+
+One class of methods for inferring the strength and frequnecies of new mutations relies on the  assumption that selected mutations segregate in natural populations. The distributon of allele frequencies in a sample, the site frequency spectrum, for a class of sites subject to natural selection 
+
+
+
+In the past 30 years of population genetic research it has become clear that natural selection shapes patterns of genetic diversity across the genomes of many species (Corbett-Detig \textit{et al} 2015; Cutter and Payseur 2012). Because genetically linked sites in the genome do not evolve independantly, selection acting at one site may have consequences for linked sites. This process, which we shall term selection at linked sites, is intrinsically linked to the rate of recombiantion both by crossing-over and gene conversion (REF DUMP). 
 
 One of the biggest goals of evolutionary genetics is to understand the fitness consequences of new mutations. There is undoubtedly a distribution of fitness effects for new mutations, but this distribution may depend on a number of factors such as the genomic region where the mutations occur and the fitness of the population in question (Peter's Review?). Experimental approaches for estimating the DFE are limited to organisms which can be maintained in lab populations, which typically excludes mammals. 
 
@@ -54,16 +63,16 @@ Where the sum is over all linked selected sites, the integral is over the distri
 
 The model we use here is an extension to the model used by CAMPOS et al. (2017) suggested by Charlesworth (unpublished). 
 \begin{equation}
-\frac{\pi_{j}}{\pi_{0}} = \frac{1}{B_{j}^{-1}  + B2N_eP_{sc,j}}
+\frac{\pi_{j}}{\pi_{0}} \approx  \frac{1}{B_{j}^{-1}  + B2N_eP_{sc,j}}
 \end{equation}
 	Where \(\frac{\pi_{j}}{\pi_{0}}\) is the reduction in neutral genetic diversity at site j relative to the expectation in the absence of selection at linked sites. The differences between our model and that used by Campos et al (2017) is that B is in the second term in the denominator of Equation 1. B is the reduction in pairwise coalescence times due to the effects of background selection which is calculated using Equation 1. Multiplying the rate of sweep induced coalescence ($P_{sj}$) by B reflects the reduction in fixation probability of new mutations caused by background selection. 
 
 \begin{equation}
-P_{sc,j} \approx V_a \tau\gamma_j^{\frac{-4r_{i,j}}{s}} 
+P_{sc,j} \approx V_a \tau\gamma_a^{\frac{-4r_{i,j}}{s}} 
 \end{equation}
 The term $V_{a}$ = $2\mu$ $p_{a}\gamma_{a}$ is the rate of sweeps per generation, where 𝜇 is the per-base pair per generation mutation rate (assumed to be $5.4 \times 10^{-9}$ (UCHIMURA et al. 2015)), $p_a$ is the fraction of new mutations occurring within a focal element that are advantageous and $\gamma_a$  is the scaled selection coefficient of a new mutation. It is straightforward to incorporate a distribution of advantageous mutation effects to Equation 3:
 		\begin{equation}
-P_{sc,j} \approx \int \limits_{0}^{1} f_x(\gamma)   V_a \tau\gamma_j^{\frac{-4r_{i,j}}{s}} \mathop{d\gamma}
+P_{sc,j} \approx \int \limits_{0}^{1} f_x(\gamma)   V_a \tau\gamma_a^{\frac{-4r_{i,j}}{s}} \mathop{d\gamma}
 \end{equation}	
 In this study, we assume an exponential distribution for the distribution of fitness effects for advantageous mutations. 
 
@@ -71,7 +80,7 @@ In this study, we assume an exponential distribution for the distribution of fit
  
 	\subsection*{Simulations}
 	We simulated background selection and selective sweeps using the forward-time simulation package SLiM (v1.8; Messer 2012). We performed simulations of a single 1Kbp protein-coding exon, flanked up and downstream by 70Kbp of strictly neutral sequence. 75\% of sites in the simulated exon were subject to selection (i.e. nonsynonymous sites) and the remainder were strictly neutral (i.e. synonymous sites). The population-scaled mutation rate (\emph{$4N_{e}\mu$}) was set to 0.01 and the population-scaled recombination rate (\emph{$4N_{e}r$}) was set to either 0.009, 0.0045 or 0.001. For a given distribution of fitness effects, see below, we performed 1,000 replicate simulations at each recombination rate resulting in 3,000 replicates per set of selection parameters. We ran simulations of 1,000 individuals for 20,000 generations to ensure that equilibrium conditions have been reached. At the final generation, 20 haploid genomes were sampled from the population. From these, we extracted the patterns of diversity around the exon or the uSFSs for nonsynonymous and synonymous sites within the exon itself.
-\input{/Users/s0784966/PhD/Coding/Estimate_selection_from_troughs/report/tables/DFE_table.tex}
+\input{tables/DFE_table.tex}
 
 	\subsection*{Analysis of the uSFS}
 
@@ -99,12 +108,41 @@ A difficulty is that genetic
  
 
 \section*{Results}
-These are the results
+\subsection*{Estimating selection parameters from simulations}
+
+
+\subsection*{Estimates of selection for \textit{M. m. castaneus}}
+
+	We estimated the parameters of a model of recurrent selective sweeps acting in two different classes of functional elements in \textit{M. m. castaneus}. We compared parameters obtained when incorporating gene conversion and background selection.
+	
+	Additionally, if selective sweeps occur frequently, the assumpiton that multiple sweeps do not interfere with each other may be violated. We found that correcting for multiple, competing sweeps did not make much difference on parameter estimates. This sugegsts that the rate of sweeps in mice is too low for the 
+
+\input{tables/Estimates_castaneusMap.tex}
+
 
 \section*{Discussion}
-And this is what I think of them
+
+The rate of sweeps we estiamted for 
+
+\subsection*{The contribution of adaptation in protein-coding and regulatory regions to phenotypic evolution in mice}
+
+An enduring question in evolutionary biology has been the extent to which protein-coding and regulatroy regions of the gneome contribute to fitness change. In this study we have found that the strenght of selection acting on new mutations occuring in protein-coding regions far exceeds that of those occuring in regulatory regions (Table X). However, the total contribution that the two classes of sites make to fitness changes will depend upon the total number of the different site types in a species' genome. In mice, there is a much large number of non-coding sites in the genome inferred to be targets of selection than there are sites that encode proteins (Halligan et al 2013; MORE MORE MORE). If the strenth of selection on advantageous mutations occuring in conserved non-coding regions was similar to the strength of mutations occuring in Equation \ref{eq:fitness}
 
 
-One of the enduring questions in evolutionary genetics concerns the contribution of protein-coding versus gene-regulatory variation to a species' fitness (REF DUMP). Evidence in multiple species suggests that selection is frequent in non-coding portions of the mammalian of the genome (Halligan \textit{et al.} 2013; Booker and Keightley \textit{submitted}; MORE MORE MORE). With the 
+The rate of adaptive fitness change ($\Delta W$) generated by mutations occurring at a particular class of sites can be modelled as
+
+\begin{equation}
+\label{eq:fitness}
+\Delta W \propto \mu_a n_a E(s_a^2),
+\end{equation}
+
+where $\mu_a$ is the rate of advantageous mutations occuring at a particular class of sites, \textit{$n_a$} is the total number of sites in the genome corresponding to that class and \textit{$s_a^2$} is the square of the selection coefficient for advantageous mutations (Halligan et al 2013). 
+\input{tables/FitnessExpectation.tex}
+
+
+A weakness of this study is that we did not estimate the strength of selection acting on the untranslated regions (UTRs) of protein-coding genes.
+
+To our knowledge, there are currently no methods that estimate the DFE using the site frueqnecy spectrum expected under either backgorund selection or selective sweeps. Rather, nuisance parameters or demographic models are used to account for the conribution of selection at linked sites to the SFS while estimating the DFE. However, there is potentially information present in the uSFS that would be useul for estimating the fitness effects of new mutations. Approximations for the uSFS expected under both BGS and selective sweeps have been developed (REFS), so a potential avenue for further research would be to incorporate these for making inferences from population genetic data.
+
 
 \end{document}
