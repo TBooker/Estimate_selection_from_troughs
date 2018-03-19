@@ -1,0 +1,12 @@
+---- Performing inference on polyDFE.config.100.txt using model C
+
+---- Warning: mutation variability is not used when only one neutral and one selected fragment is available.
+---- No mutation variability. Using Poisson likelihood.
+
+---- Calculating initial values for neutral parameters
+---- Calculating initial values for selection parameters
+
+
+-- Starting local optimization
+ it       eps_an        lambda        theta_bar      S_d            b             p_b           S_b           r  2          r  3          r  4          r  5          r  6          r  7          r  8          r  9          r 10          r 11          r 12          r 13          r 14          r 15          r 16          r 17          r 18          r 19          r 20         ln lk             grad     status
+  0       0.10000       0.01979       0.00950   -20000.00000       0.40000       0.10000      20.00000       0.90404       0.81915       0.70802       0.67570       0.59647       0.69098       0.56406       0.59274       0.56301       0.54696       0.61037       0.60468       0.70031       0.73270       0.83852       0.91597       1.39795       1.00000       1.00000  -60300.3800077460   1138.11806   -2
