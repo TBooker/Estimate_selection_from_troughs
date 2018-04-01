@@ -36,7 +36,7 @@ def main():
 		
 	args = parser.parse_args()
 	largeDF = []
-	for i in glob.glob(args.input+'/polyDFE*'):
+	for i in glob.glob(args.input+'/polyDFE.output.*'):
 			temp = parsepolyDFE(i)
 			number = i.split('.')[-2]
 			temp['number'] = [number]
