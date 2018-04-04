@@ -5,7 +5,7 @@
 \centering
 
 \caption{Distributions of fitness effects in simuations. In all simulations, deleterious mutations were drawn from an exponential DFE with $\gamma_d$ = -48.50. Where $\gamma = 2N_es$}
- \begin{tabular}{c c c c c c} 
+ \begin{tabular}{c c c l} 
 
   \hline
   DFE Model & $\gamma_a$ & $p_a$ & Label \\ [0.5ex] 
@@ -14,16 +14,18 @@
  						 & 400 / 20 & 0.0001 / 0.0009 & Bimodal - div10 \\
  						 & 400 / 20  & 0.00001 / 0.00009  & Bimodal - div100 \\
  \hdashline
- \multirow{4}{*}{Exponential} & 200 & 0.001 & 4 \\
- 						  & 200 & 0.0001 & 5 \\
- 						  & 20 & 0.001 & 6 \\
- 						  & 20 & 0.0001 & 7 \\
+ \multirow{4}{*}{Exponential} & 200 & 0.001 & Exp200 \\
+ 						  & 200 & 0.0001 & Exp200 - div10\\
+ 						  & 20 & 0.001 & Exp20 \\
+ 						  & 20 & 0.0001 & Exp20 - div10 \\
   \hdashline						 
   \multirow{4}{*}{Fixed} & 400 & 0.001 & Nes200 \\
  						  & 400 & 0.0001 & Nes200 - div10 \\
  						  & 20 & 0.001 & Nes10 \\
  						  & 20 & 0.0001 & Nes10 - div10 \\
 \hline
+
 \end{tabular}    
+    \label{tab:castaneusEstimates}
 
 \end{table}

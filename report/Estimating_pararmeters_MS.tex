@@ -5,6 +5,7 @@
 
 \setlength{\parskip}{\baselineskip}%
 \setlength{\parindent}{30pt}%
+\linespread{1.5}
 
 \title{\textbf{Estimating the parameters of selective sweeps from patterns of genetic diversity in the house mouse}}
 \author[1,*]{Tom R. Booker}
@@ -31,8 +32,7 @@ In order to answer this question, however, methods are required for esitmating t
 
 One class of methods for inferring the strength and frequnecies of new mutations relies on the  assumption that selected mutations segregate in natural populations. The distributon of allele frequencies in a sample, the site frequency spectrum, for a class of sites subject to natural selection 
 
-
-In the past 30 years of population genetic research it has become clear that natural selection shapes patterns of genetic diversity across the genomes of many species (Corbett-Detig \textit{et al} 2015; Cutter and Payseur 2012). Because genetically linked sites in the genome do not evolve independantly, selection acting at one site may have consequences for linked sites. This process, which we shall refer to as selection at linked sites, is intrinsically linked to the rate of recombination both by crossing-over and gene conversion (REF DUMP). 
+In the past 30 years of population genetic research it has become clear that natural selection shapes patterns of genetic diversity across the genomes of many species (Corbett-Detig \textit{et al} 2015; Cutter and Payseur 2012). Because genetically linked sites in the genome do not evolve independently, selection acting at one site may have consequences for linked sites. This process, which we shall refer to as selection at linked sites, is intrinsically linked to the rate of recombination both by crossing-over and gene conversion (REF DUMP). 
 
 One of the biggest goals of evolutionary genetics is to understand the fitness consequences of new mutations. There is undoubtedly a distribution of fitness effects for new mutations, but this distribution may depend on a number of factors such as the genomic region where the mutations occur and the fitness of the population in question (Peter's Review?). Experimental approaches for estimating the DFE are limited to organisms which can be maintained in lab populations, which typically excludes mammals. 
 
@@ -53,7 +53,7 @@ In this study, we use a model of selective sweeps to estimate the strength and f
 	\subsection*{Model of Recurrent Sweeps and Background Selection}
 Background selection (BGS) is often modelled as the reduction in diversity experienced by a focal neutral site caused by deleterious mutations occurring at linked selected sites. An approximation for the reduction in diversity caused by background selection:
 \begin{equation}
-B = \frac{N_{e}}{N_{0}} \approx exp\Bigg[- \sum \limits_{x} \int \limits_{0}^1 \frac{u_{x}f_x(t)\mathop{dt}}{t \Big( 1 + \frac{(1-t)r_{x,y}}{t} \Big)^2} \Bigg]
+B = \frac{N_{e}}{N_{0}} \approx exp\Bigg[- \sum \limits_{x} \int \limits_{0}^1 \frac{u_{x}f_x(t)\mathop{dt}}{t \Big( 1 + \frac{(1-t)r_{i,j}}{t} \Big)^2} \Bigg]
 \end{equation}
 Where the sum is over all linked selected sites, the integral is over the distribution of fitness effects for deleterious mutations, \emph{$u_{x}$} is the deleterious mutation rate, \emph{t} is the reduction in fitness for heterozygotes (assumed to be \(\frac{s}{2}\) ), $r_{x,y}$  is the recombination distance between the focal neutral site and the selected site and fx(t) is the proportion of sites in the DFE with a selection coefficient of t.
 
@@ -67,6 +67,7 @@ The model we use here is an extension to the model used by CAMPOS et al. (2017) 
 	Where \(\frac{\pi_{j}}{\pi_{0}}\) is the reduction in neutral genetic diversity at site j relative to the expectation in the absence of selection at linked sites. The differences between our model and that used by Campos et al (2017) is that B is in the second term in the denominator of Equation 1. B is the reduction in pairwise coalescence times due to the effects of background selection which is calculated using Equation 1. Multiplying the rate of sweep induced coalescence ($P_{sj}$) by B reflects the reduction in fixation probability of new mutations caused by background selection. 
 
 \begin{equation}
+\label{jointApprox}
 P_{sc,j} \approx V_a \tau\gamma_a^{\frac{-4r_{i,j}}{s}} 
 \end{equation}
 The term $V_{a}$ = $2\mu$ $p_{a}\gamma_{a}$ is the rate of sweeps per generation, where 𝜇 is the per-base pair per generation mutation rate (assumed to be $5.4 \times 10^{-9}$ (UCHIMURA et al. 2015)), $p_a$ is the fraction of new mutations occurring within a focal element that are advantageous and $\gamma_a$  is the scaled selection coefficient of a new mutation. It is straightforward to incorporate a distribution of advantageous mutation effects to Equation 3:
@@ -75,24 +76,30 @@ P_{sc,j} \approx \int \limits_{0}^{1} f_x(\gamma)   V_a \tau\gamma_a^{\frac{-4r_
 \end{equation}	
 In this study, we assume an exponential distribution for the distribution of fitness effects for advantageous mutations. 
 
+	Gene conversion can be included in the above formulae if we assume that the distribution of gene conversion tract lengths is exponential  by substituting the following in for the recombination distance:
+		\begin{equation}
+		\label{geneConversion}
+		r_{i,j} = d_{i,j} r_c + g_c d_g \Bigg( 1 - e ^{-\frac{d_{i,j}}{d_g}} \Bigg)
+		\end{equation}
+	where $d_{i,j}$ is the physical distance between a focal neutral site and a selected site, $r_c$ is the rate of recombination by crossing-over, $g_c$ is the rate of non-crossing over gene conversion and $d_g$ is the mean length of a gene conversion tract. If gene conversion is present, but not accounted for, one would underestimate the strength of selection, it is 
+	
 	We estimate $\gamma_a$ and $p_a$ by fitting the relationship between nucleotide diversity and distance to functional elements by non-linear least squares using the \emph{lmfit} (0.9.7) package for Python 2.7.
  
 	\subsection*{Simulations}
-	We simulated background selection and selective sweeps using the forward-time simulation package SLiM (v1.8; Messer 2012). We performed simulations of a single 1Kbp protein-coding exon, flanked up and downstream by 70Kbp of strictly neutral sequence. 75\% of sites in the simulated exon were subject to selection (i.e. nonsynonymous sites) and the remainder were strictly neutral (i.e. synonymous sites). The population-scaled mutation rate ($\theta$ = \emph{$4N_{e}\mu$}) was set to 0.01 and the population-scaled recombination rate ($\rho$ = \emph{$4N_{e}r$}) was set to either 0.009, 0.0045 or 0.001. For a given distribution of fitness effects, see below, we performed 1,000 replicate simulations at each recombination rate resulting in 3,000 replicates per set of selection parameters. We ran simulations of 1,000 individuals for 20,000 generations to ensure that equilibrium conditions have been reached. At the final generation, 20 haploid genomes were sampled from the population. From these, we extracted the patterns of diversity around the exon or the uSFSs for nonsynonymous and synonymous sites within the exon itself.
+	We simulated background selection and selective sweeps using the forward-time simulation package SLiM (v1.8; Messer 2012). We performed simulations of a single 1Kbp protein-coding exon, flanked up and downstream by 70Kbp of strictly neutral sequence. 75\% of sites in the simulated exon were subject to selection (i.e. nonsynonymous sites) and the remainder were strictly neutral (i.e. synonymous sites). The population-scaled mutation rate ($\theta$ = \emph{$4N_{e}\mu$}) was set to 0.01 and the population-scaled recombination rate ($\rho$ = \emph{$4N_{e}r$}) was set to either 0.009, 0.0045 or 0.001. For a given distribution of fitness effects (Table \ref{tab:Table1}) we performed 1,000 replicate simulations at each recombination rate resulting in 3,000 replicates per set of selection parameters. We ran simulations of 1,000 individuals for 20,000 generations to ensure that equilibrium conditions have been reached. At the final generation, 20 haploid genomes were sampled from the population. From these, we extracted the patterns of diversity around the exon or the uSFSs for nonsynonymous and synonymous sites within the exon itself.
 \input{tables/DFE_table.tex}
 
-	\subsection*{Analysis of the uSFS}
+	\subsection*{Analysis of the uSFS using DFE-alpha and polyDFE}
 
 	We estimate the strength and frequency of new mutations using the uSFS. We analyse the uSFS using either the method of Schneider et al. (2011) as implemented in DFE-alpha, or the methods of Tataru et al. (2017) as implemented in polyDFE. Both methods estimate the rate and strength of advantageous mutations using the unfolded site frequency spectrum (uSFS). However, the models implemented in the two differ in their underlying assumptions. The Schneider et al. (2011) approach builds upon the Wright-Fisher transition matrix methods developed by Keightley and Eyre-Walker (2007) to estimate the distribution of fitness effects for harmful mutations. The methods implemented by Tataru et al. (2017) build upon Sawyer and Hartl’s Poisson random field model.
 Throughout the rest of the paper, we will refer to these methods by the names of the programs in which they are implemented.
 
-DFE-alpha does not currently allow the user to estimate an exponential distribution of advantageous mutational effects. We use the PRF-based method polyDFE to infer the parameters of the DFE from the uSFS of simulations incorporating the 
 
-		\subsubsection*{DFE-alpha}
-		The methods of Schneider et al (2011) are implemented in the program DFE-alpha. We analyse the simulation data using DFE-alpha
+		The methods of Schneider et al (2011) are implemented in the program DFE-alpha. We analyse the simulation data using DFE-alpha. Because the 3-epoch model takes a long time to converge, we performed 10 bootstraps per DFE estimate and take the mode of each parameter for the selected site analysis. Selective sweeps affect thte frequencies of linked alleles, distorting the uSFS in ways not necesaassrily captured under the demographic models implemented by DFE-alpha. Because of this, we correct the selected site uSFS prior to estimating selection parameters using the fit of the demographic model following Keightley \textit{et al.} (2016) and Booker and Keightley (\textit{Unpublished})
+			
+		DFE-alpha does not currently allow the user to estimate an exponential distribution of advantageous mutational effects, so when estimating the DFE for simulations modelling an exponential distribution of fitness effects for advantageous mutations, we used the program polyDFE (v1.0; Tataru et al. 2017). polyDFE implements the Poisson-random field methods of Tataru et al. 2017. Like DFE-alpha, polyDFE contrasts the uSFS for selected and putatively neutral sites in order to infer the full DFE. polyDFE does not explicitly model the population's demographic history, rather it uses the neutral site uSFS to obtain a set of nuisance parameters which encapsulate devations from a purely neutral model (e.g. demographic history and selection at linked sites).
 		
-		\subsubsection*{polyDFE}
-		The methods of Schneider et al (2011) are implemented in the program DFE-alpha. We analyse the simulation data using DFE-alpha
+	 When analysing data using polyDFE we used the following options: Model C, including between-species divergence. As with the DFE-alpha analysis, we analysed 1,000 replicate uSFSs from the simulation data.
 
 	\subsection*{Analysis of Mouse Data}
 
@@ -104,10 +111,14 @@ From the edges of exons (CNEs), I extracted the SFS in windows of 1Kbp (100bp) e
 
 	There are two types of genetic maps available for mice, those constructed by performing crosses and those inferred from patterns of linkage disequilibrium. The two maps will have benefits and drawbacks. Firstly, maps based on pedigree information are unbiased. They give a description of the locations and rates of crossing over events in the genome,. However, pedigree-based maps require a large number of individuals to be genotyped, which has meant that researchers have often been limited to using a relatively small number of genetic markers. Recombination maps based on linkage disequilibrium, on the other hand, use patterns of linkage disequilibrium to infer the populiaton-scaled recombination rates ($4N_er$) across the genome. LD-based approaches can provide inferences of recombination rates at very fine-scales across the genome, enabling researchers to locate recombination hotspots (reference to a review? – necessary?). A drawback of LD-based approaches is that the recombination rate estimates they produce are confounded with the level of genetic diversity, since both are functions of the effective population size ($N_e$). In this study, we incorporate genetic distances using both pedigree-based and LD-based recombination maps constructed for \emph{Mus musculus}. We use the (COX et al. 2009) genetic map, which was constructed with 10,195 SNPs genotyped in 3,546 meioses. 
 
-	Rates of initiation of gene conversion in mice are known in mice.
-A difficulty is that genetic 
+
+	Rates of initiation of gene conversion in mice are known in mice. We incorporated non-crossover associated gene conversion 
+A tract length of 145bp for non-crossover associated gene conversion was used (Paigen \textit{et al.} 2008)
  
  
+ 	We incorporated background selection as a covariate when fitting Equation \ref{jointApprox} using the simualtions results we obtained in an earlier study (Booker and Keightley \textit{et al Unpublished}). These simulations incoporated the actual distribution of functional elements that is in the \textit{M. musculus} genome as well as recombination rate variation. Theoretical models of the effects of background selection perform poorly when deleterious mutations have weak ($\gamma_d < 5$) 	effects on fitness. In practice, researchers have truncated the DFE for harmful mutations. Using simulation results allows us to include the effects of BGS without the need to truncate the DFE. In the case of 0-folde sites in protein-coding exons, Booker \textit{et al.} (\textit{Unpublished}) found that $\approx$ 20\% of new mutations occuring at nonsynsymous sites had $\gamma_d < 1$. Truncating the distribution may make a substantial difference to the effects of BGS. 
+ 	
+ 	
 \subsection*{Estimating the effects of background selection}
 
 We incorporated the effects of background selection into 
@@ -115,7 +126,19 @@ We incorporated the effects of background selection into
 \section*{Results}
 \subsection*{Estimating selection parameters from simulations}
 
+	The strength and frequency of new advantageous mutations can be  estimated from both the uSFS and patterns of genetic diversity at linked sites. 
+	
+	In the case of weakly selected advantageous mutations, with effects of $\gamma_a = 20$, uSFS based inference methods outperform our method analysing patterns of diversity. This is presuably because under this selection regime, the fixation of advantageous mutaitons has little effect on patterns of genetic diversity. Furthermore, in such cases, if background selection is not corrected for, the parameters of selection inferred may be entirely spurious.
+	
+	In our simulaitons, we modelled strongly selected mutations at different frequencies. 
+	
+	When analysing simulation data we used the actual DFE model assumed in the simulations. This is obviously not possible when analysing real data, where the true nature of the DFE is unknown. Estimates of the DFE for harmful mutations obtained using uSFS analysis methods can be biased if positive selection is present but not modelled 
+	
+The fitness effects and 
 
+When advantageous mutaitons are frequent, the product $\gamma p_a$ is accurately estimated fromt the uSFS. However, the individual parameters are difficult to disentangle. 
+	
+	
 \subsection*{Estimates of selection for \textit{M. m. castaneus}}
 
 	We estimated the parameters of a model of recurrent selective sweeps acting in two different classes of functional elements in \textit{M. m. castaneus}. We compared parameters obtained when incorporating gene conversion and background selection.
@@ -124,6 +147,8 @@ We incorporated the effects of background selection into
 
 Modelling the effects of BGS and selective sweeps on patterns of diversity at linked 
 
+
+Estimates of seelction obtained for protein-coding regions were an order of magnitude higher than those obtained for conserved non-coding elements. 
 
 \input{tables/Estimates_castaneusMap.tex}
 
@@ -141,7 +166,7 @@ In an earlier study, Teschke \textit{et al.} (2008) analysed patterns of variati
 
 \subsection*{The contribution of adaptation in protein-coding and regulatory regions to phenotypic evolution in mice}
 
-An enduring question in evolutionary biology has been the extent to which protein-coding and regulatroy regions of the gneome contribute to fitness change. In this study we have found that the strenght of selection acting on new mutations occuring in protein-coding regions far exceeds that of those occuring in regulatory regions (Table \ref{EstimatesCastaneus}). However, the total contribution that the two classes of sites make to fitness changes will depend upon the total number of the different site types in a species' genome. In mice, there is a much large number of non-coding sites in the genome inferred to be targets of selection than there are sites that encode proteins (Halligan et al 2013; MORE MORE MORE). 
+An enduring question in evolutionary biology has been the extent to which protein-coding and regulatroy regions of the gneome contribute to fitness change. In this study, we have found that the strength of selection acting on new mutations occuring in protein-coding regions far exceeds that of those occuring in conserved non-coding elements (assumed to be regulatory) (Table \ref{EstimatesCastaneus}). However, the total contribution that the two classes of sites make to fitness changes will depend upon the total number of the different site types in a species' genome. In mice, there is a much large number of non-coding sites in the genome inferred to be targets of selection than there are sites that encode proteins (Halligan et al 2013; MORE MORE MORE). 
 
 
 The rate of adaptive fitness change ($\Delta W$) generated by mutations occurring at a particular class of sites can be modelled as
@@ -155,9 +180,9 @@ where $\mu_a$ is the rate of advantageous mutations occuring at a particular cla
 \input{tables/FitnessExpectation.tex}
 
 
-A weakness of this study is that we did not estimate the strength of selection acting on the untranslated regions (UTRs) of protein-coding genes.
+A weakness of this study is that we did not estimate the strength of selection acting on the untranslated regions (UTRs) of protein-coding genes. The question as to whether adaptation on protein-coding or 
 
-
+We assumed that all new advantageous mutations are semi-dominant, which is something of a problem. Haldane's sieve predicts that most advantageous mutations that become fixed are dominant. There are a number of examples of selective sweeps being driven by recessive mutations in mammals, particularly humans (REFS). If advantageous mutations are fully recessive, where the dominance coefficient (\textit{h}) is 0, the chance of stochastic loss exceeds that of mutations that have \textit{h} $>$ 0. As long as mutations are neither fully recessive nor fully dominant (0 $<$ \textit{h} $<$ 1), the troughs in diversity resulting from mutations with the compound parameter \textit{2hs} are similar (Greg Ewing; Matty Hartfield's paper). Because of this, as long new mutations are neither fully reccessive nor dominant, the selection coefficients we estiamted should be directly proportional to the true values.
 
 \section*{Conclusions}
 
