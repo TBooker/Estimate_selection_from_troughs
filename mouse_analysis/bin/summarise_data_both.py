@@ -96,7 +96,9 @@ def main():
 		recPos = 'r_co'
 		data['r_gc']  = ( nc_gc_ratio * data[2] / data[3] ) * tract_length * (1 - np.exp( (-1. * data[3]) / tract_length))
 		data['joint'] = data['r_gc'] + data['r_co']
-		
+		if args.GC:
+			recPos = 'joint'
+			
 	data['dist'] = data[recPos] * data['scale']
 	print data
 
