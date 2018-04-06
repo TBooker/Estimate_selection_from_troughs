@@ -1,5 +1,6 @@
 import argparse, site_frequency_spectrum as SFS_tools, pop_gen_misc as pgm, glob
 import pandas as pd
+import numpy as np
 from tom import brace
 
 def summariseChunk(chunk, ncpg = False):
@@ -66,20 +67,40 @@ def main():
 		action = 'store_true',
 		help = "Add this flag if you want to use the Cox map",
 		default = False)
+	parser.add_argument("--GC", 
+		required = False,
+		dest = "GC", 
+		action = 'store_true',
+		help = "Add this flag if you want to include GeneConversion according to the Paigen et al estimates",
+		default = False)
 
 	args = parser.parse_args()
 
 	data = pd.read_csv(args.input, compression = 'gzip', header = None, sep ='\t')
 	data['scale'] = [-1 if x.split('.')[0] == 'u' else 1 for x in data[0]]
 
+# The following gene conversion parameters come from Paigen et al 2008 PLoS Genetics
+	nc_gc_ratio = 0.105  # The relative rate of NCO gene conversion compared to CO Gene Conversion
+	tract_length = 144 # average tract length
+	
 	if args.Cox:
-		data[8] = data[7] * 420000 * 4
+		data['r_co'] = data[7] * 420000 * 4
 # RecPos is the index of the dataframe where recombination rates are held
-		recPos = 8 
+		recPos = 'r_co'
+		data['r_gc']  = 420000 * 4 * ( nc_gc_ratio * data[7] / data[3] ) * tract_length * (1 - np.exp( (-1. * data[3]) / tract_length))
+		data['joint'] = data['r_gc'] + data['r_co']
+		if args.GC:
+			recPos = 'joint'
 	else:
-		recPos = 2
+		data['r_co'] = data[2]
+		recPos = 'r_co'
+		data['r_gc']  = ( nc_gc_ratio * data[2] / data[3] ) * tract_length * (1 - np.exp( (-1. * data[3]) / tract_length))
+		data['joint'] = data['r_gc'] + data['r_co']
+		
 	data['dist'] = data[recPos] * data['scale']
+	print data
 
+	brace()
 	if args.cne:
 		ranges = range(0, 200, 2) ## For CNEs
 	else:
