@@ -104,7 +104,7 @@ def main():
 	if args.cne:
 		ranges = range(0, 200, 2) ## For CNEs
 	else:
-		ranges = range(0, 3000, 10) ## For Exons
+		ranges = range(0, 3000, 30) ## For Exons
 	output_lines = []
 	output_lines_2 = []
 
