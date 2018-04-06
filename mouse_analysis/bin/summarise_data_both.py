@@ -100,9 +100,7 @@ def main():
 			recPos = 'joint'
 			
 	data['dist'] = data[recPos] * data['scale']
-	print data
 
-	brace()
 	if args.cne:
 		ranges = range(0, 200, 2) ## For CNEs
 	else:
