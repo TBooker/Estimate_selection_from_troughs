@@ -10,7 +10,7 @@ def simString(sa, pa):
 	'#MUTATION RATE',
 	'1.25e-6',
 	'#GENOMIC ELEMENT TYPES',
-	'g0 m1 1.00 / intergenic sequence',
+	'g0 m0 1.00 / intergenic sequence',
 	'g1 m3 0.25 m1 ' + str(0.75 - (pa * 0.75)) + ' m2 ' + str(pa * 0.75)  + '  / Define a protein-coding exon',
 	'#CHROMOSOME ORGANIZATION',
 	'g1 1 100',
@@ -470,7 +470,8 @@ def simString(sa, pa):
 	'208000 R p1 20',
 	'212000 R p1 20',
 	'216000 R p1 20',
-	'220000 R p1 20']
+	'220000 R p1 20',
+	'220000 F p1']
 	return simulation
 	
 ### Script to make a set of simulations
