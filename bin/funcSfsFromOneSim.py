@@ -42,7 +42,8 @@ def main():
 		process = subprocess.Popen(['zgrep', 'm'+str(m), args.input], stdout = subprocess.PIPE).communicate()[0]
 		fixations, sfs = getSFSfromSLiM(process)
  		if fixations == None:continue
- 		polymorphs = sum(sfs)	
+ 		polymorphs = sum(sfs)
+ 		sfs[-1] +=fixations	
  		this_sfs = ':'.join(map(str,sfs))
 		output.append(['m'+str(m),this_sfs])
 
