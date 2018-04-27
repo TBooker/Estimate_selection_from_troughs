@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014) (preloaded format=pdflatex 2014.12.12)  26 APR 2018 14:41
+This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014) (preloaded format=pdflatex 2014.12.12)  27 APR 2018 14:40
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -302,233 +302,28 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <6> on input line 17.
 
-! Missing } inserted.
-<inserted text> 
-                }
-l.20 ...stimated \\ \textit{Excluding Divergence}}
-                                                   \\
-I've put in what seems to be necessary to fix
-the current column of the current alignment.
-Try to go on, since this might almost work.
+[1{/usr/local/texlive/2014/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
+(./polyDFE_simulation.aux)
 
-! Missing \endgroup inserted.
-<inserted text> 
-                \endgroup 
-l.20 ...stimated \\ \textit{Excluding Divergence}}
-                                                   \\
-I've inserted something that you may have forgotten.
-(See the <inserted text> above.)
-With luck, this will get me unwedged. But if you
-really didn't forget anything, try typing `2' now; then
-my insertion and my current dilemma will both disappear.
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
 
-! Missing } inserted.
-<inserted text> 
-                }
-l.20 ...stimated \\ \textit{Excluding Divergence}}
-                                                   \\
-I've inserted something that you may have forgotten.
-(See the <inserted text> above.)
-With luck, this will get me unwedged. But if you
-really didn't forget anything, try typing `2' now; then
-my insertion and my current dilemma will both disappear.
+ ) 
+Here is how much of TeX's memory you used:
+ 3029 strings out of 493117
+ 45095 string characters out of 6135432
+ 113239 words of memory out of 5000000
+ 6441 multiletter control sequences out of 15000+600000
+ 6725 words of font info for 24 fonts, out of 8000000 for 9000
+ 1141 hyphenation exceptions out of 8191
+ 42i,9n,35p,351b,260s stack positions out of 5000i,500n,10000p,200000b,80000s
+</usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb
+></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb><
+/usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></u
+sr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb>
+Output written on polyDFE_simulation.pdf (1 page, 45035 bytes).
+PDF statistics:
+ 24 PDF objects out of 1000 (max. 8388607)
+ 16 compressed objects within 1 object stream
+ 0 named destinations out of 1000 (max. 500000)
+ 1 words of extra memory for PDF output out of 10000 (max. 10000000)
 
-! Missing \cr inserted.
-<inserted text> 
-                \cr 
-l.20 ...stimated \\ \textit{Excluding Divergence}}
-                                                   \\
-I'm guessing that you meant to end an alignment here.
-
-! Missing { inserted.
-<inserted text> 
-                {
-l.20 ...stimated \\ \textit{Excluding Divergence}}
-                                                   \\
-I've put in what seems to be necessary to fix
-the current column of the current alignment.
-Try to go on, since this might almost work.
-
-! Missing } inserted.
-<inserted text> 
-                }
-l.20 ...stimated \\ \textit{Excluding Divergence}}
-                                                   \\
-I've inserted something that you may have forgotten.
-(See the <inserted text> above.)
-With luck, this will get me unwedged. But if you
-really didn't forget anything, try typing `2' now; then
-my insertion and my current dilemma will both disappear.
-
-! Missing $ inserted.
-<inserted text> 
-                $
-l.20 ...stimated \\ \textit{Excluding Divergence}}
-                                                   \\
-I've inserted something that you may have forgotten.
-(See the <inserted text> above.)
-With luck, this will get me unwedged. But if you
-really didn't forget anything, try typing `2' now; then
-my insertion and my current dilemma will both disappear.
-
-! Missing } inserted.
-<inserted text> 
-                }
-l.20 ...stimated \\ \textit{Excluding Divergence}}
-                                                   \\
-I've inserted something that you may have forgotten.
-(See the <inserted text> above.)
-With luck, this will get me unwedged. But if you
-really didn't forget anything, try typing `2' now; then
-my insertion and my current dilemma will both disappear.
-
-! Misplaced alignment tab character &.
-l.21  $N_es_a$ &
-                 $p_a$ &  $N_es_a$ & $p_a$ &  $N_es_ap_a$ &   $N_es_a$  & $p...
-I can't figure out why you would want to use a tab mark
-here. If you just want an ampersand, the remedy is
-simple: Just type `I\&' now. But if some right brace
-up above has ended a previous alignment prematurely,
-you're probably due for more error messages, and you
-might try typing `S' now just to see what is salvageable.
-
-! Misplaced alignment tab character &.
-l.21  $N_es_a$ & $p_a$ &
-                          $N_es_a$ & $p_a$ &  $N_es_ap_a$ &   $N_es_a$  & $p...
-I can't figure out why you would want to use a tab mark
-here. If you just want an ampersand, the remedy is
-simple: Just type `I\&' now. But if some right brace
-up above has ended a previous alignment prematurely,
-you're probably due for more error messages, and you
-might try typing `S' now just to see what is salvageable.
-
-! Misplaced alignment tab character &.
-l.21  $N_es_a$ & $p_a$ &  $N_es_a$ &
-                                     $p_a$ &  $N_es_ap_a$ &   $N_es_a$  & $p...
-I can't figure out why you would want to use a tab mark
-here. If you just want an ampersand, the remedy is
-simple: Just type `I\&' now. But if some right brace
-up above has ended a previous alignment prematurely,
-you're probably due for more error messages, and you
-might try typing `S' now just to see what is salvageable.
-
-! Misplaced alignment tab character &.
-l.21  $N_es_a$ & $p_a$ &  $N_es_a$ & $p_a$ &
-                                              $N_es_ap_a$ &   $N_es_a$  & $p...
-I can't figure out why you would want to use a tab mark
-here. If you just want an ampersand, the remedy is
-simple: Just type `I\&' now. But if some right brace
-up above has ended a previous alignment prematurely,
-you're probably due for more error messages, and you
-might try typing `S' now just to see what is salvageable.
-
-! Misplaced alignment tab character &.
-l.21 ...$p_a$ &  $N_es_a$ & $p_a$ &  $N_es_ap_a$ &
-                                                     $N_es_a$  & $p_a$ & $N_...
-I can't figure out why you would want to use a tab mark
-here. If you just want an ampersand, the remedy is
-simple: Just type `I\&' now. But if some right brace
-up above has ended a previous alignment prematurely,
-you're probably due for more error messages, and you
-might try typing `S' now just to see what is salvageable.
-
-! Misplaced alignment tab character &.
-l.21 ..._a$ & $p_a$ &  $N_es_ap_a$ &   $N_es_a$  &
-                                                   $p_a$ & $N_es_ap_a$  \\
-I can't figure out why you would want to use a tab mark
-here. If you just want an ampersand, the remedy is
-simple: Just type `I\&' now. But if some right brace
-up above has ended a previous alignment prematurely,
-you're probably due for more error messages, and you
-might try typing `S' now just to see what is salvageable.
-
-! Misplaced alignment tab character &.
-l.21 ..._a$ &  $N_es_ap_a$ &   $N_es_a$  & $p_a$ &
-                                                   $N_es_ap_a$  \\
-I can't figure out why you would want to use a tab mark
-here. If you just want an ampersand, the remedy is
-simple: Just type `I\&' now. But if some right brace
-up above has ended a previous alignment prematurely,
-you're probably due for more error messages, and you
-might try typing `S' now just to see what is salvageable.
-
-! Misplaced alignment tab character &.
-l.22  5 &
-          0.01 & 92.8 & 0.000880 &  & 1.11 & 0.00002 &  \\
-I can't figure out why you would want to use a tab mark
-here. If you just want an ampersand, the remedy is
-simple: Just type `I\&' now. But if some right brace
-up above has ended a previous alignment prematurely,
-you're probably due for more error messages, and you
-might try typing `S' now just to see what is salvageable.
-
-! Misplaced alignment tab character &.
-l.22  5 & 0.01 &
-                 92.8 & 0.000880 &  & 1.11 & 0.00002 &  \\
-I can't figure out why you would want to use a tab mark
-here. If you just want an ampersand, the remedy is
-simple: Just type `I\&' now. But if some right brace
-up above has ended a previous alignment prematurely,
-you're probably due for more error messages, and you
-might try typing `S' now just to see what is salvageable.
-
-! Misplaced alignment tab character &.
-l.22  5 & 0.01 & 92.8 &
-                        0.000880 &  & 1.11 & 0.00002 &  \\
-I can't figure out why you would want to use a tab mark
-here. If you just want an ampersand, the remedy is
-simple: Just type `I\&' now. But if some right brace
-up above has ended a previous alignment prematurely,
-you're probably due for more error messages, and you
-might try typing `S' now just to see what is salvageable.
-
-! Misplaced alignment tab character &.
-l.22  5 & 0.01 & 92.8 & 0.000880 &
-                                    & 1.11 & 0.00002 &  \\
-I can't figure out why you would want to use a tab mark
-here. If you just want an ampersand, the remedy is
-simple: Just type `I\&' now. But if some right brace
-up above has ended a previous alignment prematurely,
-you're probably due for more error messages, and you
-might try typing `S' now just to see what is salvageable.
-
-! Misplaced alignment tab character &.
-l.22  5 & 0.01 & 92.8 & 0.000880 &  &
-                                      1.11 & 0.00002 &  \\
-I can't figure out why you would want to use a tab mark
-here. If you just want an ampersand, the remedy is
-simple: Just type `I\&' now. But if some right brace
-up above has ended a previous alignment prematurely,
-you're probably due for more error messages, and you
-might try typing `S' now just to see what is salvageable.
-
-! Misplaced alignment tab character &.
-l.22  5 & 0.01 & 92.8 & 0.000880 &  & 1.11 &
-                                             0.00002 &  \\
-I can't figure out why you would want to use a tab mark
-here. If you just want an ampersand, the remedy is
-simple: Just type `I\&' now. But if some right brace
-up above has ended a previous alignment prematurely,
-you're probably due for more error messages, and you
-might try typing `S' now just to see what is salvageable.
-
-! Misplaced alignment tab character &.
-l.22 ...01 & 92.8 & 0.000880 &  & 1.11 & 0.00002 &
-                                                    \\
-I can't figure out why you would want to use a tab mark
-here. If you just want an ampersand, the remedy is
-simple: Just type `I\&' now. But if some right brace
-up above has ended a previous alignment prematurely,
-you're probably due for more error messages, and you
-might try typing `S' now just to see what is salvageable.
-
-! Misplaced \crcr.
-\adl@endarray ->\crcr 
-                      \noalign { \ifdim \adl@height =\z@ \ifdim \adl@depth =...
-l.30 \end{tabular}
-                  
-I can't figure out why you would want to use a tab mark
-or \cr or \span just now. If something like a right brace
-up above has ended a previous alignment prematurely,
-you're probably due for more error messages, and you
-might try

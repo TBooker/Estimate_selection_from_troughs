@@ -1,35 +1,26 @@
-\documentclass[11pt]{article}
-\input{../packages.tex}
-
-
-
-\usepackage{booktabs}
-
-
-
-\begin{document}
-
 
 
 \begin{table}
 \centering
 
-\caption{Estimates of selection from the uSFS of simulated data. In each simulation the compound parameter $N_es_ap_a$ was held at 0.05. For each set of selection parameters, 10Mbp of simulated sequence was generated.}
-        \begin{tabular}{cccccccc}
-        
-       \multicolumn{2}{c}{Simulated} & \multicolumn{3}{c}{Estimated  \textit{Including Divergence}} & \multicolumn{3}{c}{Estimated \\ \textit{Excluding Divergence}} \\
- $N_es_a$ & $p_a$ &  $N_es_a$ & $p_a$ &  $N_es_ap_a$ &   $N_es_a$  & $p_a$ & $N_es_ap_a$  \\ 
- 5 & 0.01 & 92.8 & 0.000880 &  & 1.11 & 0.00002 &  \\
-% 10 & 0.005 & 93.8 & 0.000910 & & 21.4 & 0.00482 & \\
-% 25 & 0.002 & 99.9 & 0.000960 & & 1.31 & 0.00005 & \\
-% 50 & 0.001 & 99.2 & 0.000940 & & 1.09 & 0.00008 & \\
-% 100 & 0.0005 & 100 & 0.000910 & & 0.291 &  & \\
-% 200 & 0.00025 & 93.2 & 0.00103 & & 0.852 & 0.00002 & \\
-% 400 & 0.000125 & 91.4 & 0.000940 & & 1.32 & 0.00008 & \\
+\caption{polyDFE analysis of simulated data. For each simulation the compound parameter $2N_es_ap_a$ was held at 0.10. For each set of selection parameters, 10Mbp of simulated sequence was generated.}
 
+        \begin{tabular}{cccccccc}
+        \toprule
+        \multicolumn{2}{c}{Simulated} & \multicolumn{3}{c}{Estimated  \textit{Including Divergence}} & \multicolumn{3}{c}{Estimated  \textit{Excluding Divergence}} \\ 
+		\cmidrule(lr){3-5}\cmidrule(lr){6-8}
+ $2N_es_a$ & $p_a$ &  $2N_es_a$ & $p_a$ &  $2N_es_ap_a$ &   $2N_es_a$  & $p_a$ & $2N_es_ap_a$  \\ \hline
+  10 & 0.0100 & 92.8 & 0.000880 & 0.0817 & 1.11 & 0.00002 & 0.0000222 \\
+ 20 & 0.00500 & 93.8 & 0.000910 & 0.0854 & 21.4 & 0.00482 & 0.103 \\
+ 50 & 0.00200 & 99.9 & 0.000960 & 0.0959 & 1.31 & 0.00005 & 0.0000655 \\
+ 100 & 0.00100 & 99.2 & 0.000940 & 0.0932 & 1.09 & 0.00008 & 0.0000872 \\
+ 200 & 0.000500 & 100 & 0.000910 & 0.0910 & 0.291 & 0.00005 & 0.0000146 \\
+ 400 & 0.000250 & 93.2 & 0.00103 & 0.0960 & 0.852 & 0.00002 & 0.0000170\\
+ 800 & 0.000125 & 91.4 & 0.000940 & 0.0859 & 1.32 & 0.00008 & 0.000106 \\
+\bottomrule
 \end{tabular}    
- %   \label{tab:castaneusEstimates}
+
+   \label{tab:polyDFE}
 
 \end{table}
 
-\end{document}
