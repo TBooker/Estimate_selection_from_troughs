@@ -1,0 +1,75 @@
+---- Performing inference on Ns10_pa_0.005_boots/Ns10_pa_0.005.25.polyDFE.txt using model B
+
+---- Warning: mutation variability is not used when only one neutral and one selected fragment is available.
+---- No mutation variability. Using Poisson likelihood.
+
+---- Using provided initial values
+
+
+-- Starting local optimization
+ it       eps_an        eps_cont      theta_bar      S_d            b             p_b           S_b           r  2          r  3          r  4          r  5          r  6          r  7          r  8          r  9          r 10          r 11          r 12          r 13          r 14          r 15          r 16          r 17          r 18          r 19         ln lk             grad     status
+  0      4.50e-06      9.00e-07       0.00100     -400.00000       0.40000       0.02000       4.00000       1.00000       1.00000       1.00000       1.00000       1.00000       1.00000       1.00000       1.00000       1.00000       1.00000       1.00000       1.00000       1.00000       1.00000       1.00000       1.00000       1.00000       1.00000  -241309.1774288138   1673.77628   -2
+547      4.51e-06      9.00e-07       0.00941     -932.39322       0.19759       0.00440      26.30189       0.98308       0.99384       0.98964       0.95438       0.97684       0.95332       0.95255       0.95439       0.95930       0.90141       0.94820       0.92103       0.93510       0.94937       0.93818       0.94451       0.98021       0.99979  -193.6130837997      0.00403   -3
+-- Local optimization: stuck in the same solution
+
+
+---- Best joint likelihood found -193.61308 with gradient 0.00403
+-- Model: B
+--     eps_an        eps_cont      theta_bar     a        
+--    4.51e-06      9.00e-07       0.00941       -1.00000  
+--      S_d            b             p_b           S_b      
+--   -932.39322       0.19759       0.00440      26.30189  
+--     r  2          r  3          r  4          r  5          r  6          r  7          r  8          r  9          r 10          r 11          r 12          r 13          r 14          r 15          r 16          r 17          r 18          r 19     
+--     0.98308       0.99384       0.98964       0.95438       0.97684       0.95332       0.95255       0.95439       0.95930       0.90141       0.94820       0.92103       0.93510       0.94937       0.93818       0.94451       0.98021       0.99979  
+
+---- Expected P_neut(i), 0 < i < n (neutral SFS per site) 
+E[P_neut(1)] = 0.009411
+E[P_neut(2)] = 0.004626
+E[P_neut(3)] = 0.003118
+E[P_neut(4)] = 0.002328
+E[P_neut(5)] = 0.001796
+E[P_neut(6)] = 0.001532
+E[P_neut(7)] = 0.001282
+E[P_neut(8)] = 0.001121
+E[P_neut(9)] = 0.000998
+E[P_neut(10)] = 0.000903
+E[P_neut(11)] = 0.000771
+E[P_neut(12)] = 0.000744
+E[P_neut(13)] = 0.000667
+E[P_neut(14)] = 0.000629
+E[P_neut(15)] = 0.000596
+E[P_neut(16)] = 0.000552
+E[P_neut(17)] = 0.000523
+E[P_neut(18)] = 0.000512
+E[P_neut(19)] = 0.000495
+
+---- Expected P_sel(i), 0 < i < n (selected SFS per site) 
+E[P_sel(1)] = 0.003776
+E[P_sel(2)] = 0.001526
+E[P_sel(3)] = 0.000940
+E[P_sel(4)] = 0.000663
+E[P_sel(5)] = 0.000491
+E[P_sel(6)] = 0.000406
+E[P_sel(7)] = 0.000331
+E[P_sel(8)] = 0.000283
+E[P_sel(9)] = 0.000248
+E[P_sel(10)] = 0.000221
+E[P_sel(11)] = 0.000187
+E[P_sel(12)] = 0.000179
+E[P_sel(13)] = 0.000159
+E[P_sel(14)] = 0.000150
+E[P_sel(15)] = 0.000142
+E[P_sel(16)] = 0.000132
+E[P_sel(17)] = 0.000127
+E[P_sel(18)] = 0.000128
+E[P_sel(19)] = 0.000130
+
+---- Expected neutral and selected misattributed polymorphism per site
+E[mis_neut] = 0.000471
+E[mis_sel] = 0.000134
+
+---- alpha_div = 0.281548
+---- alpha_dfe = 0.356247
+
+
+
