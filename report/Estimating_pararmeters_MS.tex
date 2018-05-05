@@ -24,6 +24,17 @@
 
 \end{abstract}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%  #   #    #  #####  #####  ######
+%  #   ##   #    #    #   #  #    #     
+%  #   # #  #    #    #####  #    #
+%  #   #  # #    #    #  #   #    #           
+%  #   #   ##    #    #   #  #    #  
+%  #   #    #    #    #   #  ######    
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \section*{Introduction}
 
 In the past 30 years of population genetic research it has become clear that natural selection shapes patterns of nucleotide diversity across the genomes of many species (Corbett-Detig \textit{et al} 2015; Cutter and Payseur 2012). Because genetically linked sites do not evolve independently, selection acting at one site may have consequences for another. The consequences of selection at linked sites are intrinsically linked to the frequency and strength of selected mutations as well as, crucially, the rate of recombination (REF DUMP). Two main modes of selection at linked sites have been identified; selective sweeps caused by the spread of advantageous mutations and background selection caused by the removal of deleterious variants. The two processes are related and can both potentially explain the positive correlations between nucleotide diversity and recombination rate reported in many species (Cutter and Payseur). However, the proportion of nonsynyonomous substitutions attributable to adaptive evolution ($\alpha$) is  high (50\%) in many species (Galtier; but see Booker et al 2017 for caveats), suggesting that selective sweeps may play a substantial role in shaping nucleotide diversity across the genomes of many species.
@@ -47,7 +58,16 @@ When analysis of the uSFS includes between-species divergence, estimates of
 
 In this study, we use a model of selective sweeps to estimate the strength and frequency of advantageous mutations that occur within protein-coding exons and regulatory elements. We show that the selection parameters that explain the troughs in diversity observed around protein-coding exons are out of the range detectable by analysis of the uSFS using simulations.  We find that, as expected \textit{a priori}, the strength of selection acting on protein-coding exons is far greater than that acting in regulatory elements. Using a simple model of the fitness change brought about by adaptive evolution, we show that, despite adaptation occurring more frequently in regulatory regions, protein-coding change likely causes more phenotypic evolution in mice.
 
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% #   #  ####  #####  #   #  ####    ####
+% ## ##  #       #    #   #  #   #   #  
+% # # #  ###     #    #####  #   #   ####
+% #   #  #       #    #   #  #   #      #        
+% #   #  #       #    #   #  #   #      #
+% #   #  ####    #    #   #  ####    ####
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section*{Materials and Methods}
 
 	\subsection*{Model of Recurrent Sweeps and Background Selection}
@@ -81,7 +101,7 @@ The term $V_{a}$ = $2\mu$ $p_{a}\gamma_{a}$ is the rate of sweeps per generation
 		\label{exponential}
 P_{sc,j} \approx \int \limits_{0}^{1} f_x(\gamma) V_a \tau\gamma_a^{\frac{-4r_{i,j}}{s}} \mathop{d\gamma}
 		\end{equation}
-When analysing the mouse data, see below, we compared the fit of Equation \ref{jointApprox} incorporating either single class of beneficial mutations (Equation \ref{singleClass}) or the exponential distribution (Equation \ref{exponential}) using Aikieke's Information Criterion (AIC).
+When analysing the mouse data, see below, we compared the fit of Equation \ref{jointApprox} incorporating either single class of beneficial mutations (Equation \ref{singleClass}) or the exponential distribution (Equation \ref{exponential}) using Aikieke's Information Criterion (AIC) by assumig that the residuals about the curve are normally distributed.
 
 	
 	We estimate $\gamma_a$ and $p_a$ by fitting the relationship between nucleotide diversity and distance to functional elements by non-linear least squares using the \emph{lmfit} (0.9.7) package for Python 2.7.
@@ -94,7 +114,7 @@ When analysing the mouse data, see below, we compared the fit of Equation \ref{j
 
 %	We simulated background selection and selective sweeps using the forward-time simulation package SLiM (v1.8; Messer 2012). We performed simulations of a single 1Kbp protein-coding exon, flanked up and downstream by 70Kbp of strictly neutral sequence. 75\% of sites in the simulated exon were subject to selection (i.e. nonsynonymous sites) and the remainder were strictly neutral (i.e. synonymous sites). The population-scaled mutation rate ($\theta$ = \emph{$4N_{e}\mu$}) was set to 0.01 and the population-scaled recombination rate ($\rho$ = \emph{$4N_{e}r$}) was set to either 0.009, 0.0045 or 0.001. For a given distribution of fitness effects (Table \ref{tab:Table1}) we performed 1,000 replicate simulations at each recombination rate resulting in 3,000 replicates per set of selection parameters. We ran simulations of 1,000 individuals for 20,000 generations to ensure that equilibrium conditions have been reached. At the final generation, 20 haploid genomes were sampled from the population. From these, we extracted the patterns of diversity around the exon or the uSFSs for nonsynonymous and synonymous sites within the exon itself.
 %\input{tables/DFE_table.tex}
-\input{tables/polyDFE_simulation.2.tex}
+%\input{tables/polyDFE_simulation.2.tex}
 
 	\subsection*{Analysing simulation data using DFE-alpha and polyDFE}
 
@@ -141,10 +161,48 @@ Recombination proceeds via crossing-over or gene conversion, but the above formu
 
 We incorporated the effects of background selection into 
 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% ####   ####  #####  #   #  #     #######  #####
+% #   #  #     #      #   #  #        #     #
+% ## #   ###   #####  #   #  #        #     #####
+% # #    #         #  #   #  #        #         #
+% #  #   #         #  #   #  #        #         #
+% #   #  ####  #####  #####  #####    #     #####
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \section*{Results}
 \subsection*{Estimating selection parameters from simulations}
 
+	We performed simulations to assess how accurately positive selection parameters are estimated by analysis of the uSFS. We performed simulations that incorporated linkage, as selection at linked sites causes distortions to the uSFS that likely affect real data and thus cannot be ignored. From our simulations we found that when  advantageous mutations are relatively weakly selected and infrequent ($\gamma_a$ $<$ 100 and $p_a$ $>$ 0.0005), polyDFE estimated both $\gamma_a$ and $p_a$ with precision (Table REF). However, we found that when selection on advantageous mutations is strong but infrequent ($\gamma_a$ $\geq$ 100 and $p_a$ $\leq$ 0.0005) the positive selection parameters were poorly estimated regardless of whether divergence was used in the inference. However, when divergence was included, the product $\gamma_a p_a$ was accurately estimated (Table REF).
+		
+	Strongly selected  In our simulations, we modelled cases where $gamma_a p_a$ = 0.05. This value of $\gamma_a p_a$ is based on values estimated in studies of \textit{Drosophila melanogaster}. 
+	
+	In simulations incorporating strongly advantageous mutations (i.e. $gamma >$ 100), we found that positive selection could not be detected by analysis of polymorphism alone. Likelihood ratios between full DFE models and dDFE models fitted to the uSFS were not statistically significant when divergence was ignored (Table X). In such cases, advantageous mutations contribute little to standing variation, so there is little power to detect advantageous mutations from polymorphism alone. 
+	
+	Strongly selected, but rare advantageous mutations can be detected by analysis of the uSFS, if between-species divergence is included. data sets resulted in likelihood ratio tests, 
+	This is evidenced by significant likelihood ratio tests for the presence of advantageous mutations. However, in these cases, the parameter values obtained are 
+	
+	The number of fixed, advantageous mutations carries information on the compound parameter $\gamma_a p_a \mu$ (Kimura and Ohta 1971), but without further information from polymorphism data, this compound parameter cannot be disentangled by through analysis of the uSFS.
+	
+	In such cases, advantageous mutations were detected when between-species did not substantially contribute to standing variation and so 
+	
+	Analysing simulated uSFSs with polyDFE yielded estimates of the dDFE that were extremely precise, but this depended on whether or not divergence was included or whether a full DFE was inferred. This is particularly evident for the case of $\gamma_a$ = 5 and $p_a$ = 0.01 (Table SX), where advantageous mutations contribute substantially to both standing variation and between-species divergence. In this case, by limiting the inference to just the dDFE,  advantageous mutations that contribute to the shape of the uSFS are assumed to be deleterious, resulting in spurious dDFE inferences. In the simulations where $\gamma_a$ = 400 and $p_a$ 0.000125, advantageous mutations make little contribution to standing variation, 
+	
+		Adaptive evolution was fairly frequent in our simulations ($\alpha$ $\approx30$\%), 
+	ignoring the contribution of advantageous mutations to both standing variation and between-species divergence, either by modelling only the dDFE or by excluding divergence from calculations, led to biased parameter estimates, consistent with the findings of Tataru \textit{et al} (2017). 
+	
+	Estimates of the parameters of the dDFE were recovered from simulated populations with high precision. Our simulations assumed a gamma dDFE, but also included of advantageous mutations. When divergence was included in the iner
+	Ignoring the contribution of advantageous mutations to the uSFS (i.e. by estimating only the dDFE parameters) resulted in dDFE parameter estimates that were substantially biased (Table SX). This was particularly 
+	
+
+
 	The strength and frequency of new advantageous mutations can be  estimated from both the uSFS and patterns of genetic diversity at linked sites. 
+	
+	
+	
 	
 	In the case of weakly selected advantageous mutations, with effects of $\gamma_a = 20$, uSFS based inference methods outperform our method analysing patterns of diversity. This is presuably because under this selection regime, the fixation of advantageous mutaitons has little effect on patterns of genetic diversity. Furthermore, in such cases, if background selection is not corrected for, the parameters of selection inferred may be entirely spurious.
 	
@@ -182,7 +240,7 @@ Estimates of seelction obtained for protein-coding regions were an order of magn
 
 \section*{Discussion}
 
-The rate of sweeps we estimated for 
+
 
 Tataru \textit{et al.} (2017) performed simulations to assess how accurately positive selection parameters can be obtained from the uSFS when excluding between-species divergence from their analysis. Previous methods to estimate $\alpha$ made the assumption that positively selected variants contribute little  to standing genetic variation so can thus be ignored when correcting estiamtes of $\alpha$ using polymorpism data (Eyre-Walker and Smith 2002). Tataru \textit{et al} (2017) showed  that estimates of the dDFE can become biased if positively selected mutations contribute to standing variation and are ignored. However, the parameters that Tataru \textit{et al.} (2017) used in their simulations may be fairly unrealistic. For example, to demonstrate that $\alpha$ can be accurately estimated from polymorphism alone they simulated a population with $\gamma$ = 400 (note that they used a different parametrisation of the selection model) and $p_a$ = 0.02. This gives $\gamma p_a$ = 8, whereas estimates of this parameter in other studies are not nearly so high. For example, Campos \textit{et al.} estimated that $\gamma p_a$ = 0.055 in \textit{Drosophila melanogaster} by fitting a model of selection on linked sites to the correlation between synonymous site diversity and divergence at nonsynonymous sites, while Booker and Keightley (Unpublished) estimated $\gamma p_a$ = 0.0436 in \textit{M. m. castaneus} by analysis of the uSFS. We simulated populations where $\gamma p_a$ = 0.1, but selection was strong ($\gamma = 400$). We found that a) benefical mutations were not detected in standing variation (based on a likleihood ratio test) and b) that while $\gamma p_a$ is relialby estiamtes when including divergence, that the individual parameters cannot be teased apart. 
 
@@ -212,10 +270,8 @@ However, the total contribution that the two classes of sites make to fitness ch
 
 \input{tables/FitnessExpectation.tex}
 
+We assumed that all new advantageous mutations are semi-dominant, which is something of a problem. Haldane's sieve predicts that most advantageous mutations that become fixed are dominant. There are a number of examples of selective sweeps being driven by recessive mutations in mammals, particularly humans (REFS). If advantageous mutations are fully recessive, where the dominance coefficient (\textit{h}) is 0, the chance of stochastic loss exceeds that of mutations that have \textit{h} $>$ 0. As long as mutations are neither fully recessive nor fully dominant (0 $<$ \textit{h} $<$ 1), the troughs in diversity resulting from mutations with the compound parameter \textit{2hs} are similar (Greg Ewing paper). Because of this, as long new mutations are neither fully recessive nor dominant, the selection coefficients we estimated should be directly proportional to the true values
 
-A weakness of this study is that we did not estimate the strength of selection acting on the untranslated regions (UTRs) of protein-coding genes. The question as to whether adaptation on protein-coding or 
-
-We assumed that all new advantageous mutations are semi-dominant, which is something of a problem. Haldane's sieve predicts that most advantageous mutations that become fixed are dominant. There are a number of examples of selective sweeps being driven by recessive mutations in mammals, particularly humans (REFS). If advantageous mutations are fully recessive, where the dominance coefficient (\textit{h}) is 0, the chance of stochastic loss exceeds that of mutations that have \textit{h} $>$ 0. As long as mutations are neither fully recessive nor fully dominant (0 $<$ \textit{h} $<$ 1), the troughs in diversity resulting from mutations with the compound parameter \textit{2hs} are similar (Greg Ewing; Matty Hartfield's paper). Because of this, as long new mutations are neither fully reccessive nor dominant, the selection coefficients we estiamted should be directly proportional to the true values.
 
 \section*{Conclusions}
 
@@ -240,6 +296,6 @@ One of the long-standing goals of evolutionary biology has been to understand th
 In mice, there are reductions in genetic diversity around both conserved non-
 \end{document}
 
-
+Indeed, accurate estimates can be obtained even when ignoring between-species divergence (Table), as pointed out by Tataru \textit{et al} (2017). This is potentially very useful because divergence may bias parameter estimates if, for example, the DFE has changed  in the time since focal species and the outgroup(s) used to polarise alleles shared common ancestors.
 
 

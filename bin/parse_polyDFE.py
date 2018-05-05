@@ -3,23 +3,26 @@ import pandas as pd, argparse, glob
 
 def parsepolyDFE(input):
 	data = [i.strip() for i in open(input).readlines()]
-	results = data[data.index('-- Model: C')+1 : data.index('-- Model: C')+5]
+	lnL = [i for i in data if i.startswith('---- Best joint likelihood')][0].split(' ')[5]
+	results = data[data.index('-- Model: B')+1 : data.index('-- Model: B')+5]
 	retDict = {}
+	retDict['lnL'] = lnL
 	for i,j in zip(results[2].split(), results[3].split()):
 		if i == '--': continue
+
 		if i == 'p_b':
-			retDict['pa'] = [float(j)]
+			retDict['pa_est'] = [float(j)]
 		elif i == 'S_b':		
-			retDict['NeSa'] = [float(j)]
+			retDict['Sb_est'] = [float(j)]
 		else:
 		
 			retDict[i] = [float(j)]
 
-	retDict['product'] = [retDict['pa'][0] * retDict['NeSa'][0]]
+	retDict['product_est'] = [retDict['pa_est'][0] * retDict['Sb_est'][0]]
 	return retDict
 		
 def main():
-	parser = argparse.ArgumentParser(description="This script takes an CSV File full of SFSs and creates input files for either DFE alpha or polyDFE for each line. It stores them in a handy pickle which can be used to get individual input files")
+	parser = argparse.ArgumentParser(description="This script makes a CSV File with the results of polyDFE in a nice table")
 
 	parser.add_argument("-i","--input", 
 		required = True,
@@ -30,20 +33,33 @@ def main():
 		required = True,
 		dest = "output",
 		type =str, 
-		help = "The name of the Datafram you'll make")
+		help = "The name of the Dataframe you'll write")
 		
 		
 		
 	args = parser.parse_args()
 	largeDF = []
-	for i in glob.glob(args.input+'/polyDFE.output.*'):
+	for i in glob.glob(args.input+'/Ns*_pa_*_polyDFE.*.*.out'):
 			temp = parsepolyDFE(i)
-			number = i.split('.')[-2]
-			temp['number'] = [number]
-			temp['model'] = [args.input]
-			largeDF.append(pd.DataFrame.from_dict(temp))
+			ID = i.split('/')[1].split('_')
+			temp['Sb'] = [ int(ID[0][2:]) ]
+			temp['pa'] = [ ID[2] ]
 			
-	output = pd.concat(largeDF)
+			model = ID[3].split('.')
+			if model[1] == 'dDFE':
+				temp['Full DFE'] = '-'
+			elif model[1] == 'fullDFE':
+				temp['Full DFE'] = '+'
+			if model[2] == 'noDiv':
+				temp['Divergence'] = '-'
+			elif model[2] == 'withDiv':
+				temp['Divergence'] = '+'
+
+
+#			temp['model'] = [args.input]
+			largeDF.append(pd.DataFrame.from_dict(temp))
+				
+	output = pd.concat(largeDF).sort_values(['Sb',  'Divergence','Full DFE'], ascending=[1, 1, 1])
 	output.to_csv(args.output, index = False)
 	
 	
