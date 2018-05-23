@@ -3,6 +3,14 @@ import pandas as pd
 import numpy as np
 from tom import brace
 
+
+def find_nearest(array, value):
+    array = np.asarray(array)
+    idx = (np.abs(array - value)).argmin()
+    if value - array[idx] >0: return array[idx]
+    elif value - array[idx] < 0 : return array[idx-1]
+
+
 def summariseChunk(chunk, ncpg = False):
 
 	all_SFS_list =  [map(int,i.split(':')) for i in list(chunk[4])]
@@ -102,19 +110,23 @@ def main():
 	data['dist'] = data[recPos] * data['scale']
 
 	if args.cne:
-		ranges = range(0, 200, 2) ## For CNEs
+		roundBy = 2
+		bins = np.logspace(0, 2.477122, 100) - 1
+#		bins = range(0, 200, roundBy) ## For CNEs
 	else:
-		ranges = range(0, 3000, 30) ## For Exons
+		roundBy = 30
+		bins = np.logspace(0, 3.477122, 100) - 1
+#		bins = range(0, 3000, roundBy) ## For Exons
 	output_lines = []
 	output_lines_2 = []
 
-	for i in range(len(ranges)):
+	for i in range(len(bins)):
 	
 		if i <99:
 		
-			chunk = data.loc[(data[recPos] >= ranges[i]) & (data[recPos] < ranges[i+1]) ] 
+			chunk = data.loc[(data[recPos] >= bins[i]) & (data[recPos] < bins[i+1]) ] 
 		else:
-			chunk = data.loc[(data[recPos] >= ranges[i]) ] 
+			chunk = data.loc[(data[recPos] >= bins[i]) ] 
 
 		if len(chunk) == 0 : continue
 
@@ -130,7 +142,7 @@ def main():
 		
 		if sum( SFS ) ==0 : continue
 		else:
-			outline = [ ranges[i], 
+			outline = [ bins[i], 
 			args.label,
 			SFS_tools.pi(SFS), 
 			pgm.jukes_cantor(float(div[0])/sum(SFS)),
@@ -140,7 +152,7 @@ def main():
 			]
 		if sum( SFS_up ) ==0 : continue
 		else:
-			outline_up = [ -1*ranges[i], 
+			outline_up = [ -1*bins[i], 
 			args.label,
 			SFS_tools.pi(SFS_up), 
 			pgm.jukes_cantor(float(div_up[0])/sum(SFS_up)),
@@ -150,7 +162,7 @@ def main():
 			]
 		if sum( SFS_down ) ==0 : continue
 		else:
-			outline_down = [ ranges[i], 
+			outline_down = [ bins[i], 
 			args.label,
 			SFS_tools.pi(SFS_down), 
 			pgm.jukes_cantor(float(div_down[0])/sum(SFS_down)),
@@ -163,10 +175,10 @@ def main():
 		output_lines_2.append(outline_up)
 		output_lines_2.append(outline_down)
 
-	output1 =  pd.DataFrame(output_lines, columns = ['distance','label', 'pi', 'fam_div_jc', 'rat_div_jc','tajima', 'sites'])
+	output1 =  pd.DataFrame(output_lines, columns = ['mid','label', 'pi', 'fam_div_jc', 'rat_div_jc','tajima', 'sites'])
 	output1.to_csv(args.output)
 
-	output2 =  pd.DataFrame(output_lines_2, columns = ['distance','label', 'pi', 'fam_div_jc', 'rat_div_jc','tajima', 'sites'])
+	output2 =  pd.DataFrame(output_lines_2, columns = ['mid','label', 'pi', 'fam_div_jc', 'rat_div_jc','tajima', 'sites'])
 	output2.to_csv('split_'+args.output)
 
 

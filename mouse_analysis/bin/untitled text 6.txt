@@ -1,0 +1,6 @@
+# Quick little script to convert estimated values into obs/expected values. This will allow me to put everything on the same scale
+
+import sys, pandas
+
+data = pd.read_csv(sys.argv[1])
+ref = pd.read_csv(sys.argv[2])
