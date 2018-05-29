@@ -3,44 +3,44 @@ Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
 The top-level auxiliary file: Estimating_pararmeters_MS.aux
 The style file: apalike.bst
 Database file #1: refLibrary/MyRefs.bib.bib
-You've used 32 entries,
+You've used 37 entries,
             1935 wiz_defined-function locations,
-            698 strings with 8955 characters,
-and the built_in function-call counts, 13768 in all, are:
-= -- 1294
-> -- 644
-< -- 15
-+ -- 235
-- -- 222
-* -- 1289
-:= -- 2422
-add.period$ -- 96
-call.type$ -- 32
-change.case$ -- 271
-chr.to.int$ -- 31
-cite$ -- 32
-duplicate$ -- 446
-empty$ -- 939
-format.name$ -- 270
-if$ -- 2657
+            724 strings with 9898 characters,
+and the built_in function-call counts, 16268 in all, are:
+= -- 1516
+> -- 809
+< -- 17
++ -- 299
+- -- 282
+* -- 1537
+:= -- 2869
+add.period$ -- 111
+call.type$ -- 37
+change.case$ -- 326
+chr.to.int$ -- 36
+cite$ -- 37
+duplicate$ -- 515
+empty$ -- 1080
+format.name$ -- 339
+if$ -- 3124
 int.to.chr$ -- 2
 int.to.str$ -- 0
-missing$ -- 32
-newline$ -- 163
-num.names$ -- 96
-pop$ -- 192
+missing$ -- 37
+newline$ -- 188
+num.names$ -- 111
+pop$ -- 237
 preamble$ -- 1
-purify$ -- 271
+purify$ -- 326
 quote$ -- 0
-skip$ -- 337
+skip$ -- 389
 stack$ -- 0
-substring$ -- 1042
-swap$ -- 32
+substring$ -- 1193
+swap$ -- 37
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 192
+type$ -- 222
 warning$ -- 0
-while$ -- 95
+while$ -- 109
 width$ -- 0
-write$ -- 418
+write$ -- 482

@@ -45,6 +45,13 @@ Corbett-Detig, R.~B., Hartl, D.~L., and Sackton, T.~B. (2015).
   species.
 \newblock {\em PLoS Biol}, 13(4):e1002112.
 
+\bibitem[Cox et~al., 2009]{RN232}
+Cox, A., Ackert-Bicknell, C.~L., Dumont, B.~L., Ding, Y., Bell, J.~T.,
+  Brockmann, G.~A., Wergedal, J.~E., Bult, C., Paigen, B., Flint, J., Tsaih,
+  S.~W., Churchill, G.~A., and Broman, K.~W. (2009).
+\newblock A new standard genetic map for the laboratory mouse.
+\newblock {\em Genetics}, 182(4):1335--44.
+
 \bibitem[Cutter and Payseur, 2013]{RN117}
 Cutter, A.~D. and Payseur, B.~A. (2013).
 \newblock Genomic signatures of selection at linked sites: unifying the
@@ -76,6 +83,18 @@ Galtier, N. (2016).
 \newblock Adaptive protein evolution in animals and the effective eopulation
   size hypothesis.
 \newblock {\em PLoS Genet}, 12(1):e1005774.
+
+\bibitem[Garud et~al., 2015]{RN208}
+Garud, N.~R., Messer, P.~W., Buzbas, E.~O., and Petrov, D.~A. (2015).
+\newblock Recent selective sweeps in north american drosophila melanogaster
+  show signatures of soft sweeps.
+\newblock {\em PLoS Genet}, 11(2):e1005004.
+
+\bibitem[Garud and Petrov, 2016]{RN303}
+Garud, N.~R. and Petrov, D.~A. (2016).
+\newblock Elevated linkage disequilibrium and signatures of soft sweeps are
+  common in drosophila melanogaster.
+\newblock {\em Genetics}, 203(2):863--80.
 
 \bibitem[Halligan et~al., 2013]{RN122}
 Halligan, D.~L., Kousathanas, A., Ness, R.~W., Harr, B., Eory, L., Keane,
@@ -144,6 +163,12 @@ Orr, H.~A. (2003).
 \newblock The distribution of fitness effects among beneficial mutations.
 \newblock {\em Genetics}, 163:1519--1526.
 
+\bibitem[Paigen et~al., 2008]{RN263}
+Paigen, K., Szatkiewicz, J.~P., Sawyer, K., Leahy, N., Parvanov, E.~D., Ng,
+  S.~H., Graber, J.~H., Broman, K.~W., and Petkov, P.~M. (2008).
+\newblock The recombinational anatomy of a mouse chromosome.
+\newblock {\em PLoS Genet}, 4(7):e1000119.
+
 \bibitem[Sattath et~al., 2011]{RN167}
 Sattath, S., Elyashiv, E., Kolodny, O., Rinott, Y., and Sella, G. (2011).
 \newblock Pervasive adaptive protein evolution apparent in diversity patterns
@@ -155,6 +180,11 @@ Schneider, A., Charlesworth, B., Eyre-Walker, A., and Keightley, P.~D. (2011).
 \newblock A method for inferring the rate of occurrence and fitness effects of
   advantageous mutations.
 \newblock {\em Genetics}, 189(4):1427--37.
+
+\bibitem[Schrider and Kern, 2017]{RN338}
+Schrider, D.~R. and Kern, A.~D. (2017).
+\newblock Soft sweeps are the dominant mode of adaptation in the human genome.
+\newblock {\em Mol Biol Evol}.
 
 \bibitem[Stephan, 2010]{RN339}
 Stephan, W. (2010).
