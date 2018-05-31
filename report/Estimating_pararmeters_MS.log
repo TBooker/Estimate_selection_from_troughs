@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014) (preloaded format=pdflatex 2014.12.12)  28 MAY 2018 17:58
+This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014) (preloaded format=pdflatex 2014.12.12)  31 MAY 2018 10:18
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -376,21 +376,21 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 [1
 
 {/usr/local/texlive/2014/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
-[2]
+[2] [3]
 
-LaTeX Warning: Reference `polyDFE' on page 3 undefined on input line 86.
+LaTeX Warning: Reference `polyDFE' on page 4 undefined on input line 86.
 
 
-LaTeX Warning: Reference `polyDFE' on page 3 undefined on input line 88.
+LaTeX Warning: Reference `polyDFE' on page 4 undefined on input line 88.
 
-[3] [4] [5] (./tables/polyDFEsims_Boots.tex
+[4] [5] [6] (./tables/polyDFEsims_Boots.tex
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <9> on input line 7.
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <5> on input line 7.
-) [6] [7]
+) [7] [8] [9]
 </Users/s0784966/PhD/Coding/Estimate_selection_from_troughs/Presentation/data_a
-nalysis_singleClass.pdf, id=44, 722.7pt x 433.62pt>
+nalysis_singleClass.pdf, id=50, 722.7pt x 433.62pt>
 File: /Users/s0784966/PhD/Coding/Estimate_selection_from_troughs/Presentation/d
 ata_analysis_singleClass.pdf Graphic file (type pdf)
 
@@ -403,15 +403,15 @@ ughs/Presentation/data_analysis_singleClass.pdf used on input line 195.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[8] [9 </Users/s0784966/PhD/Coding/Estimate_selection_from_troughs/Presentation
-/data_analysis_singleClass.pdf>] [10] (./tables/Estimates_castaneusMap.tex)
-(./tables/Estimates_coxMap.tex) [11] [12] [13] (./tables/FitnessExpectation.tex
+[10] [11 </Users/s0784966/PhD/Coding/Estimate_selection_from_troughs/Presentati
+on/data_analysis_singleClass.pdf>] [12] (./tables/Estimates_castaneusMap.tex)
+(./tables/Estimates_coxMap.tex) [13] [14] [15] (./tables/FitnessExpectation.tex
 )
 
-LaTeX Warning: Reference `eg:fitness' on page 14 undefined on input line 296.
+LaTeX Warning: Reference `eg:fitness' on page 16 undefined on input line 300.
 
-[14] (./Estimating_pararmeters_MS.bbl [15] [16]) [17]
-(./tables/summaryStats.tex) (./tables/polyDFEsims_dDFE.tex) [18] [19]
+[16] (./Estimating_pararmeters_MS.bbl [17] [18] [19]) [20]
+(./tables/summaryStats.tex) (./tables/polyDFEsims_dDFE.tex) [21] [22]
 (./Estimating_pararmeters_MS.aux)
 
 LaTeX Warning: There were undefined references.
@@ -423,7 +423,7 @@ LaTeX Warning: There were multiply-defined labels.
 Here is how much of TeX's memory you used:
  4312 strings out of 493117
  62688 string characters out of 6135432
- 147995 words of memory out of 5000000
+ 147999 words of memory out of 5000000
  7645 multiletter control sequences out of 15000+600000
  12091 words of font info for 41 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
@@ -448,10 +448,10 @@ ive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/local/texlive
 texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/local/texlive/2014/t
 exmf-dist/fonts/type1/public/amsfonts/cm/cmti7.pfb></usr/local/texlive/2014/tex
 mf-dist/fonts/type1/public/amsfonts/cm/cmti8.pfb>
-Output written on Estimating_pararmeters_MS.pdf (19 pages, 279400 bytes).
+Output written on Estimating_pararmeters_MS.pdf (22 pages, 281377 bytes).
 PDF statistics:
- 155 PDF objects out of 1000 (max. 8388607)
- 110 compressed objects within 2 object streams
+ 164 PDF objects out of 1000 (max. 8388607)
+ 116 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 500000)
  6 words of extra memory for PDF output out of 10000 (max. 10000000)
 
