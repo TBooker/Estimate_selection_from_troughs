@@ -69,9 +69,14 @@ def main():
 	dn = float(nonsynSFS[-1]) / sum(nonsynSFS)
 	print 'nonsyn pi:', pi(nonsynSFS)
 	print 'syn pi:', pi(synSFS)
+	print 'pi / pi_0:', pi(synSFS) / 0.01
+	print 'dN', dn
+	print 'ds', ds
+	print 'adv. Cont', float(sum(mergeTheSFS([i['m2'] for i in dicts])[1:-1])) / (sum(mergeTheSFS([i['m1'] for i in dicts])[1:-1]) + sum(mergeTheSFS([i['m2'] for i in dicts])[1:-1]))
+
 	print'dN/dS:', dn/ds
-	combinedText = open(args.output, 'w')
-	combinedText.write('\n'.join(['1\t1\t20', polyDFEline(synSFS), polyDFEline(nonsynSFS)]))
-	combinedText.close()
+# 	combinedText = open(args.output, 'w')
+# 	combinedText.write('\n'.join(['1\t1\t20', polyDFEline(synSFS), polyDFEline(nonsynSFS)]))
+# 	combinedText.close()
 	
 main()

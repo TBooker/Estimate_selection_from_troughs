@@ -49,13 +49,13 @@ def getBootRanges(df, Sb, pa):
 
  	else:
  		prop = '-'
- 		temp['Sb'] = '-'
+ 		temp['Sb'] = Sb
 
 		temp['Sb_lower'] = '-'
 		temp['Sb_median'] = '-'
 		temp['Sb_upper'] = '-'
 
-		temp['pa'] = '-'
+		temp['pa'] = pa
 		temp['pa_lower'] = '-' 
 		temp['pa_median'] = '-'
 		temp['pa_upper'] = '-'
@@ -99,7 +99,7 @@ def main():
 	for dir in dirs: 
 		ID = dir.split('/')[-1]
 		pa = ID.split('_')[2]
-		Sb = ID.split('_')[0][2:]
+		Sb = int(ID.split('_')[0][2:])
 		
 	
 		fullDFE_DF = []
@@ -115,7 +115,7 @@ def main():
 				ID = i.split('/')[-1].split('_')[-1]
 				
 				
-				temp['Sb'] = [ Sb ]
+				temp['Sb'] = [ int(Sb) ]
 				temp['pa'] = [ pa ]
 				temp['rep'] = [ int(rep) ]
 			
@@ -148,7 +148,7 @@ def main():
 		allDFEs.append( thisDFE )
 		
 	
-	output = pd.concat(allDFEs).sort_values(['Full DFE',  'Divergence'], ascending=[1, 1])
+	output = pd.concat(allDFEs).sort_values(['Sb', 'Divergence', 'Full DFE'], ascending=[1,1, 1])
 	print output
 	output.to_csv( args.output , index = False)
 	

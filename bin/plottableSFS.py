@@ -44,6 +44,11 @@ def main():
 		dest = "output",
 		type =str, 
 		help = "The name of the output file you want to write to")
+	parser.add_argument("-l","--label", 
+		required = True,
+		dest = "label",
+		type =str, 
+		help = "Give a label for the datafram (for plotting purposes)")
 	parser.add_argument("-d","--dir", 
 		required = False,
 		dest = "dir",
@@ -72,31 +77,39 @@ def main():
 	alleles = range(1,len(m1)-1)
 	
 	m1_prop =  [ float(i)/(sum(m1[1:-1])+sum(m2[1:-1]) )  for i in m1[1:-1]  ]
+	m1_count =  m1[1:-1] 
 	m1_cont = pd.DataFrame(
     {'alleles': alleles,
-     'sfs': m1_prop,
+     'sfsCount': m1_count,
+     'sfsProp': m1_prop,
      'alpha': 1- alpha,
      'Source' : 'Gamma dDFE',
      'Site Class' : 'Nonsynonymous'
     })
 	
 	m2_prop =  [ float(i)/(sum(m1[1:-1])+sum(m2[1:-1]) )  for i in m2[1:-1]  ]
+	m2_count =  m2[1:-1] 
 	m2_cont = pd.DataFrame(
     {'alleles': alleles,
-     'sfs': m2_prop,
+     'sfsCount': m2_count,
+     'sfsProp': m2_prop,
      'alpha': alpha,
      'Source' : 'Advantageous Mutations',
      'Site Class' : 'Nonsynonymous'
     })
-	syn =  [ float(i)/(sum(synSFS[1:-1]) )  for i in synSFS[1:-1]  ]
+	syn =  [ float(i)/(sum(synSFS[1:-1]) )  for i in synSFS[1:-1]  ]	
+	syn_count = synSFS[1:-1]
 	syn_cont = pd.DataFrame(
     {'alleles': alleles,
-     'sfs': syn,
+     'sfsCount': syn_count,
+     'sfsProp': syn,
      'alpha': 0,
      'Source' : 'Synonymous',
      'Site Class' : 'Synoynmous'
     })
-	pd.concat([m1_cont, m2_cont, syn_cont]).to_csv(args.output)
+	outDF = pd.concat([m1_cont, m2_cont, syn_cont])
+	outDF['label'] = args.label
+	outDF.to_csv(args.output)
 	
 	
 	
