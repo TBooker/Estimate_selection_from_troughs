@@ -88,15 +88,14 @@ def main():
 	data['scale'] = [-1 if x.split('.')[0] == 'u' else 1 for x in data[0]]
 
 # The following gene conversion parameters come from Paigen et al 2008 PLoS Genetics
-
-	nc_gc_ratio = 12.0  # The relative rate of NCO gene conversion compared to CO Gene Conversion
+	nc_gc_ratio = 0.105  # The relative rate of NCO gene conversion compared to CO Gene Conversion
 	tract_length = 144 # average tract length
 	
 	if args.Cox:
-		data['r_co'] = data[7] * 426200 * 4
+		data['r_co'] = data[7] * 420000 * 4
 # RecPos is the index of the dataframe where recombination rates are held
 		recPos = 'r_co'
-		data['r_gc']  = 426200 * 4 * ( nc_gc_ratio * data[7] / data[3] ) * tract_length * (1 - np.exp( (-1. * data[3]) / tract_length))
+		data['r_gc']  = 420000 * 4 * ( nc_gc_ratio * data[7] / data[3] ) * tract_length * (1 - np.exp( (-1. * data[3]) / tract_length))
 		data['joint'] = data['r_gc'] + data['r_co']
 		if args.GC:
 			recPos = 'joint'

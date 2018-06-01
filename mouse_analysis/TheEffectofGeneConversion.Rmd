@@ -1,0 +1,91 @@
+---
+title: "Gene Conversion"
+author: "Tom Booker"
+date: "09/04/2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = F)
+```
+```{r}
+library(wesanderson)
+library(ggplot2)
+
+
+pal <- wes_palette(n = 5, name = "Royal1", type = "continuous")
+TommyTheme <-   
+    theme_bw()+
+    theme(
+    axis.title.x = element_text(size=20,angle=0),
+    axis.title.y = element_text(size=20,vjust=0.5, angle = 0),
+    axis.text.x = element_text(size=14,angle=0),
+    axis.text.y = element_text(size=14,angle=0),
+    strip.text.y = element_text(size = 20, face = 'italic'),
+    strip.text.x = element_text(size = 20, face = 'italic'),
+    legend.text = element_text(size = 18)
+  )
+```
+
+
+Kenneth Paigen and colleagues (PLoS Genetics - 2008) estimated gene conversion parameters. For non-crossover associated gene conversion, they estimated a mean gene conversion tract lengthof 144bp. They estimated that the ratio of non-crossover to crossing-over rates was 10.5%.
+
+
+I reanalysed the patterns of diversity incorporating the effects of BGS. Here I'll plot the data and compare between the effects of incorporating gene conversion and not.
+
+```{r Exons , echo = F}
+
+e_g <- read.csv('~/PhD/Coding/Estimate_selection_from_troughs/mouse_analysis/both/exons/autosomes.castaneus.newCut.csv')
+e_g$element <- 'Protein-Coding Exons'
+e_g$lab <- 'Crossing-Over \n+ Gene Conversion'
+#e_g<-e_g[e_g$distance < 1000,]
+
+e_c <- read.csv('~/PhD/Coding/Estimate_selection_from_troughs/mouse_analysis/both/exons/autosomes.gc.castaneus.csv')
+e_c$element <- 'Protein-Coding Exons'
+e_c$lab <- 'Crossing-Over'
+#e_c<-e_c[e_c$distance < 1000,]
+
+exons <- rbind(e_g, e_c)
+```
+
+```{r CNE, echo = F}
+c_g <- read.csv('~/PhD/Coding/Estimate_selection_from_troughs/mouse_analysis/both/cne/autosome.cne.gc.csv')
+c_g$element <- 'Conserved Non-Coding Elements'
+c_g$lab <- 'Crossing-Over \n+ Gene Conversion'
+#c_g<-c_g[c_g$distance < 100,]
+
+c_c <- read.csv('~/PhD/Coding/Estimate_selection_from_troughs/mouse_analysis/both/cne/autosome.cne.csv')
+c_c$element <- 'Conserved Non-Coding Elements'
+c_c$lab <- 'Crossing-Over'
+c_c<-c_c[c_c$distance > 150,]
+mean(c_c$pi)
+cnes<- rbind(c_g, c_c)
+
+els <- rbind(exons, cnes)
+```
+
+```{r plotPiBoth, width = 20, height = 20, echo = F, fig.height = 5, fig.width = 13, fig.align = "center"}
+
+ggplot(data = els, aes(x = log10(distance), y = pi, col = lab))+
+  geom_line(alpha = 0.6, lwd = 0.7)+
+  ylab(expression(pi))+
+  xlab('Distance to Element (4Ner)')+
+  scale_color_manual('', values= pal)+
+  facet_grid(~element, scale ='free_x')+
+  TommyTheme
+  
+```
+
+```{r plotScaledPiBoth, width = 20, height = 20, echo = F, fig.height = 5, fig.width = 13, fig.align = "center"}
+
+ggplot(data = els, aes(x = distance, y = pi/rat_div_jc, col = lab))+
+  geom_line(alpha = 0.6, lwd = 0.7)+
+  ylab(expression(pi * '/'*d[rat]))+
+  xlab('Distance to Element (4Ner)')+
+  scale_color_manual('', values= pal)+
+  facet_grid(~element, scale ='free_x')+
+  TommyTheme
+  
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
