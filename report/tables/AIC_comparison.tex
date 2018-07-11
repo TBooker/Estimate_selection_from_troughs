@@ -1,0 +1,40 @@
+\begin{table}
+   \centering
+      \begin{threeparttable}[b]
+
+\caption{Comparison of advantageous mutational models. Dashes indicate the best-fitting model. }
+
+\begin{tabular}{ccccc}
+\toprule
+	& & & \multicolumn{2}{c}{$\Delta AIC$} \\
+       Map & GC & Model\tnote{a} &  CNEs &  Exons \\
+\midrule
+ \multirow{9}{*}{\textit{castaneus}} &    \multirow{3}{*}{High} &     2 &      - &       - \\
+  &      &     e &   -367 &    -284 \\
+  &      &     s &    -85.6 &    -284 \\ \cdashline{2-5}
+  &     \multirow{3}{*}{None}  &     2 &      - &       - \\
+  &      &     e &   -262 &    -126.989377 \\
+  &      &     s &    -87.3 &    -153 \\ \cdashline{2-5}
+  &     \multirow{3}{*}{Paigen}  &     2 &      - &       - \\
+  &      &     e &   -280 &    -134\\ 
+  &      &     s &   -113 &    -161\\ \hdashline
+\multirow{9}{*}{Cox}  &     \multirow{3}{*}{High} &     2 &      - &      -3.91\\
+  &      &     e &   -177&       - \\
+  &      &     s &    -92&      -1.48\\ \cdashline{2-5}
+  &     \multirow{3}{*}{No} &     2 &      - &       - \\
+  &      &     e &   -150&     -19.6\\
+  &      &     s &    -44&     -38.9\\ \cdashline{2-5}
+  &     \multirow{3}{*}{Paigen} &     2 &      - &       - \\
+  &  	 &     e &   -147 &     -16.2\\
+  &      &     s &    -43.5 &     -32.1\\
+\bottomrule
+\end{tabular}
+ 
+   \begin{tablenotes}
+     \item[a] Denotes the model of advantageous mutations used. $e$ - exponential, $2$ - two classes of discrete effects and $s$ - a single class of discrete effects.
+   \end{tablenotes}
+
+  \end{threeparttable}
+  
+  \label{tab:dDFE}
+\end{table}

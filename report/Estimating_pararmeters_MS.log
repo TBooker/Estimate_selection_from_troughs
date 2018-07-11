@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014) (preloaded format=pdflatex 2014.12.12)  31 MAY 2018 17:30
+This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014) (preloaded format=pdflatex 2014.12.12)  22 JUN 2018 11:51
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -239,39 +239,51 @@ Package: ifmtarg 2009/09/02 v1.2a check for an empty argument
 (/usr/local/texlive/2014/texmf-dist/tex/latex/etoolbox/etoolbox.sty
 Package: etoolbox 2011/01/03 v2.1 e-TeX tools for LaTeX
 \etb@tempcnta=\count116
-)))
+))
 (/usr/local/texlive/2014/texmf-dist/tex/latex/natbib/natbib.sty
 Package: natbib 2010/09/13 8.31b (PWD, AO)
 \bibhang=\skip50
 \bibsep=\skip51
 LaTeX Info: Redefining \cite on input line 694.
 \c@NAT@ctr=\count117
+))
+(/usr/local/texlive/2014/texmf-dist/tex/generic/babel/babel.sty
+Package: babel 2014/03/24 3.9k The Babel package
+
+(/usr/local/texlive/2014/texmf-dist/tex/generic/babel-english/english.ldf
+Language: english 2012/08/20 v3.3p English support from the babel system
+
+(/usr/local/texlive/2014/texmf-dist/tex/generic/babel/babel.def
+File: babel.def 2014/03/24 3.9k Babel common definitions
+\babel@savecnt=\count118
+\U@D=\dimen148
 )
+\l@canadian = a dialect from \language\l@american 
+\l@australian = a dialect from \language\l@british 
+\l@newzealand = a dialect from \language\l@british 
+))
 (./Estimating_pararmeters_MS.aux
 
-LaTeX Warning: Label `geneConversion' multiply defined.
+LaTeX Warning: Label `fig:sfsExample' multiply defined.
 
 
-LaTeX Warning: Label `EstimatesCastaneus' multiply defined.
-
-
-LaTeX Warning: Label `tab:Table2' multiply defined.
+LaTeX Warning: Label `tab:dDFE' multiply defined.
 
 )
 \openout1 = `Estimating_pararmeters_MS.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 28.
-LaTeX Font Info:    ... okay on input line 28.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 28.
-LaTeX Font Info:    ... okay on input line 28.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 28.
-LaTeX Font Info:    ... okay on input line 28.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 28.
-LaTeX Font Info:    ... okay on input line 28.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 28.
-LaTeX Font Info:    ... okay on input line 28.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 28.
-LaTeX Font Info:    ... okay on input line 28.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 26.
+LaTeX Font Info:    ... okay on input line 26.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 26.
+LaTeX Font Info:    ... okay on input line 26.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 26.
+LaTeX Font Info:    ... okay on input line 26.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 26.
+LaTeX Font Info:    ... okay on input line 26.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 26.
+LaTeX Font Info:    ... okay on input line 26.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 26.
+LaTeX Font Info:    ... okay on input line 26.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -309,16 +321,16 @@ LaTeX Font Info:    ... okay on input line 28.
 
 (/usr/local/texlive/2014/texmf-dist/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count118
-\scratchdimen=\dimen148
+\scratchcounter=\count119
+\scratchdimen=\dimen149
 \scratchbox=\box32
-\nofMPsegments=\count119
-\nofMParguments=\count120
+\nofMPsegments=\count120
+\nofMParguments=\count121
 \everyMPshowfont=\toks20
-\MPscratchCnt=\count121
-\MPscratchDim=\dimen149
-\MPnumerator=\count122
-\makeMPintoPDFobject=\count123
+\MPscratchCnt=\count122
+\MPscratchDim=\dimen150
+\MPnumerator=\count123
+\makeMPintoPDFobject=\count124
 \everyMPtoPDFconversion=\toks21
 ) (/usr/local/texlive/2014/texmf-dist/tex/generic/oberdiek/pdftexcmds.sty
 Package: pdftexcmds 2011/11/29 v0.20 Utility functions of pdfTeX for LuaTeX (HO
@@ -365,61 +377,113 @@ File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <12> on input line 29.
+(Font)              <12> on input line 27.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <8> on input line 29.
+(Font)              <8> on input line 27.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <6> on input line 29.
+(Font)              <6> on input line 27.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <10.95> on input line 48.
+(Font)              <10.95> on input line 46.
 
 [1
 
 {/usr/local/texlive/2014/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
-[2] [3]
+[2] [3] [4]
 
-LaTeX Warning: Reference `polyDFE' on page 4 undefined on input line 74.
+LaTeX Warning: Reference `polyDFE' on page 5 undefined on input line 116.
 
 
-LaTeX Warning: Reference `polyDFE' on page 4 undefined on input line 74.
+LaTeX Warning: Reference `polyDFE' on page 5 undefined on input line 116.
 
-[4] [5] [6] [7] [8] (./tables/polyDFEsims_Boots.tex
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <9> on input line 7.
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <5> on input line 7.
-) [9] [10] [11]
-</Users/s0784966/PhD/Coding/Estimate_selection_from_troughs/Presentation/data_a
-nalysis_singleClass.pdf, id=56, 722.7pt x 433.62pt>
-File: /Users/s0784966/PhD/Coding/Estimate_selection_from_troughs/Presentation/d
-ata_analysis_singleClass.pdf Graphic file (type pdf)
+[5]
+</Users/s0784966/PhD/Coding/Estimate_selection_from_troughs/report/figures/Pi_g
+eneticDistance_4x4.pdf, id=34, 722.7pt x 433.62pt>
+File: /Users/s0784966/PhD/Coding/Estimate_selection_from_troughs/report/figures
+/Pi_geneticDistance_4x4.pdf Graphic file (type pdf)
 
-<use /Users/s0784966/PhD/Coding/Estimate_selection_from_troughs/Presentation/da
-ta_analysis_singleClass.pdf>
+<use /Users/s0784966/PhD/Coding/Estimate_selection_from_troughs/report/figures/
+Pi_geneticDistance_4x4.pdf>
 Package pdftex.def Info: /Users/s0784966/PhD/Coding/Estimate_selection_from_tro
-ughs/Presentation/data_analysis_singleClass.pdf used on input line 179.
+ughs/report/figures/Pi_geneticDistance_4x4.pdf used on input line 141.
 (pdftex.def)             Requested size: 500.484pt x 300.28984pt.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[12] [13 </Users/s0784966/PhD/Coding/Estimate_selection_from_troughs/Presentati
-on/data_analysis_singleClass.pdf>] [14] [15]
+
+</Users/s0784966/PhD/Coding/Estimate_selection_from_troughs/mouse_analysis/Mode
+lFit.pdf, id=35, 867.24pt x 433.62pt>
+File: /Users/s0784966/PhD/Coding/Estimate_selection_from_troughs/mouse_analysis
+/ModelFit.pdf Graphic file (type pdf)
+
+<use /Users/s0784966/PhD/Coding/Estimate_selection_from_troughs/mouse_analysis/
+ModelFit.pdf>
+Package pdftex.def Info: /Users/s0784966/PhD/Coding/Estimate_selection_from_tro
+ughs/mouse_analysis/ModelFit.pdf used on input line 150.
+(pdftex.def)             Requested size: 500.484pt x 250.24265pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[6] [7 </Users/s0784966/PhD/Coding/Estimate_selection_from_troughs/report/figur
+es/Pi_geneticDistance_4x4.pdf>] [8 </Users/s0784966/PhD/Coding/Estimate_selecti
+on_from_troughs/mouse_analysis/ModelFit.pdf>]
 (./tables/Estimates_castaneusMap.tex
+Overfull \hbox (7.90367pt too wide) in paragraph at lines 7--24
+ [][] 
+ []
+
+) (./tables/polyDFEsims_Boots.tex
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <9> on input line 7.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <5> on input line 7.
+)
+</Users/s0784966/PhD/Coding/Estimate_selection_from_troughs/simulations/NewSimu
+lations/SFSplot/SFSplot.pdf, id=89, 867.24pt x 361.35pt>
+File: /Users/s0784966/PhD/Coding/Estimate_selection_from_troughs/simulations/Ne
+wSimulations/SFSplot/SFSplot.pdf Graphic file (type pdf)
+
+<use /Users/s0784966/PhD/Coding/Estimate_selection_from_troughs/simulations/New
+Simulations/SFSplot/SFSplot.pdf>
+Package pdftex.def Info: /Users/s0784966/PhD/Coding/Estimate_selection_from_tro
+ughs/simulations/NewSimulations/SFSplot/SFSplot.pdf used on input line 190.
+(pdftex.def)             Requested size: 500.484pt x 208.53554pt.
+
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-) (./tables/Estimates_coxMap.tex
+[9] [10] [11 </Users/s0784966/PhD/Coding/Estimate_selection_from_troughs/simula
+tions/NewSimulations/SFSplot/SFSplot.pdf>] [12]
+(./tables/FitnessExpectation.tex) [13] [14] [15] [16]
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 309.
+
+
+(/usr/local/texlive/2014/texmf-dist/tex/latex/base/omscmr.fd
+File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
+)
+LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10.95> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 309.
+
+(./Estimating_pararmeters_MS.bbl [17] [18] [19]) [20]
+(./tables/summaryStats.tex) (./tables/polyDFEsims_dDFE.tex)
+(./tables/AIC_comparison.tex) (./tables/BGSeffect.tex)
+</Users/s0784966/PhD/Coding/Estimate_selection_from_troughs/BGS/BGSplotLoess.pd
+f, id=145, 722.7pt x 578.16pt>
+File: /Users/s0784966/PhD/Coding/Estimate_selection_from_troughs/BGS/BGSplotLoe
+ss.pdf Graphic file (type pdf)
+
+<use /Users/s0784966/PhD/Coding/Estimate_selection_from_troughs/BGS/BGSplotLoes
+s.pdf>
+Package pdftex.def Info: /Users/s0784966/PhD/Coding/Estimate_selection_from_tro
+ughs/BGS/BGSplotLoess.pdf used on input line 344.
+(pdftex.def)             Requested size: 500.484pt x 400.38646pt.
+
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-) [16] [17] [18] [19] [20] [21] (./tables/FitnessExpectation.tex)
-
-LaTeX Warning: Reference `eg:fitness' on page 22 undefined on input line 284.
-
-[22] (./Estimating_pararmeters_MS.bbl [23] [24] [25] [26]) [27]
-(./tables/summaryStats.tex) (./tables/polyDFEsims_dDFE.tex) [28]
-(./Estimating_pararmeters_MS.aux)
+[21] [22] [23 </Users/s0784966/PhD/Coding/Estimate_selection_from_troughs/BGS/B
+GSplotLoess.pdf>] (./Estimating_pararmeters_MS.aux)
 
 LaTeX Warning: There were undefined references.
 
@@ -428,13 +492,13 @@ LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 4312 strings out of 493117
- 62688 string characters out of 6135432
- 146003 words of memory out of 5000000
- 7645 multiletter control sequences out of 15000+600000
- 12091 words of font info for 41 fonts, out of 8000000 for 9000
+ 4770 strings out of 493117
+ 69851 string characters out of 6135432
+ 166886 words of memory out of 5000000
+ 8080 multiletter control sequences out of 15000+600000
+ 11744 words of font info for 40 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 42i,21n,37p,1838b,461s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 42i,21n,37p,1814b,459s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb
 ></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb>
 </usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmbxti10.pfb
@@ -445,20 +509,20 @@ usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></us
 r/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/
 local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/lo
 cal/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/loca
-l/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/t
-exlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texl
-ive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/local/texlive
-/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/
-2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/local/texlive/20
-14/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2014
-/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/2014/
-texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/local/texlive/2014/t
-exmf-dist/fonts/type1/public/amsfonts/cm/cmti7.pfb></usr/local/texlive/2014/tex
-mf-dist/fonts/type1/public/amsfonts/cm/cmti8.pfb>
-Output written on Estimating_pararmeters_MS.pdf (28 pages, 279579 bytes).
+l/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/local/
+texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/tex
+live/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texliv
+e/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/local/texlive/2
+014/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/20
+14/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/local/texlive/2014
+/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2014/t
+exmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/2014/te
+xmf-dist/fonts/type1/public/amsfonts/cm/cmti7.pfb></usr/local/texlive/2014/texm
+f-dist/fonts/type1/public/amsfonts/cm/cmti8.pfb>
+Output written on Estimating_pararmeters_MS.pdf (23 pages, 383255 bytes).
 PDF statistics:
- 183 PDF objects out of 1000 (max. 8388607)
- 129 compressed objects within 2 object streams
+ 233 PDF objects out of 1000 (max. 8388607)
+ 162 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 500000)
- 6 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 21 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -16,11 +16,26 @@ Booker, T.~R., Ness, R.~W., and Keightley, P.~D. (2017b).
   population genomic data.
 \newblock {\em Genetics}, 207(1):297--309.
 
-\bibitem[Campos et~al., 2017]{RN323}
+\bibitem[Boyko et~al., 2008]{RN201}
+Boyko, A.~R., Williamson, S.~H., Indap, A.~R., Degenhardt, J.~D., Hernandez,
+  R.~D., Lohmueller, K.~E., Adams, M.~D., Schmidt, S., Sninsky, J.~J., Sunyaev,
+  S.~R., White, T.~J., Nielsen, R., Clark, A.~G., and Bustamante, C.~D. (2008).
+\newblock Assessing the evolutionary impact of amino acid mutations in the
+  human genome.
+\newblock {\em PLoS Genet}, 4(5):e1000083.
+
+\bibitem[Braverman et~al., 1995]{RN287}
+Braverman, J.~M., Hudson, R.~R., Kaplan, N.~L., Langley, C.~H., and Stephan, W.
+  (1995).
+\newblock The hitchhiking effect on the site frequency spectrum of dna
+  polymorphisms.
+\newblock {\em Genetics}, 140:783--796.
+
+\bibitem[Campos et~al., 2017]{RN290}
 Campos, J.~L., Zhao, L., and Charlesworth, B. (2017).
 \newblock Estimating the parameters of background selection and selective
   sweeps in drosophila in the presence of gene conversion.
-\newblock {\em Proc Natl Acad Sci}, 114(24):E4762--E4771.
+\newblock {\em Proc Natl Acad Sci}, Early Online.
 
 \bibitem[Carroll, 2005]{RN346}
 Carroll, S.~B. (2005).
@@ -38,12 +53,6 @@ Coop, G. and Ralph, P. (2012).
 \newblock Patterns of neutral diversity under general models of selective
   sweeps.
 \newblock {\em Genetics}, 192(1):205--24.
-
-\bibitem[Corbett-Detig et~al., 2015]{RN154}
-Corbett-Detig, R.~B., Hartl, D.~L., and Sackton, T.~B. (2015).
-\newblock Natural selection constrains neutral diversity across a wide range of
-  species.
-\newblock {\em PLoS Biol}, 13(4):e1002112.
 
 \bibitem[Cox et~al., 2009]{RN232}
 Cox, A., Ackert-Bicknell, C.~L., Dumont, B.~L., Ding, Y., Bell, J.~T.,
@@ -71,12 +80,16 @@ Elyashiv, E., Sattath, S., Hu, T.~T., Strutsovsky, A., McVicker, G.,
 \newblock A genomic map of the effects of linked selection in drosophila.
 \newblock {\em PLoS Genet}, 12(8):e1006130.
 
-\bibitem[Frisse et~al., 2001]{RN361}
-Frisse, L., Hudson, R.~R., Bartoszewicz, A., Wall, J.~D., Donfack, J., and
-  Di~Rienzo, A. (2001).
-\newblock Gene conversion and different population histories may explain the
-  contrast between polymorphism and linkage disequilibrium levels.
-\newblock {\em Am J Hum Genet}, 69:831--843.
+\bibitem[Eyre-Walker and Keightley, 2007]{RN109}
+Eyre-Walker, A. and Keightley, P.~D. (2007).
+\newblock The distribution of fitness effects of new mutations.
+\newblock {\em Nat Rev Genet}, 8(8):610--8.
+
+\bibitem[Field et~al., 2016]{RN301}
+Field, Y., Boyle, E.~A., Telis, N., Gao, Z., Gaulton, K.~J., Golan, D., Yengo,
+  L., Rocheleau, G., Froguel, P., McCarthy, M.~I., and Pritchard, J.~K. (2016).
+\newblock Detection of human adaptation during the past 2000 years.
+\newblock {\em Science}, 354(6313):760--764.
 
 \bibitem[Galtier, 2016]{RN215}
 Galtier, N. (2016).
@@ -127,16 +140,41 @@ Keightley, P.~D., Campos, J.~L., Booker, T.~R., and Charlesworth, B. (2016).
   melanogaster.
 \newblock {\em Genetics}, 203(2):975--84.
 
-\bibitem[Kimura and Ohta, 1969]{RN357}
-Kimura, M. and Ohta, T. (1969).
-\newblock The average number of generations until fixation of a mutant gene in
-  a finite population.
-\newblock {\em Genetics}, 61(3):763--771.
+\bibitem[Keightley and Eyre-Walker, 2007]{RN164}
+Keightley, P.~D. and Eyre-Walker, A. (2007).
+\newblock Joint inference of the distribution of fitness effects of deleterious
+  mutations and population demography based on nucleotide polymorphism
+  frequencies.
+\newblock {\em Genetics}, 177(4):2251--61.
+
+\bibitem[Kern and Hahn, 2018]{RN357}
+Kern, A.~D. and Hahn, M.~W. (2018).
+\newblock The neutral theory in light of natural selection.
+\newblock {\em Mol Biol Evol}, 35(6):1366--1371.
 
 \bibitem[King and Wilson, 1975]{RN347}
 King, M.-C. and Wilson, A.~C. (1975).
 \newblock Evolution at two levels in humans and chimpanzees.
 \newblock {\em Science}, 188(4184):107--116.
+
+\bibitem[Kousathanas et~al., 2014]{RN238}
+Kousathanas, A., Halligan, D.~L., and Keightley, P.~D. (2014).
+\newblock Faster-x adaptive protein evolution in house mice.
+\newblock {\em Genetics}, 196(4):1131--43.
+
+\bibitem[Kousathanas and Keightley, 2013]{RN178}
+Kousathanas, A. and Keightley, P.~D. (2013).
+\newblock A comparison of models to infer the distribution of fitness effects
+  of new mutations.
+\newblock {\em Genetics}, 193(4):1197--208.
+
+\bibitem[Laenen et~al., 2018]{RN368}
+Laenen, B., Tedder, A., Nowak, M.~D., Torang, P., Wunder, J., Wotzel, S.,
+  Steige, K.~A., Kourmpetis, Y., Odong, T., Drouzas, A.~D., Bink, M., Agren,
+  J., Coupland, G., and Slotte, T. (2018).
+\newblock Demography and mating system shape the genome-wide impact of
+  purifying selection in arabis alpina.
+\newblock {\em Proc Natl Acad Sci U S A}, 115(4):816--821.
 
 \bibitem[Maynard~Smith and Haigh, 1974]{RN124}
 Maynard~Smith, J. and Haigh, J. (1974).
@@ -159,10 +197,10 @@ Nordborg, M., Charlesworth, B., and Charlesworth, D. (1996).
 \newblock The effect of recombination on background selection.
 \newblock {\em Genetical Research}, 67:159--174.
 
-\bibitem[Orr, 2003]{RN362}
-Orr, H.~A. (2003).
-\newblock The distribution of fitness effects among beneficial mutations.
-\newblock {\em Genetics}, 163:1519--1526.
+\bibitem[Paigen and Petkov, 2010]{RN247}
+Paigen, K. and Petkov, P. (2010).
+\newblock Mammalian recombination hot spots: properties, control and evolution.
+\newblock {\em Nat Rev Genet}, 11(3):221--33.
 
 \bibitem[Paigen et~al., 2008]{RN263}
 Paigen, K., Szatkiewicz, J.~P., Sawyer, K., Leahy, N., Parvanov, E.~D., Ng,
@@ -205,6 +243,12 @@ Teschke, M., Mukabayire, O., Wiehe, T., and Tautz, D. (2008).
   the house mouse based on microsatellite scans.
 \newblock {\em Genetics}, 180:1537--1545.
 
+\bibitem[Thornton, 2014]{RN361}
+Thornton, K.~R. (2014).
+\newblock A c++ template library for efficient forward-time population genetic
+  simulation of large populations.
+\newblock {\em Genetics}, 198(1):157--66.
+
 \bibitem[Uchimura et~al., 2015]{RN228}
 Uchimura, A., Higuchi, M., Minakuchi, Y., Ohno, M., Toyoda, A., Fujiyama, A.,
   Miura, I., Wakana, S., Nishino, J., and Yagi, T. (2015).
@@ -217,5 +261,12 @@ Wiehe, T. and Stephan, W. (1993).
 \newblock Analysis of a genetic hitchhiking model, and its application to dna
   polymorphism data from drosophila melanogaster.
 \newblock {\em Mol Biol Evol}, 10(4):842--854.
+
+\bibitem[Williamson et~al., 2014]{RN236}
+Williamson, R.~J., Josephs, E.~B., Platts, A.~E., Hazzouri, K.~M., Haudry, A.,
+  Blanchette, M., and Wright, S.~I. (2014).
+\newblock Evidence for widespread positive and negative selection in coding and
+  conserved noncoding regions of capsella grandiflora.
+\newblock {\em PLoS Genetics}, 10(9):e1004622.
 
 \end{thebibliography}
