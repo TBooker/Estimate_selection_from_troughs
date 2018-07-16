@@ -3,44 +3,44 @@ Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
 The top-level auxiliary file: Estimating_pararmeters_MS.aux
 The style file: apalike.bst
 Database file #1: /Users/s0784966/Dropbox/Thesis/common/MyRefs2.bib
-You've used 45 entries,
+You've used 44 entries,
             1935 wiz_defined-function locations,
-            766 strings with 11655 characters,
-and the built_in function-call counts, 20497 in all, are:
-= -- 1888
-> -- 1098
-< -- 21
-+ -- 413
-- -- 388
-* -- 1969
-:= -- 3620
-add.period$ -- 135
-call.type$ -- 45
-change.case$ -- 419
-chr.to.int$ -- 44
-cite$ -- 45
-duplicate$ -- 627
-empty$ -- 1315
-format.name$ -- 461
-if$ -- 3920
+            760 strings with 11521 characters,
+and the built_in function-call counts, 20149 in all, are:
+= -- 1854
+> -- 1091
+< -- 20
++ -- 409
+- -- 386
+* -- 1940
+:= -- 3560
+add.period$ -- 132
+call.type$ -- 44
+change.case$ -- 413
+chr.to.int$ -- 43
+cite$ -- 44
+duplicate$ -- 613
+empty$ -- 1286
+format.name$ -- 458
+if$ -- 3851
 int.to.chr$ -- 2
 int.to.str$ -- 0
-missing$ -- 45
-newline$ -- 228
-num.names$ -- 135
-pop$ -- 310
+missing$ -- 44
+newline$ -- 223
+num.names$ -- 132
+pop$ -- 307
 preamble$ -- 1
-purify$ -- 419
+purify$ -- 413
 quote$ -- 0
-skip$ -- 473
+skip$ -- 462
 stack$ -- 0
-substring$ -- 1443
-swap$ -- 45
+substring$ -- 1411
+swap$ -- 44
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 270
+type$ -- 264
 warning$ -- 0
-while$ -- 132
+while$ -- 129
 width$ -- 0
-write$ -- 586
+write$ -- 573

@@ -418,7 +418,7 @@ def simString(sa, pa):
 	'#GENERATIONS',
 	'110000',
 	'#DEMOGRAPHY AND STRUCTURE',
-	'1 P p1 2000 / single population of 1000 individuals',
+	'1 P p1 1000 / single population of 1000 individuals',
 	'#OUTPUT',
 	'12000 R p1 20',
 	'14000 R p1 20',
@@ -470,7 +470,7 @@ def simString(sa, pa):
 	'106000 R p1 20',
 	'108000 R p1 20',
 	'110000 R p1 20',
-	'110000 F']
+	'110000 F\n']
 	return simulation
 	
 ### Script to make a set of simulations

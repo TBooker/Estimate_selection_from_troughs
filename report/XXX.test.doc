@@ -1,0 +1,827 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <meta name="author" content="Tom R. Booker" />
+  <title>Chapter 4: Estimating the parameters of selective sweeps from patterns of genetic diversity in the house mouse genome</title>
+  <style type="text/css">code{white-space: pre;}</style>
+</head>
+<body>
+<div id="header">
+<h1 class="title"><strong>Chapter 4:</strong> Estimating the parameters of selective sweeps from patterns of genetic diversity in the house mouse genome</h1>
+<h2 class="author">Tom R. Booker</h2>
+</div>
+<h1 id="introduction" class="unnumbered">Introduction</h1>
+<p>Genetically linked sites do not evolve independently, so selection acting at one site may influence the fate of another. The consequences of selection at linked sites are intrinsically linked to the frequency and strength of selected mutations as well as, crucially, the rate of recombination <span class="citation"></span> REF DUMP). Two main modes of selection at linked sites have been identified; selective sweeps caused by the spread of advantageous mutations and background selection caused by the removal of deleterious variants. The two processes are related and can both potentially explain the positive correlations between nucleotide diversity and recombination rate reported in many species <span class="citation"></span>. However, the proportion of nonsynonymous substitutions attributable to adaptive evolution (<span class="math inline"><em>α</em></span>) is typically high (50%) (<span class="citation"></span>; but see <span class="citation"></span> for caveats), suggesting that selective sweeps may play a substantial role in shaping nucleotide diversity across the genomes of many species.</p>
+<p>Selective sweeps have been subject to rigorous population genetic research <span class="citation"></span>. The classic footprint of a selective sweep is a trough in nucleotide diversity at neutral sites surrounding substitutions. Reductions in nucleotide diversity caused by selective sweeps are related to the strength of selection acting on advantageous mutations as well as the frequency with which they arise. Taking advantage of this, <span class="citation"></span> used a model of selective sweeps to estimate the frequency and strength of advantageous mutations in <em>Drosophila melanogaster</em> by fitting the positive correlation between recombination rate and nucleotide diversity. At the time of their analysis, the theory of background selection was in its infancy and models combining the effects of background selection and sweeps had not been developed. However, the effects of background selection are expected to be ubiquitous across the genome <span class="citation"></span>, and studies, conceptually similar to Wiehe and Stephan’s (1993), have shown that controlling for background selection is highly important when parametrizing sweep models from patterns of nucleotide diversity <span class="citation"></span>.</p>
+<p>Because both selective sweeps and background selection act to reduce nucleotide diversity, it has proven difficult to distinguish their effects using population genetic data <span class="citation"></span>. A number of different approaches have been taken to tease apart the effects of the two processes. For instance, <span class="citation"></span> showed that, on average, there is a trough in diversity around recent nonsynonymous protein-coding substitutions in <em>Drosophila melanogaster</em> but not around synonymous ones. This pattern is strongly suggestive of selective sweeps, so they <span class="citation"></span> fitted a sweep model to the trough they observed and estimated that strongly advantageous mutations (<span class="math inline">2<em>N</em><sub><em>e</em></sub><em>s</em></span> <span class="math inline">≈</span> 5,000) occur in the fruitfly’s genome. In the house mouse, there is also a trough in diversity around recent nonsynonymous substitutions, but an almost identical trough is observed around synonymous substitutions, furthermore a similar trough is observed around even randomly selected synonymous and nonsynonymous sites in the genome <span class="citation"></span>. This all, perhaps, suggests that the reductions in diversity caused by selection at linked sites extend beyond the average distance separating nonsynonymous substitutions, so that the methods employed by <span class="citation"></span> are not effective in mice <span class="citation"></span>. For both classes of elements, however, values of <span class="math inline"><em>α</em> ≥ 0.19</span> have been reported <span class="citation"></span> and background selection alone cannot fully explain the troughs in diversity (<span class="citation"></span>, Chapter 3), suggesting that selective sweeps do contribute to the observed patterns.</p>
+<p>In Chapter 3, we sought to tease apart the contribution of BGS and SSWs to patterns of diversity in mice. We estimated distributions of fitness effects (DFEs) for both harmful and advantageous mutations occurring in multiple classes of functional sites, analysing the distribution of derived allele frequencies (referred to as the unfolded site frequency spectrum, hereafter uSFS). The methods that we used, and related approaches, rely on the assumption that selected mutations segregate in populations of interest, such that they affect the shape of the uSFS. Using simulations, we found that neither BGS nor SSWs given the selection parameters we estimated could explain troughs in diversity observed around protein-coding exons and conserved non-coding elements (CNEs). A possible explanation for this finding is that advantageous mutations which have large effects on fitness, and which cause the greatest reduction in neutral diversity, may not be detectable by analysis of the uSFS.</p>
+<p>In this study, we use a model of selective sweeps to estimate the strength and frequency of advantageous mutations that occur within protein-coding exons and regulatory elements. Using simulations, we show that the selection parameters that explain the troughs in diversity are out of the range detectable by analysis of the uSFS. We find that, as expected <em>a priori</em>, the strength of selection acting on protein-coding exons is far greater than that acting in regulatory elements. Finally, using a simple model of the fitness change brought about by adaptive evolution, we show that, despite adaptation occurring more frequently in regulatory regions, adaptation in protein-coding regions may contribute more to phenotypic evolution in mice.</p>
+<h1 id="materials-and-methods" class="unnumbered">Materials and Methods</h1>
+<h2 id="model-of-recurrent-sweeps-with-background-selection" class="unnumbered">Model of Recurrent Sweeps with Background Selection</h2>
+<p><span class="citation"></span> gave expressions for the neutral diversity expected under the combined effects of background selection (BGS) and selective sweeps (SSWs). They assumed that the effects of BGS and SSWs act independently so that their effects can simply be summed. However, background selection causes a reduction to the effective population size (<span class="math inline"><em>N</em><sub><em>e</em></sub></span>) at a neutral locus, <span class="math inline"><em>k</em></span> by some fraction <span class="math inline"><em>B</em><sub><em>k</em></sub></span>, so may influence the rate and fixation probability of new advantageous mutations which is dependant upon <span class="math inline"><em>N</em><sub><em>e</em></sub></span>. To reflect this, we scale the sweep effect by <span class="math inline"><em>B</em><sub><em>k</em></sub></span> in a modified version of the model used by <span class="citation"></span>,</p>
+<p><br /><span class="math display">$$\label{jointApprox}
+\frac{\pi_{k}}{\pi_{0}} \approx  \frac{1}{B_{k}^{-1}  + B_{k}2N_eP_{sc,k}}.$$</span><br /></p>
+<p>Where <span class="math inline"><em>π</em><sub><em>k</em></sub></span> is neutral genetic diversity observed at neutral site <em>j</em> and <span class="math inline"><em>π</em><sub>0</sub></span> is diversity expected in the absence of selection at linked sites. <span class="math inline"><em>P</em><sub><em>s</em><em>c</em>, <em>k</em></sub></span> is the reduction in coalescence times at site <span class="math inline"><em>k</em></span> caused by the effects of SSWs,</p>
+<p><br /><span class="math display">$$\label{singleClass}
+P_{sc,k} \approx V_a \tau\gamma_a^{\frac{-4r_{i,k}}{s}}$$</span><br /></p>
+<p>The term <span class="math inline"><em>V</em><sub><em>a</em></sub> = 2<em>μ</em><em>p</em><sub><em>a</em></sub><em>γ</em><sub><em>a</em></sub></span> is the rate of sweeps per base pair per generation, where <span class="math inline"><em>μ</em></span> is the per-base pair per generation mutation rate, <span class="math inline"><em>p</em><sub><em>a</em></sub></span> is the proportion of new mutations that are advantageous and <span class="math inline"><em>γ</em><sub><em>a</em></sub></span> is the scaled selection coefficient (<span class="math inline">2<em>N</em><sub><em>e</em></sub><em>s</em><sub><em>a</em></sub></span>) of those mutations(Kimura and Ohta?). <span class="math inline"><em>τ</em></span> is the number of selected sites in a functional element. The recombination fraction between a functional element (<span class="math inline"><em>i</em></span>) and the focal neutral site is <span class="math inline"><em>r</em><sub><em>i</em>, <em>k</em></sub></span>. When assuming that recombination proceeds solely by crossing over <span class="math inline"><em>r</em><sub><em>i</em>, <em>k</em></sub></span> is simply the product of the physical distance (<span class="math inline"><em>d</em><sub><em>i</em>, <em>k</em></sub></span>) and the local crossing-over rate (<span class="math inline"><em>r</em><sub><em>c</em></sub></span>). When incorporating gene conversion, we use Equation 1 from <span class="citation"></span>: <br /><span class="math display">$$\label{geneConversion}
+        r_{i,k} = d_{i,k} r_c + g_c d_g \Bigg( 1 - e ^{-\frac{d_{i,k}}{d_g}} \Bigg)$$</span><br /> where <span class="math inline"><em>g</em><sub><em>c</em></sub></span> is the rate of gene conversion and <span class="math inline"><em>d</em><sub><em>g</em></sub></span> is the mean gene conversion tract length, assuming that the distribution of tract lengths is exponential. When applying Equation [geneConversion] we use <span class="math inline"><em>g</em><sub><em>c</em></sub> = <em>κ</em><em>r</em><sub><em>c</em></sub></span> where <span class="math inline"><em>κ</em></span> is the ratio of the non-crossovers to crossovers.</p>
+<p>Both theoretical and experiemental results suggest that the distribution of fitness effects for advantageous mutations is exponential <span class="citation"></span>. We incorporate an exponential distribution of advantageous mutation effects to Equation 3 as follows: <br /><span class="math display">$$\label{exponential}
+P_{sc,k} \approx \int \limits_{0}^{\infty} f(\gamma) V_a \tau\gamma_a^{\frac{-4r_{i,k}}{s}} \mathop{d\gamma}$$</span><br /></p>
+<p>We estimated <span class="math inline"><em>γ</em><sub><em>a</em></sub></span> and <span class="math inline"><em>p</em><sub><em>a</em></sub></span> by fitting Equation [jointApprox] to the relationship between nucleotide diversity and distance to functional elements using non-linear least squares with the <em>lmfit</em> (0.9.7) package for Python 2.7. When analysing the mouse data, see below, we compared the fit of Equation [jointApprox] incorporating either one or two discrete classes of beneficial mutations (Equation [singleClass]) or the exponential distribution (Equation [exponential]) using Aikieke’s Information Criterion (AIC).</p>
+<h2 id="analysis-of-mouse-data" class="unnumbered">Analysis of Mouse Data</h2>
+<p>We analysed patterns of genetic diversity present in 10 wild-caught <em>M. m. castaneus</em> individuals, first reported by <span class="citation"></span>. Breifly, <span class="citation"></span> sequenced individual genomes to high coverage (<span class="math inline">≈</span> 30x) using Illumina paired-end reads, which were mapped to the mm9 mouse reference genome using BWA. Variants were called using a Samtools pipeline. Note that we only analyse SNP data in this study, insertion/deletion variants are not included. For further details of the sequencing and variant calling methods see <span class="citation"></span>. Protein-coding exons present in the version 67 of the Ensembl annotation database and the locations of conserved non-coding elements identified by <span class="citation"></span> using an alignment of placental mammals were used in this study. The mean length of a protein-coding exon is 151bp, of which we assume 75% of sites are subject to selection and the mean length of a conserved non-coding exon is 51bp, of which 100% of sites are subject to selection.</p>
+<p>From the edges of exons (CNEs), polymorphism data and divergence to the rn4 rat reference genome were extracted for non-CpG sites in windows of 1Kbp (100bp) extending to distances of 100Kbp (5Kbp). Analysis windows were then binned based on genetic distance to the focal element using either the LD-based recombination map for <em>M. m. castaneus</em> constructed by <span class="citation"></span> or the pedigree-based genetic map constructed using common lab strains of <em>M. musculus</em> by <span class="citation"></span>. Because LD-based and pedigree based recombination maps have different benefits and drawbacks (<em>see Results</em>), we performed analyses based on both of these maps in parallel.</p>
+<p>Compared to crossing-over rates, gene conversion parameters are very difficult to estimate <span class="citation"></span>. Empirical estimates of the ratio of non-crossovers to crossovers (a parameter we have termed <span class="math inline"><em>κ</em></span>) vary across orders of magnitude in mammals <span class="citation"></span>. <span class="citation"></span> measured non-crossover gene conversion rates in three recombination hotspots in mice and estimated a mean gene conversion tract length of 144bp and <span class="math inline"><em>κ</em> = 0.105</span>, we refer to this estimate as the Paigen gene conversion rate. Values of <span class="math inline"><em>κ</em></span> as high as 12.0 have been reported in humans, so to explore the effects of high gene conversion rates on the parameters of selection inferred from models of selection at linked sites, we also assumed a <span class="math inline"><em>κ</em></span> 12.0, which we refer to as the high gene conversion rate.</p>
+<p>In order to disentangle the sweep parameters we obtained, we assume a point mutation rate of <span class="math inline">5.4 × 10<sup>−9</sup></span> <span class="citation"></span>.</p>
+<h2 id="estimates-of-b" class="unnumbered">Estimates of <em>B</em></h2>
+<p>Background selection contributes to the troughs in diversity around both protein-coding exons and CNEs (<span class="citation"></span>; Chapter 3). Because of this, we required estimates of the effect of background selection on neutral diversity, <em>B</em>, to fit as a covariate when fitting Equation [jointApprox] to the diversity troughs. There are formulae for calculating <em>B</em> given the DFE as well as mutation and recombination rates <span class="citation"></span>, but these over-predict the effects of BGS when purifying selection is weak (<span class="math inline"><em>γ</em><sub><em>d</em></sub> &lt; 1</span>) (Good and Desai; Gordo et al). Since weakly selected mutations comprise a large portion of the DFEs we obtained previously, we opted to obtain estimates of <em>B</em> from simulations. In Chapter 3, we used simulations to estimate the contribution of background selection to patterns of nucleotide diversity around both protein-coding exons and CNEs. These simulations incorporated recombination rate variation, the actual distribution of functional elements in the genome and dDFEs specific to each of the functional elements analysed. By extracting diversity as a function of genetic distance to both protein-coding exons and CNEs from these simulations, we obtained estimates of <em>B</em> that can be used when fitting Equation [jointApprox].</p>
+<p>The simulations we used to estimate <span class="math inline"><em>B</em></span> were the same as those we used in Chapter 3, except that we increased the number of simulation replicates from 2,000 to 6,000. To obtain smoothed <span class="math inline"><em>B</em></span> values we fit Loess curves to the simulation data using R (v3.4.2). We smoothed the <span class="math inline"><em>B</em></span> curves using Loess regression with a span of 0.2 and using the number of sites contributing to each analysis bin as weights.</p>
+<h2 id="simulations-to-obtain-usfs" class="unnumbered">Simulations to obtain uSFS</h2>
+<p>In order to test whether the parameters of strongly selected advantageous mutations can be detected using the uSFS, we generated simulated datasets using the forward-time simulation package SLiM (v1.8; <span class="citation"></span>). We simulated the evolution of 1Mbp chromosomes containing 20 evenly spaced out ‘genes‘. Each ‘gene‘ consisted of 10 100bp exons, separated by 1Kbp of neutrally evolving intronic sequence. Nonsynonymous mutations were modelled as 75% of mutations occurring in exons, the remaining 25% were strictly neutral (i.e. synonymous sites). We varied the <span class="math inline"><em>γ</em><sub><em>a</em></sub></span> and <span class="math inline"><em>p</em><sub><em>a</em></sub></span> parameters across simulations, but kept the product <span class="math inline"><em>γ</em><sub><em>a</em></sub><em>p</em><sub><em>a</em></sub></span> equal to 0.1. We based this value of <span class="math inline"><em>γ</em><sub><em>a</em></sub><em>p</em><sub><em>a</em></sub> ≈ 0.1</span> on a recent study in <em>D. melanogaster</em> <span class="citation"></span>. All simulations incorporated the same gamma dDFE (<span class="math inline"><em>β</em></span> = 0.2 and <span class="math inline">$\hat{\gamma_d}$</span> = -1,000), but the advantageous mutation parameters varies, these are listed in Table [polyDFE]. The population-scaled mutation and recombination rates (i.e. <span class="math inline"><em>θ</em></span> = <em><span class="math inline">4<em>N</em><sub><em>e</em></sub><em>μ</em></span></em> and <span class="math inline"><em>ρ</em></span> = <em><span class="math inline">4<em>N</em><sub><em>e</em></sub><em>r</em></span></em>, respectively) were set to 0.01. Populations of <span class="math inline"><em>N</em></span> = 1,000 diploid individuals were simulated for an initial burn-in of 10<span class="math inline"><em>N</em></span> generations to establish equilibrium conditions. After the burn-in, 20 haploid chromosomes were sampled every 2<span class="math inline"><em>N</em></span> generations for a further 100<span class="math inline"><em>N</em></span> generations. We performed 10 replicate simulations for each set of selection parameters (Table [polyDFE]). Across simulation replicates, time-points and loci we extracted the simulated nonsynonymous and synonymous sites, giving uSFS data for 10,000 ‘genes’. We sampled the set of 10,000 ‘genes’ with replacement 100 times, collating the nonsynonymous and synonymous site uSFSs for each replicate.</p>
+<p>We estimated the DFEs in our simuations by analysing the uSFS using the methods of <span class="citation"></span> as implemented in the polyDFE (v1.1) package. PolyDFE fits an expression for the uSFS expected in the presence of both advantageous and deleterious mutations to data from putatively neutral and selected classes of sites, and estimates parameters by maximum likelihood. The neutral class uSFS is used to determine distortions to the uSFS caused by processes such as selection at linked sites and a history of population size change. In addition, polyDFE corrects for polymorphism misattributed to divergence, mutation rate variability and error in assigning sites as ancestral/derived. <span class="citation"></span> performed extensive simulations and showed that accurate estimates of the parameters for both deleterious and advantageous mutations can be obtained using their methods. However, there are a range of parameters that they did not test which may be biologically relevant, specifically when advantageous mutations are strongly selected, but infrequent.</p>
+<p>We analysed our simulated uSFSs using polyDFE choosing Model C (a gamma dDFE and a discrete class of advantageous mutations) and either including or not between-species divergence. We analysed the uSFS for simulated nonsynonymous using simulated synonymous sites as the neutral reference class. For each DFE tested we analysed 100 bootstrap samples of the simulation data.</p>
+<h1 id="results" class="unnumbered">Results</h1>
+<h2 id="patterns-of-genetic-diversity-around-protein-coding-exons-and-conserved-non-coding-elements" class="unnumbered">Patterns of genetic diversity around protein-coding exons and conserved non-coding elements</h2>
+<p>.</p>
+<p>[fig:sfsExample]</p>
+<p>Recombination rates can be estimated in various ways, which have different pros and cons. For instance, the population-scaled recombination rate (<span class="math inline"><em>ρ</em></span>) can be inferred from a relatively small sample of unrelated individuals at very fine-scales using patterns of linkage disequilibrium (LD). However, selection at linked sites influences local LD and may therefore affect recombination rate estimates obtained in this way (Clark REVIEW). Alternatively, direct estimates of the recombination rate (<span class="math inline"><em>r</em></span>) can be obtained from crossing experiments, but to achieve sufficient power to generate recombination maps a very large number of individuals need to be genotyped, which has typically precluded the use of whole-genome re-sequencing, limiting resolution. In summary, high resolution recombination maps can be generated using patterns of LD, but these may be biased by selection at linked sites, while unbiased recombination maps may be generated using crosses, though these typically have low resolution. When analysing patterns of genetic diversity using a model of selection at linked sites, the way in which recombination rate estimates were obtained may, therefore, affect parameter estimates.</p>
+<p>In this study, we analysed patterns of genetic diversity in <em>M. m. castaneus</em> and calculated genetic distances assuming either the high resolution recombination map constructed from LD by <span class="citation"></span>(the <em>castaneus</em> map) or the pedigree-based map of <span class="citation"></span> (the Cox map). The choice of recombination map had a substantial effect on patterns of nucleotide diversity. We found that, in the immediate flanks of both exons and CNEs, diversity was lower when assuming the LD-based <em>castaneus</em> map than when assuming the pedigree-based Cox map (Figure X). This difference is consistent with the idea that regions of the genome close to functional elements, where the effects of BGS and/or SSWs are strongest, and which exhibit reduced diversity, may yield downwardly biased estimates of the recombination rate. An alternative explanation is that the Cox map, which lacks resolution, does not fully capture regions of low recombination rate, so analysis windows that are tightly linked to functional elements may appear less tightly linked. However, genetic diversity plateaus at a higher level when assuming the <em>castaneus</em> map, suggesting that the Cox map may not capture some of the highly recombining portions of the genome. The choice of recombination map will, therefore, have an impact on the parameters of selection inferred from the patterns of diversity. Throughout the rest of the paper, we present, in parallel, the results of analyses based on the <em>castaneus</em> map with those based on the Cox map.</p>
+<h2 id="diversity-expected-in-the-absence-of-selection-pi_0" class="unnumbered">Diversity expected in the absence of selection, <span class="math inline"><em>π</em><sub>0</sub></span></h2>
+<p>A key parameter in Equation [jointApprox] is <span class="math inline"><em>π</em><sub>0</sub></span>, the nucleotide diversity expected in the absence of the effects of selection at linked sites. This parameter is very difficult to estimate and may even prove unobservable in real data given the ubiquity of the effects of selection at linked sites <span class="citation"></span>, yet it is required. One strategy for estimating <span class="math inline"><em>π</em><sub>0</sub></span> would be to divide the mean <span class="math inline"><em>π</em></span> in regions sufficiently distant to functional elements by the corresponding value of <span class="math inline"><em>B</em></span>. <span class="math inline"><em>B</em></span> plateaus at approximately 0.95 in regions surrounding both protein-coding exons and CNEs, but the level at which observed diversity plateaus is different for the two classes of elements (Figure).</p>
+<p>around protein-coding exons is lower than for CNEs (Figure X). The overall reduction in neutral diversity around both classes of elements caused by background selection is similar, so it may be that selective sweeps at elements linked to exons have reduced overall diversity more than for CNEs. When analysing patterns of diversity around protein-coding exons, we assumed <span class="math inline"><em>p</em><em>i</em><sub>0</sub></span> values of 0.00955 and 0.00895 when using the <em>castaneus</em> and Cox maps, respectively. When analysing patterns of diversity around CNEs, we assumed <span class="math inline"><em>p</em><em>i</em><sub>0</sub></span> values of 0.0102 and 0.00915 when using the <em>castaneus</em> and Cox maps, respectively.</p>
+<h2 id="parameters-of-selective-sweep-obtained-from-patterns-of-nucleotide-diversity" class="unnumbered">Parameters of selective sweep obtained from patterns of nucleotide diversity</h2>
+<p>We found that a model containing two classes of advantageous mutational effects gave a better fit to the data (as judged by AIC) than did a single class or an exponential distribution for both protein-coding exons and CNEs. This result held regardless of the recombination map assumed when analysing the data and whether or not gene conversion was included in the analysis (Table X).</p>
+<p>For both protein-coding exons and CNEs we inferred positively selected mutations with large fitness. In each case In the case of protein-coding exons, we inferred positively selected mutations with <span class="math inline"><em>γ</em><sub><em>a</em></sub></span> = 8,470</p>
+<p>Ignoring the contribution of BGS by setting <span class="math inline"><em>B</em></span> to 1.0 when fitting Equation [jointApprox] to the diversity troughs resulted in a much poorer model fit (Table [tab:BGSeffect]). The strength of selection acting on advantageous mutations was estimated to be higher and the frequency lower when background selection was ignored, for both classes of elements, for both recombination maps (Table [tab:BGSeffect]).</p>
+<p>In the absence of BGS effects, the strength of advantageous mutations required to explain the observed data is more far higher (Table [tab:BGSeffect]), consistant with <span class="citation"></span>. Furthermore, ignoring the contribution of BGS by setting <span class="math inline"><em>B</em></span> to 1.0 when fitting Equation [jointApprox] to the diversity troughs resulted in a much poorer model fit.</p>
+<p>The gene conversion parameters of Paigen <em>et al</em> did not substantially influence the analysis.</p>
+<p>[EstimatesCastaneus]</p>
+<p><span>cccccc</span></p>
+<p>Element &amp; <span class="math inline"><em>γ</em><sub><em>a</em>, 1</sub></span> &amp; <span class="math inline"><em>p</em><sub><em>a</em>, 1</sub></span> &amp;<span class="math inline"><em>γ</em><sub><em>a</em>, 2</sub></span> &amp; <span class="math inline"><em>p</em><sub><em>a</em>, 2</sub></span> &amp;<br />
+[0.5ex]</p>
+<p>&amp; 8,470 &amp; 2.22 x <span class="math inline">10<sup>−5</sup></span> &amp; 22.3 &amp; 0.0202 &amp;<br />
+&amp; [ 672 ] &amp; [ 2.21 x <span class="math inline">10<sup>−6</sup></span> ]&amp; [ 3.39 ] &amp; [ 4.38x <span class="math inline">10<sup>−3</sup></span> ] &amp;<br />
+&amp; 432 &amp; 1.12 x <span class="math inline">10<sup>−3</sup></span> &amp; 14.5 &amp; 0.0298 &amp;<br />
+&amp; [ 21.2 ] &amp; [ 8.86 x <span class="math inline">10<sup>−5</sup></span> ]&amp; [ 3.17 ] &amp; [ 8.22 x <span class="math inline">10<sup>−3</sup></span> ] &amp;<br />
+&amp; 4,100 &amp; 2.45 x <span class="math inline">10<sup>−5</sup></span> &amp; 117 &amp; 6.16 x <span class="math inline">10<sup>−4</sup></span> &amp;<br />
+&amp; [ 640 ] &amp; [ 5.56 x <span class="math inline">10<sup>−6</sup></span> ]&amp; [ 49.9 ] &amp; [ 2.78 x <span class="math inline">10<sup>−4</sup></span> ] &amp;<br />
+&amp; 357 &amp; 4.77 x <span class="math inline">10<sup>−4</sup></span> &amp; 5.95 &amp; 0.0454 &amp;<br />
+&amp; [ 46.8 ] &amp; [ 9.37 x <span class="math inline">10<sup>−5</sup></span> ]&amp; [ 3.533 ] &amp; [ 0.0358 ] &amp;<br />
+</p>
+<p>[tab:Table2]</p>
+<table>
+<tbody>
+<tr class="odd">
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center">Prop.</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr class="even">
+<td align="center"></td>
+<td align="center"><em>Simulated</em></td>
+<td align="center"><em>Estimated</em></td>
+<td align="center"><em>Simulated</em></td>
+<td align="center"><em>Estimated</em></td>
+<td align="center"></td>
+<td align="center">Significant <a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a></td>
+</tr>
+<tr class="odd">
+<td align="center">+</td>
+<td align="center"></td>
+<td align="center">11.2 [5.60 - 20.0]</td>
+<td align="center"></td>
+<td align="center">0.00856 [0.00440 - 0.0199]</td>
+<td align="center">0.0954 [0.0838 - 0.115]</td>
+<td align="center">1.00</td>
+</tr>
+<tr class="even">
+<td align="center">-</td>
+<td align="center"></td>
+<td align="center">3.97 [1.13 - 27.2]</td>
+<td align="center"></td>
+<td align="center">0.0201 [0.00472 - 0.0706]</td>
+<td align="center">0.0828 [0.0616 - 0.155]</td>
+<td align="center">1.00</td>
+</tr>
+<tr class="odd">
+<td align="center">+</td>
+<td align="center"></td>
+<td align="center">16.6 [9.20 - 37.4]</td>
+<td align="center"></td>
+<td align="center">0.00568 [0.00241 - 0.0107]</td>
+<td align="center">0.0949 [0.0822 - 0.108]</td>
+<td align="center">1.00</td>
+</tr>
+<tr class="even">
+<td align="center">-</td>
+<td align="center"></td>
+<td align="center">19.9 [2.90 - 37.4]</td>
+<td align="center"></td>
+<td align="center">0.00532 [0.00289 - 0.0207]</td>
+<td align="center">0.106 [0.0454 - 0.193]</td>
+<td align="center">0.97</td>
+</tr>
+<tr class="odd">
+<td align="center">+</td>
+<td align="center"></td>
+<td align="center">37.4 [21.6 - 41.8]</td>
+<td align="center"></td>
+<td align="center">0.00257 [0.00202 - 0.00467]</td>
+<td align="center">0.0951 [0.0809 - 0.106]</td>
+<td align="center">1.00</td>
+</tr>
+<tr class="even">
+<td align="center">-</td>
+<td align="center"></td>
+<td align="center">37.3[1.87 - 65.5]</td>
+<td align="center"></td>
+<td align="center">0.00266 [0.00125 - 0.0146]</td>
+<td align="center">0.0717 [0.0112 - 0.145]</td>
+<td align="center">0.86</td>
+</tr>
+<tr class="odd">
+<td align="center">+</td>
+<td align="center"></td>
+<td align="center">37.43 [37.4 - 1530]</td>
+<td align="center"></td>
+<td align="center">0.00249 [0.0000738 - 0.00283]</td>
+<td align="center">0.0938 [0.0795 - 0.107]</td>
+<td align="center">1.00</td>
+</tr>
+<tr class="even">
+<td align="center">-</td>
+<td align="center"></td>
+<td align="center">0.323 [0.0371 - 1.25]</td>
+<td align="center"></td>
+<td align="center">0.00259 [0.000525 - 0.0941]</td>
+<td align="center">0.00102 [0.0000620 - 0.0137]</td>
+<td align="center">0.00</td>
+</tr>
+<tr class="odd">
+<td align="center">+</td>
+<td align="center"></td>
+<td align="center">37.4 [37.4 - 1,700]</td>
+<td align="center"></td>
+<td align="center">0.00251 [0.000220 - 0.00283]</td>
+<td align="center">0.0947 [0.0738 - 0.106]</td>
+<td align="center">1.00</td>
+</tr>
+<tr class="even">
+<td align="center">-</td>
+<td align="center"></td>
+<td align="center">0.272 [0.00546 - 1.911]</td>
+<td align="center"></td>
+<td align="center">0.0122 [0.000690 - 0.138]</td>
+<td align="center">0.00310 [0.000104 - 0.0294]</td>
+<td align="center">0.07</td>
+</tr>
+<tr class="odd">
+<td align="center">+</td>
+<td align="center"></td>
+<td align="center">37.4 [32.7 - 37.4]</td>
+<td align="center"></td>
+<td align="center">0.00245 [0.00199 - 0.00283]</td>
+<td align="center">0.0919 [0.0776 - 0.102]</td>
+<td align="center">1.00</td>
+</tr>
+<tr class="even">
+<td align="center">-</td>
+<td align="center"></td>
+<td align="center">12.3 [0.287 - 66.6]</td>
+<td align="center"></td>
+<td align="center">0.00212 [0.000783 - 0.0104]</td>
+<td align="center">0.0338 [0.000250 - 0.0984]</td>
+<td align="center">0.22</td>
+</tr>
+<tr class="odd">
+<td align="center">+</td>
+<td align="center"></td>
+<td align="center">37.4 [32.9 - 37.4]</td>
+<td align="center"></td>
+<td align="center">0.00222 [0.00186 - 0.00264]</td>
+<td align="center">0.0831 [0.0701 - 0.0936]</td>
+<td align="center">1.00</td>
+</tr>
+<tr class="even">
+<td align="center">-</td>
+<td align="center"></td>
+<td align="center">1.75 [0.111 - 43.0]</td>
+<td align="center"></td>
+<td align="center">0.00240 [0.000343 - 0.0293]</td>
+<td align="center">0.0134 [0.0000515 - 0.0649]</td>
+<td align="center">0.12</td>
+</tr>
+</tbody>
+</table>
+<p>[tab:advMuts]</p>
+<h2 id="estimating-selection-parameters-from-the-usfs-of-simulated-data" class="unnumbered">Estimating selection parameters from the uSFS of simulated data</h2>
+<p>Parameters of the DFE can be estimated directly from polymorphism data if selected mutations are segregating in populations of interest (<em>Reviewed in</em> <span class="citation"></span>). It has been repeatedly demonstrated that parameters of the DFE for deleterious mutations (dDFE) can be accurately estimated from the SFS <span class="citation"></span>. It has also been shown that the parameters of advantageous mutations can also be estimated from the uSFS <span class="citation"></span>, but it has been argued that strongly selected advantageous mutations, which may contribute little to standing variation, will be undetectable by such methods (<span class="citation"></span>; Chapter 3). In this study, we confirm this verbal argument using simulations, showing that accurate estimation of positive selection parameters does indeed depend on the strength and relative frequencies of advantageous mutations.</p>
+<p>We used forward-in-time simulations that incorporated linkage, because selection at linked sites can distort the uSFS in ways that likely affect real data and thus cannot be ignored. For each set of advantageous mutation parameters, we simulated 10Mbp of gene-like sequences giving a total of 7.5Mbp of nonsynonymous sites and 2.5Mbp of synonymous sites which we used to construct the uSFS for 20 haploid individuals. This sample size and quantity of data is fairly typical of population genomic datasets (e.g. <span class="citation"></span>).</p>
+<p>Consistent with <span class="citation"></span> we found that polyDFE gave estimates of the dDFE were highly accurate (Table [tab:dDFE]). The estimation performed most poorly when divergence was included, but only a dDFE was inferred. These results replicate the findings of <span class="citation"></span> and further emphasize the importance of specifying a full DFE model when making inferences of selection from the uSFS.</p>
+<p>We analysed the uSFS from our simulated populations and found that when advantageous mutations are relatively frequent (<span class="math inline"><em>p</em><sub><em>a</em></sub></span> <span class="math inline">&gt;</span> 0.0005), but weakly selected (<span class="math inline"><em>γ</em><sub><em>a</em></sub></span> <span class="math inline">&lt;</span> 100), both <span class="math inline"><em>γ</em><sub><em>a</em></sub></span> and <span class="math inline"><em>p</em><sub><em>a</em></sub></span> parameters can be estimated with precision (Table [tab:Table2]). However, we found that when advantageous mutations were infrequent but strongly selected (<span class="math inline"><em>γ</em><sub><em>a</em></sub></span> <span class="math inline">≥</span> 100 and <span class="math inline"><em>p</em><sub><em>a</em></sub></span> <span class="math inline">≤</span> 0.0005) the parameters were very poorly estimated. Across all simulated datasets, when we included divergence in the analysis, the product <span class="math inline"><em>γ</em><sub><em>a</em></sub><em>p</em><sub><em>a</em></sub></span> was accurately estimated (Table REF) and likelihood ratio tests never failed to detect the presence of advantageous mutations in the uSFS. When we excluded divergence from the analysis, however, the product <span class="math inline"><em>γ</em><sub><em>a</em></sub><em>p</em><sub><em>a</em></sub></span> was poorly estimated when <span class="math inline"><em>γ</em><sub><em>a</em></sub> ≥ 100</span> and likelihood ratio tests typically failed to detect positive selection (Table REF).</p>
+<p>Across different sets of simulations, the strength of selection differed (ranging between <span class="math inline"><em>γ</em><sub><em>a</em></sub></span> = 10 and <span class="math inline"><em>γ</em><sub><em>a</em></sub></span> = 800), but the product <span class="math inline"><em>γ</em><sub><em>a</em></sub><em>p</em><sub><em>a</em></sub></span>, which is expected to be directly proportional to the rate of sweeps, was always equal to 0.1. All simulations were subject to the same dDFE, so the extent of background selection should be fairly similar. We found that selection at linked sites reduced synonymous site diversity below the expectation value of 0.01 in all simulations (Table [tab:summaryStats]), but as the strength of selection acting on advantageous mutations increased, diversity at linked sites decreased (reflected in in the decreasing values <span class="math inline"><em>π</em>/<em>π</em><sub>0</sub></span> shown in Table [tab:summaryStats]). As expected, the relative fixation rate of nonsynonymous mutations (meausured using <span class="math inline"><em>d</em><em>N</em>/<em>d</em><em>S</em></span> ) did not vary systematically across simulations (Table [tab:summaryStats]).</p>
+<h1 id="discussion" class="unnumbered">Discussion</h1>
+<p>Background selection and selective sweeps both operate in the mouse genome. By fitting a model combining the effects of both processes to the troughs in diversity around protein-coding exons and CNEs in <em>M. m. castaneus</em>, we estimated parameters of positively selected mutations occurring in the two classes of element that predict the observed patterns. This relied on estimates of the reduction in diversity caused by background selection (<span class="math inline"><em>B</em></span>), which, in turn, relied on estimates of the DFE for harmful variants. The dDFE can be accurately estimated from the uSFS as long as the dDFE is estimated using a model that includes advantageous mutations (Table [tab:dDFE]) <span class="citation"></span>.</p>
+<p>Here we have estimated parameters of positive selection from patterns of genetic diversity in the house mouse genome. We found that protein-coding regions experience more strongly selected mutation than do conserved non-coding elements. For both classes of sites, we found statistical support for two classes of advantageous mutational effects, one strong and one relatively weak. We performed simulations that suggest that these strongly selected mutations are undetectable by analysis of the uSFS.</p>
+<p>Using simulations, we demonstrated that the parameter estimates that we obtained are likely out of the range detectable by analysis of the uSFS. Whether positively selected mutations are currently segregating in populations of interest will be dependant upon the strength and frequency with which they arise, assuming a model of directional selection with invariant selection coefficients.</p>
+<h2 id="the-relative-contribution-of-adaptive-substitutions-in-protein-coding-and-regulatory-regions-to-fitness-change-in-mice" class="unnumbered">The relative contribution of adaptive substitutions in protein-coding and regulatory regions to fitness change in mice</h2>
+<p>An enduring goal of evolutionary biology has been to understand the extent to which protein-coding and regulatory regions of the genome contribute to phenotypic evolution <span class="citation"></span>. <span class="citation"></span> posited that, since identity between human and chimpanzee proteins is around 99%, changes in gene regulation may explain the plethora of phenotypic differenes between humans and chimps. Furthermore, <span class="citation"></span> suggested that pleiotropy may place a burden on protein-coding genes such that adaptation most often occurs in regulatory regions. Using a simple model of adaptive fitness change, we can use the parameter estimates we obtained in this study to try and shed light on this question.</p>
+<p>Consider the following model of the fitness change brought about by the fixation of advantageous mutations (<span class="math inline"><em>Δ</em><em>W</em></span>). New mutations occur at a particular class of sites with rate <span class="math inline"><em>μ</em></span> per base-pair, per generation. A proportion of these new mutations, <span class="math inline"><em>p</em><sub><em>a</em></sub></span>, are advantageous with an expected selection coefficient of <span class="math inline"><em>s</em><sub><em>a</em></sub></span>. The advantageous mutations fix with probability <span class="math inline"><em>u</em>(<em>s</em><sub><em>a</em></sub>)</span> and once fixed contribute <span class="math inline"><em>s</em><sub><em>a</em></sub></span> to the change in fitness. If it is assumed that selection is strong relative to genetic drift, then <span class="math inline"><em>u</em>(<em>s</em><sub><em>a</em></sub>)</span> is approximately <span class="math inline"><em>s</em><sub><em>a</em></sub></span>, giving the following expression:</p>
+<p><br /><span class="math display"><em>Δ</em><em>W</em> ∝ <em>μ</em><em>p</em><sub><em>a</em></sub><em>n</em><sub><em>a</em></sub><em>E</em>(<em>s</em><sub><em>a</em></sub>)<sup>2</sup>,</span><br /></p>
+<p>We parametrized Equation [eq:fitness] using the estimates of selection we estimated in this study, summing the fitness contribution for the two classes of fitness effect. We assume that the average point mutation rate is the same for CNEs and protein-coding exons, so we ignore <span class="math inline"><em>μ</em></span> in Equation [eq:fitness].</p>
+<p>Based on our parameter estimates, adaptation is far more frequent in CNEs than it is in protein-coding exons. Firstly, there are approximately three times as many CNE sites than there are nonsynonymous sites in the mouse genome. Secondly, the frequency of strongly selected mutations in CNEs is more than an order of magnitude higher than for protein-coding exons. However, since the change in fitness is dependant on the square of the selection coefficient (it is related to the additive genetic variance in fitness), the change in population mean fitness brought about by the fixation of advantageous mutations is higher for protein-coding exons than for CNEs (Table [tab:fitnessTable]. The difference was not huge, but was robust to the choice of recombination map.</p>
+<table>
+<caption>Estimates of the changes in fitness caused by new mutations occurring in protein-coding exons and CNEs. and a per base-pair per generation mutation rate of 5.4 x <span class="math inline">10<sup>−9</sup></span> (Uchimura <em>et al.</em> 2015).</caption>
+<tbody>
+<tr class="odd">
+<td align="left"></td>
+<td align="center"><span class="math inline"><em>μ</em><sub><em>a</em></sub></span></td>
+<td align="center"><span class="math inline"><em>n</em><sub><em>a</em></sub></span> (x <span class="math inline">10<sup>6</sup></span>)</td>
+<td align="center"><span class="math inline"><em>s</em><sub><em>a</em>, 1</sub><sup>2</sup></span></td>
+<td align="center"><span class="math inline"><em>Δ</em><em>W</em></span> x (<span class="math inline">10<sup>−12</sup></span>)</td>
+</tr>
+<tr class="even">
+<td align="left">[0.5ex] Exons</td>
+<td align="center">6.70 x <span class="math inline">10<sup>−14</sup></span></td>
+<td align="center">24.0</td>
+<td align="center">1.39 x <span class="math inline">10<sup>−4</sup></span></td>
+<td align="center">224</td>
+</tr>
+<tr class="odd">
+<td align="left">CNEs</td>
+<td align="center">1.23 x <span class="math inline">10<sup>−11</sup></span></td>
+<td align="center">54.2</td>
+<td align="center">7.36 x <span class="math inline">10<sup>−9</sup></span></td>
+<td align="center">4.91</td>
+</tr>
+</tbody>
+</table>
+<p>[tab:fitnessTable]</p>
+<p>There are a number of factors that should, perhaps, temper these conclusions. Firstly, the selection coefficient that appears in Equation [eq:fitness] is the expectation of the DFE for advantageous mutations. If there were a continuous distribution of <span class="math inline"><em>s</em></span> values around the point estimates we obtained, integrating over this distribution may yield a different result. Secondly, we have assumed that all elements of a particular class share a common set of selection parameters. This is slightly problematic since there are a number of sub-categorisations that could be applied to the set of CNEs we analysed (e.g. promoters and enhancers may be subject to different selective pressures). Indeed, different categories of protein-coding genes may also be subject to different selection pressures. For instance, virus interacting proteins and highly expressed genes have been estimated to have higher rates of adaptive substitutions in different organisms (Enard eLife paper; Williamson).</p>
+<p>Whether or not the conclusions we have drawn in this study can be generalised to other organisms remains to be seen, but the brown rat, <em>Rattus norvegicus</em>, provides a compelling first case for comparison. In <em>R. norvegicus</em> there are troughs in nucleotide diversity around protein-coding exons and CNEs that are very similar to those observed in <em>M. m. castaneus</em> <span class="citation"></span>. Since broad-scale recombination rates are similar in mice and rats <span class="citation"></span>, qualitatively similar conclusions regarding the contribution of protein-coding versus regulatory change to adaptive evolution may be reached when analysing patterns of genetic diversity in rats.</p>
+<h2 id="analysis-of-the-usfs">Analysis of the uSFS</h2>
+<p>By analysing the uSFS of simulated populations, polyDFE yielded exquisitely accurate estimates of the dDFE from simulated data, even when positive selection was very strong. Consistent with <span class="citation"></span>, we found that if advantageous mutations are present, but unaccounted for, estimates of the dDFE become inaccurate.</p>
+<p>The number of fixed, advantageous mutations carries information on the compound parameter <span class="math inline"><em>γ</em><sub><em>a</em></sub><em>p</em><sub><em>a</em></sub><em>μ</em></span> (Kimura and Ohta 1971), which will be embedded within between species divergence at selected sites.</p>
+<p>Without further information from polymorphism data, this compound parameter cannot be disentangled by analysis of the uSFS. Between-species divergence is not included in our estimation of <span class="math inline"><em>γ</em><sub><em>a</em></sub></span> and <span class="math inline"><em>p</em><sub><em>a</em></sub></span> from patterns of diversity, nevertheless it is desirable that the rate of sweeps inferred from the patterns of diversity can also explain in the way uSFS-based estimates are. However, values of <span class="math inline"><em>γ</em><sub><em>a</em></sub><em>p</em><sub><em>a</em></sub><em>μ</em></span> that far exceed</p>
+<p>Across our simulations, the rate of sweeps did not vary, but nucleotide diversity at neutral, synonymous sites did; as the scaled strength of selection increased, synonymous site diversity decreased (Table [tab:summaryStats]). This all suggests that when advantageous mutations are strongly selected, but rare, patterns of nucleotide diversity carry information that is not present in the unfolded site frequency spectrum.</p>
+<h2 id="estimating-parameters-of-positive-selection-from-the-usfs-versus-patterns-of-diversity" class="unnumbered">Estimating parameters of positive selection from the uSFS versus patterns of diversity</h2>
+<p>To our knowledge, there are currently no methods that estimate the DFE using the site frequency spectrum expected under either background selection or selective sweeps. Rather, nuisance parameters or demographic models are used to account for the contribution of selection at linked sites to the shape of the SFS while assuming that selected mutations also shape the SFS. However, we have shown that advantageous mutations occurring in <em>M. m. castaneus</em> may be far stronger and infrequent than those that can reliably be detected by analysis of the uSFS. Interestingly, when we fit a bimodal DFE for advantageous mutations to the pattern of diversity around CNEs, one of the modes we inferred very closely matched the selection parameters we obtained by analysis of the uSFS in a previous study (Booker and Keightley BioRXiv).</p>
+<p>there is potentially information present in the uSFS that may be useful for estimating the fitness effects of new mutations. Approximations for the uSFS expected under both BGS and selective sweeps have been developed (REFS), so a potential avenue for further research would be to incorporate these for making inferences from population genetic data.</p>
+<p>In an earlier study, T<span class="citation"></span> analysed patterns of variation at microsatellite loci across the <em>M. m. domesticus</em> genome. In their study they estimated that selective sweeps driven by mutations with a selection coefficient of <span class="math inline"><em>s</em> ≈ 0.008</span> occur at least every hundredth generation. If we assume an <span class="math inline"><em>N</em><sub><em>e</em></sub></span> of 420,000, we estimate that selective sweeps in protein-coding exons are driven by mutations with <span class="math inline"><em>s</em> ≈ 0.0099</span> and in CNEs <span class="math inline"><em>s</em> ≈ 0.00027</span>.</p>
+<p>We assumed that all new advantageous mutations are semi-dominant, which is something of a problem. Haldane’s sieve predicts that most advantageous mutations that become fixed are dominant. There are a number of examples of selective sweeps being driven by recessive mutations in mammals, particularly humans (REFS). If advantageous mutations are fully recessive, where the dominance coefficient (<em>h</em>) is 0, the chance of stochastic loss exceeds that of mutations that have <em>h</em> <span class="math inline">&gt;</span> 0. As long as mutations are neither fully recessive nor fully dominant (0 <span class="math inline">&lt;</span> <em>h</em> <span class="math inline">&lt;</span> 1), the troughs in diversity resulting from mutations with the compound parameter <em>2hs</em> are similar (Greg Ewing paper). Because of this, as long new mutations are neither fully recessive nor dominant, the selection coefficients we estimated should be directly proportional to the true values</p>
+<h2 id="limitations">Limitations</h2>
+<p>In collating the patterns of genetic diversity around either CNEs or protein-coding exons across the entire genome, it is likely that we have lost some valuable information. An alternative approach would be to fit Equation [jointApprox] to genome-wide variation in nucleotide diversity, conditioning on the locations of functional elements and a genetic map. <span class="citation"></span> fitted genome-wide variation in <em>D. melanogaster</em> using a model that combined background selection and selective sweeps conditioning on the locations of recent substitutions to estimate the effects of selective sweeps and functional elements to ascertain the effects of background selection. However, applying their methods to mice, where there is little information in the patterns of mean diversity around putatively selected/neutral nucleotide substitutions <span class="citation"></span>.</p>
+<p>The model of selective sweeps that we used in this study is of so-called ’hard’ (or classic) selective sweeps, whereas studies in both humans and <em>Drosophila</em> suggest that ’soft’ selective sweeps are common <span class="citation"></span>. A ’soft’ selective sweep differs from the model outlined in the Methods section of this paper in that multiple haplotypes reach fixation, this can occur if selection acts on standing genetic variation or if multiple copies of the selected mutation arise independently (REVIEW). Additionally, adaptation acting on quantitative traits subject to stabilising selection may generate partial sweeps, as abrupt changes in allele frequency at many loci can rapidly affect mean phenotypes, withoutnecessarily causing fixations. Such partial sweeps may be common in humans <span class="citation"></span>. In their paper, <span class="citation"></span> thoroughly discussed how assuming a model of hard sweeps when either soft or partial sweeps are common would affect estimates of positive selection parameters obtained from patterns of diversity. Briefly, if soft sweeps were common, it would likely have caused us to overestimate the strength of selection. Whereas if partial sweeps were common then we would likely underestiamte th positive selection parameters. It seems probable that adaptation does not fit any one category, rather sites will likely be subject to a mixture of different types of sweep and different classes of genomic element may differ in</p>
+<p>In the case of a soft sweep from standing variation, for example, the effect of the sweep on neutral diversity is related to the frequency with which the focal allele was segregating before the onset of selection. Nonsynonymous variants are far less frequent and are maintained at lower frequencies than variants within CNEs <span class="citation"></span>, so the effects of soft sweeps may differ between the two classes of sites.</p>
+<h2 id="recombination-rate-issues">Recombination rate issues</h2>
+<p>The <em>castaneus</em> map that we inferred previously <span class="citation"></span> was constructed using a model of crossovers that does not explicitly model gene conversion. However, gene conversion will affect LD and may be reflected in the estimates of <span class="math inline"><em>r</em><em>h</em><em>o</em></span>/bp obtained using LDhelmet (see Comeron 2017 review for discussion of this).</p>
+<p>The estimates based on the Cox map, on the other hand, are not subject to this issue, but are Estimates of the relative rate of gene conversion and crossing-over In this study, gene conversion made little to no difference to parameter estimation, but this depends on the gene conversion parameters assumed.</p>
+<p>The LD-based methods to infer recombination rates assume that patterns in</p>
+<p>We assumed the estiamtes obtained by <span class="citation"></span> when performing our analyses, which yielded little difference in the parameter estimates. Assuming the high rate of gene conversion estimated for humans (XXX) made a much larger difference to parameter estimates.</p>
+<h1 id="conclusions" class="unnumbered">Conclusions</h1>
+<p>In this study we have shown that that strong positive selection explains the diversity dips around protein-coding exons and CNEs. Using simulations, we showed that the parameters of these mutations are out of the range detectable by the uSFS, thus reconciling the present results with those obtained in Chapter 3. Furthermore, the parameters we estimated suggested that mutations in protein-coding regions contributes more to phenotypic change than do regulatory mutations.</p>
+<h1 id="increasing-the-impact-of-the-paper" class="unnumbered">Increasing the impact of the paper</h1>
+<p>I am happy with the way this chapter has turned out and I think that I could pursue a publication with it. However, there are a number of things that I/we could do to turn this from a fairly good low impact paper to a higher impact PNAS-level paper. By broadening the focus of the analysis to include all the species for which Ben has generated polymorphism datasets, we would likely garner more interest. The crucial question at the end of this paper is whether CNEs or exons contribute more to adaptive evolution. With an analysis of multiple species, we could ask whether general trends emerge from the analysis.</p>
+<p>We would need the following to perform the analyses:</p>
+<ul>
+<li><p>Polymorphism and recombination maps for <em>M. m. castaneus</em>, <em>M. m. musculus</em>, <em>M. m. domesticus</em>, <em>R. norvegicus</em> and <em>M. spretus</em>. <em>I think, Ben has done all of this.</em></p></li>
+<li><p>CNEs defined using progressive cactus placental alignment perhaps, of the kind Rory obtained for flycatchers. <em>Me or Ben could do this, or Rory, if he were interested in being involved and had the time</em></p></li>
+<li><p>We would also need dDFEs for each of the species (sub-species) above, which would be used to obtain values of <span class="math inline"><em>B</em></span>. I would do this part.</p></li>
+<li><p>We could then use the framework I have used in this chapter to estimate the sweep parameters in multiple species. I would also do this part.</p></li>
+</ul>
+<h1 id="acknowledgements" class="unnumbered">Acknowledgements</h1>
+<p>Thanks to Bret Payseur, Sally Otto, Nathaniel Sharp and the Otto labgroup at UBC for discussions. TRB is supported by an EASTBIO BBSRC studentship. This project has received funding from the ERC.</p>
+<p>[tab:summaryStats]</p>
+<table>
+<caption>Summary statistics for simulated populations</caption>
+<thead>
+<tr class="header">
+<th align="center"><span class="math inline"><em>γ</em><sub><em>a</em></sub></span></th>
+<th align="center"><span class="math inline"><em>p</em><sub><em>a</em></sub></span></th>
+<th align="center"><span class="math inline"><em>π</em>/<em>π</em><sub>0</sub></span></th>
+<th align="center"><span class="math inline"><em>d</em><em>S</em></span></th>
+<th align="center"><span class="math inline"><em>d</em><em>N</em></span></th>
+<th align="center"><span class="math inline"><em>d</em><em>N</em>/<em>d</em><em>S</em></span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">10</td>
+<td align="center">0.010000</td>
+<td align="center">0.940</td>
+<td align="center">0.00533</td>
+<td align="center">0.00159</td>
+<td align="center">0.299</td>
+</tr>
+<tr class="even">
+<td align="center">20</td>
+<td align="center">0.005000</td>
+<td align="center">0.914</td>
+<td align="center">0.00526</td>
+<td align="center">0.00157</td>
+<td align="center">0.299</td>
+</tr>
+<tr class="odd">
+<td align="center">50</td>
+<td align="center">0.002000</td>
+<td align="center">0.880</td>
+<td align="center">0.00527</td>
+<td align="center">0.00159</td>
+<td align="center">0.302</td>
+</tr>
+<tr class="even">
+<td align="center">100</td>
+<td align="center">0.001000</td>
+<td align="center">0.862</td>
+<td align="center">0.00525</td>
+<td align="center">0.00162</td>
+<td align="center">0.309</td>
+</tr>
+<tr class="odd">
+<td align="center">200</td>
+<td align="center">0.000500</td>
+<td align="center">0.844</td>
+<td align="center">0.00531</td>
+<td align="center">0.00159</td>
+<td align="center">0.300</td>
+</tr>
+<tr class="even">
+<td align="center">400</td>
+<td align="center">0.000250</td>
+<td align="center">0.819</td>
+<td align="center">0.00523</td>
+<td align="center">0.00155</td>
+<td align="center">0.296</td>
+</tr>
+<tr class="odd">
+<td align="center">800</td>
+<td align="center">0.000125</td>
+<td align="center">0.795</td>
+<td align="center">0.00527</td>
+<td align="center">0.00156</td>
+<td align="center">0.295</td>
+</tr>
+</tbody>
+</table>
+<table>
+<caption>Parameters of the distribution of fitness effects for harmful mutations obtained by analysis of the uSFS. Simulated values were <span class="math inline"><em>β</em> = 0.20</span> and <span class="math inline">$\hat{\gamma_d} = -2000$</span> </caption>
+<thead>
+<tr class="header">
+<th align="center"><span class="math inline"><em>γ</em><sub><em>a</em></sub></span></th>
+<th align="center"><span class="math inline"><em>p</em><sub><em>a</em></sub></span></th>
+<th align="center">Divergence</th>
+<th align="center">Full DFE</th>
+<th align="center"><span class="math inline"><em>β</em></span></th>
+<th align="center"><span class="math inline">$\hat{\gamma_d}$</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center"></td>
+<td align="center"></td>
+<td align="center">+</td>
+<td align="center">+</td>
+<td align="center">0.203 [0.190 - 0.231]</td>
+<td align="center">-865 [-1120 - -561]</td>
+</tr>
+<tr class="even">
+<td align="center"></td>
+<td align="center"></td>
+<td align="center">+</td>
+<td align="center">-</td>
+<td align="center">0.135 [0.127 - 0.140]</td>
+<td align="center">-6860 [-10100 - -4850]</td>
+</tr>
+<tr class="odd">
+<td align="center"></td>
+<td align="center"></td>
+<td align="center">-</td>
+<td align="center">+</td>
+<td align="center">0.217 [0.190 - 0.270]</td>
+<td align="center">-755 [-110000 - -483]</td>
+</tr>
+<tr class="even">
+<td align="center"></td>
+<td align="center"></td>
+<td align="center">-</td>
+<td align="center">-</td>
+<td align="center">0.175 [0.166 - 0.184]</td>
+<td align="center">-1550 [-2100 - -1180]</td>
+</tr>
+<tr class="odd">
+<td align="center"></td>
+<td align="center"></td>
+<td align="center">+</td>
+<td align="center">+</td>
+<td align="center">0.199 [0.184 - 0.212]</td>
+<td align="center">-974 [-1390 - -744]</td>
+</tr>
+<tr class="even">
+<td align="center"></td>
+<td align="center"></td>
+<td align="center">+</td>
+<td align="center">-</td>
+<td align="center">0.132 [0.125 - 0.142]</td>
+<td align="center">-8480 [-13200 - -5030]</td>
+</tr>
+<tr class="odd">
+<td align="center"></td>
+<td align="center"></td>
+<td align="center">-</td>
+<td align="center">+</td>
+<td align="center">0.199 [0.187 - 0.226]</td>
+<td align="center">-9831 [-1330 - -676]</td>
+</tr>
+<tr class="even">
+<td align="center"></td>
+<td align="center"></td>
+<td align="center">-</td>
+<td align="center">-</td>
+<td align="center">0.176 [0.168 - 0.183]</td>
+<td align="center">-1620 [-2040 - -1230]</td>
+</tr>
+<tr class="odd">
+<td align="center"></td>
+<td align="center"></td>
+<td align="center">+</td>
+<td align="center">+</td>
+<td align="center">0.199 [0.179 - 0.210]</td>
+<td align="center">-979 [-1680 - -740]</td>
+</tr>
+<tr class="even">
+<td align="center"></td>
+<td align="center"></td>
+<td align="center">+</td>
+<td align="center">-</td>
+<td align="center">0.136 [0.130 - 0.144]</td>
+<td align="center">-7260 [-11100 - -4930]</td>
+</tr>
+<tr class="odd">
+<td align="center"></td>
+<td align="center"></td>
+<td align="center">-</td>
+<td align="center">+</td>
+<td align="center">0.199 [0.187 - 0.215]</td>
+<td align="center">-944 [-1350 - -739]</td>
+</tr>
+<tr class="even">
+<td align="center"></td>
+<td align="center"></td>
+<td align="center">-</td>
+<td align="center">-</td>
+<td align="center">0.186 [0.177 - 0.195]</td>
+<td align="center">-1220 [-1640 - -986]</td>
+</tr>
+<tr class="odd">
+<td align="center"></td>
+<td align="center"></td>
+<td align="center">+</td>
+<td align="center">+</td>
+<td align="center">0.195 [0.175 - 0.210]</td>
+<td align="center">-952 [-1780 - -661]</td>
+</tr>
+<tr class="even">
+<td align="center"></td>
+<td align="center"></td>
+<td align="center">+</td>
+<td align="center">-</td>
+<td align="center">0.137 [0.129 - 0.144]</td>
+<td align="center">-5980 [-9350 - -4140]</td>
+</tr>
+<tr class="odd">
+<td align="center"></td>
+<td align="center"></td>
+<td align="center">-</td>
+<td align="center">+</td>
+<td align="center">0.193 [0.184 - 0.271]</td>
+<td align="center">-953 [-1270 - -637]</td>
+</tr>
+<tr class="even">
+<td align="center"></td>
+<td align="center"></td>
+<td align="center">-</td>
+<td align="center">-</td>
+<td align="center">0.189 [0.182 - 0.199]</td>
+<td align="center">-1040 [-1310 - -790]</td>
+</tr>
+<tr class="odd">
+<td align="center"></td>
+<td align="center"></td>
+<td align="center">+</td>
+<td align="center">+</td>
+<td align="center">0.197 [0.174 - 0.210]</td>
+<td align="center">-1040 [-2060 - -748]</td>
+</tr>
+<tr class="even">
+<td align="center"></td>
+<td align="center"></td>
+<td align="center">+</td>
+<td align="center">-</td>
+<td align="center">0.136 [0.130 - 0.144]</td>
+<td align="center">-7470 [-10700 - -5100]</td>
+</tr>
+<tr class="odd">
+<td align="center"></td>
+<td align="center"></td>
+<td align="center">-</td>
+<td align="center">+</td>
+<td align="center">0.207 [0.187 - 0.353]</td>
+<td align="center">-927 [-1320 - -498]</td>
+</tr>
+<tr class="even">
+<td align="center"></td>
+<td align="center"></td>
+<td align="center">-</td>
+<td align="center">-</td>
+<td align="center">0.190 [0.183 - 0.199]</td>
+<td align="center">-1160 [-1470 - -917]</td>
+</tr>
+<tr class="odd">
+<td align="center"></td>
+<td align="center"></td>
+<td align="center">+</td>
+<td align="center">+</td>
+<td align="center">0.209 [0.192 - 0.224]</td>
+<td align="center">-745 [-1180 - -558]</td>
+</tr>
+<tr class="even">
+<td align="center"></td>
+<td align="center"></td>
+<td align="center">+</td>
+<td align="center">-</td>
+<td align="center">0.148 [0.141 - 0.156]</td>
+<td align="center">-4010 [-5910 - -2810]</td>
+</tr>
+<tr class="odd">
+<td align="center"></td>
+<td align="center"></td>
+<td align="center">-</td>
+<td align="center">+</td>
+<td align="center">0.210 [0.199 - 0.229]</td>
+<td align="center">-727 [-939 - -541]</td>
+</tr>
+<tr class="even">
+<td align="center"></td>
+<td align="center"></td>
+<td align="center">-</td>
+<td align="center">-</td>
+<td align="center">0.202 [0.193 - 0.212]</td>
+<td align="center">-840 [-1040 - -660]</td>
+</tr>
+<tr class="odd">
+<td align="center"></td>
+<td align="center"></td>
+<td align="center">+</td>
+<td align="center">+</td>
+<td align="center">0.210 [0.181 - 0.218]</td>
+<td align="center">-798 [-1500 - -592]</td>
+</tr>
+<tr class="even">
+<td align="center"></td>
+<td align="center"></td>
+<td align="center">+</td>
+<td align="center">-</td>
+<td align="center">0.148 [0.139 - 0.157]</td>
+<td align="center">-3890 [-6000 - -2720]</td>
+</tr>
+<tr class="odd">
+<td align="center"></td>
+<td align="center"></td>
+<td align="center">-</td>
+<td align="center">+</td>
+<td align="center">0.205 [0.193 - 0.236]</td>
+<td align="center">-804 [-1020 - -543]</td>
+</tr>
+<tr class="even">
+<td align="center"></td>
+<td align="center"></td>
+<td align="center">-</td>
+<td align="center">-</td>
+<td align="center">0.198 [0.189 - 0.209]</td>
+<td align="center">-889 [-1130 - -693]</td>
+</tr>
+</tbody>
+</table>
+<p>+/- indicates whether or not divergence was included when analysing the uSFS</p>
+<p>+/- indicates whether or not advantageous mutation parameters were inferred</p>
+<p>The shape parameter of the gamma distribution of deleterious fitness effects</p>
+<p>Mean strength of selection of a new harmful mutation</p>
+<p>[tab:dDFE]</p>
+<table>
+<caption>Comparison of advantageous mutational models. Dashes indicate the best-fitting model. </caption>
+<tbody>
+<tr class="odd">
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr class="even">
+<td align="center">Map</td>
+<td align="center">GC</td>
+<td align="center">Model</td>
+<td align="center">CNEs</td>
+<td align="center">Exons</td>
+</tr>
+<tr class="odd">
+<td align="center"></td>
+<td align="center"></td>
+<td align="center">2</td>
+<td align="center">-</td>
+<td align="center">-</td>
+</tr>
+<tr class="even">
+<td align="center"></td>
+<td align="center"></td>
+<td align="center">e</td>
+<td align="center">-367</td>
+<td align="center">-284</td>
+</tr>
+<tr class="odd">
+<td align="center"></td>
+<td align="center"></td>
+<td align="center">s</td>
+<td align="center">-85.6</td>
+<td align="center">-284</td>
+</tr>
+<tr class="even">
+<td align="center"></td>
+<td align="center"></td>
+<td align="center">2</td>
+<td align="center">-</td>
+<td align="center">-</td>
+</tr>
+<tr class="odd">
+<td align="center"></td>
+<td align="center"></td>
+<td align="center">e</td>
+<td align="center">-262</td>
+<td align="center">-126.989377</td>
+</tr>
+<tr class="even">
+<td align="center"></td>
+<td align="center"></td>
+<td align="center">s</td>
+<td align="center">-87.3</td>
+<td align="center">-153</td>
+</tr>
+<tr class="odd">
+<td align="center"></td>
+<td align="center"></td>
+<td align="center">2</td>
+<td align="center">-</td>
+<td align="center">-</td>
+</tr>
+<tr class="even">
+<td align="center"></td>
+<td align="center"></td>
+<td align="center">e</td>
+<td align="center">-280</td>
+<td align="center">-134</td>
+</tr>
+<tr class="odd">
+<td align="center"></td>
+<td align="center"></td>
+<td align="center">s</td>
+<td align="center">-113</td>
+<td align="center">-161</td>
+</tr>
+<tr class="even">
+<td align="center"></td>
+<td align="center"></td>
+<td align="center">2</td>
+<td align="center">-</td>
+<td align="center">-3.91</td>
+</tr>
+<tr class="odd">
+<td align="center"></td>
+<td align="center"></td>
+<td align="center">e</td>
+<td align="center">-177</td>
+<td align="center">-</td>
+</tr>
+<tr class="even">
+<td align="center"></td>
+<td align="center"></td>
+<td align="center">s</td>
+<td align="center">-92</td>
+<td align="center">-1.48</td>
+</tr>
+<tr class="odd">
+<td align="center"></td>
+<td align="center"></td>
+<td align="center">2</td>
+<td align="center">-</td>
+<td align="center">-</td>
+</tr>
+<tr class="even">
+<td align="center"></td>
+<td align="center"></td>
+<td align="center">e</td>
+<td align="center">-150</td>
+<td align="center">-19.6</td>
+</tr>
+<tr class="odd">
+<td align="center"></td>
+<td align="center"></td>
+<td align="center">s</td>
+<td align="center">-44</td>
+<td align="center">-38.9</td>
+</tr>
+<tr class="even">
+<td align="center"></td>
+<td align="center"></td>
+<td align="center">2</td>
+<td align="center">-</td>
+<td align="center">-</td>
+</tr>
+<tr class="odd">
+<td align="center"></td>
+<td align="center"></td>
+<td align="center">e</td>
+<td align="center">-147</td>
+<td align="center">-16.2</td>
+</tr>
+<tr class="even">
+<td align="center"></td>
+<td align="center"></td>
+<td align="center">s</td>
+<td align="center">-43.5</td>
+<td align="center">-32.1</td>
+</tr>
+</tbody>
+</table>
+<p>Denotes the model of advantageous mutations used. <span class="math inline"><em>e</em></span> - exponential, <span class="math inline">2</span> - two classes of discrete effects and <span class="math inline"><em>s</em></span> - a single class of discrete effects.</p>
+<p>[tab:dDFE]</p>
+<table>
+<caption>The effect of background selection (<span class="math inline"><em>B</em><em>G</em><em>S</em></span>) on estiamtes of positive selection parameters obtained by fitting the troughs in diversity. Values obtained assuming the <em>castaneus</em> map and the gene conversion parameters of <span class="citation"></span> are shown. The difference in AIC between the full model and a model assuming that BGS does not contribute to the observed troughs </caption>
+<thead>
+<tr class="header">
+<th align="center">Element</th>
+<th align="center">BGS</th>
+<th align="center"><span class="math inline"><em>Δ</em><em>A</em><em>I</em><em>C</em></span></th>
+<th align="center"><span class="math inline"><em>γ</em><sub><em>a</em>, 1</sub></span></th>
+<th align="center"><span class="math inline"><em>p</em><sub><em>a</em>, 1</sub></span></th>
+<th align="center"><span class="math inline"><em>γ</em><sub><em>a</em>, 2</sub></span></th>
+<th align="center"><span class="math inline"><em>p</em><sub><em>a</em>, 2</sub></span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center"></td>
+<td align="center">-</td>
+<td align="center">65.5</td>
+<td align="center">18,900 [1,510]</td>
+<td align="center">0.0000130 [0.000001]</td>
+<td align="center">62.8 [9.46]</td>
+<td align="center">0.00584 [0.00115]</td>
+</tr>
+<tr class="even">
+<td align="center"></td>
+<td align="center">+</td>
+<td align="center">-</td>
+<td align="center">8,470 [672]</td>
+<td align="center">0.0000220 [0.000002]</td>
+<td align="center">22.3 [3.39]</td>
+<td align="center">0.02020 [0.00438]</td>
+</tr>
+<tr class="odd">
+<td align="center"></td>
+<td align="center">-</td>
+<td align="center">109</td>
+<td align="center">1,460 [134]</td>
+<td align="center">0.000126 [0.000018]</td>
+<td align="center">68.2 [9.73]</td>
+<td align="center">0.00377 [0.000561]</td>
+</tr>
+<tr class="even">
+<td align="center"></td>
+<td align="center">+</td>
+<td align="center">-</td>
+<td align="center">432 [21.2]</td>
+<td align="center">0.001120 [0.000089]</td>
+<td align="center">14.5 [3.17]</td>
+<td align="center">0.0298 [0.00822]</td>
+</tr>
+</tbody>
+</table>
+<p>[tab:BGSeffect]</p>
+<p>.</p>
+<p>[fig:BGSLoess]</p>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>The proportion of bootstrap replicates where a full DFE gave a significantly better fit than a model containing just deleterious mutations<a href="#fnref1">↩</a></p></li>
+</ol>
+</div>
+</body>
+</html>

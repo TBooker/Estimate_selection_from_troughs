@@ -89,7 +89,7 @@ def main():
 
 # The following gene conversion parameters come from Paigen et al 2008 PLoS Genetics
 
-	nc_gc_ratio = 12.0  # The relative rate of NCO gene conversion compared to CO Gene Conversion
+	nc_gc_ratio = 0.105  # The relative rate of NCO gene conversion compared to CO Gene Conversion 0.105 for Paigen
 	tract_length = 144 # average tract length
 	
 	if args.Cox:

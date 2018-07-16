@@ -123,8 +123,8 @@ def main():
 #		bins = range(0, 200, roundBy) ## For CNEs
 	else:
 		roundBy = 30
-#		bins = np.logspace(0, 3.477122, 100) - 1
-		bins = np.logspace(0, 3.7, 100) - 1
+		bins = np.logspace(0, 3.477122, 100) - 1
+#		bins = np.logspace(0, 3.7, 100) - 1
 
 #		bins = range(0, 3000, roundBy) ## For Exons
 

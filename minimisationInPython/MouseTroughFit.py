@@ -15,7 +15,7 @@ def combinedSelSweepRecovery(params, mid, data, B, cne = False):
 
 	Ya = params['NeSa'] # This is 2Nes
 	pa = params['pa']
-
+	
 
 	if cne:
 		Fraction = 1.
@@ -25,10 +25,10 @@ def combinedSelSweepRecovery(params, mid, data, B, cne = False):
 		ExonWidth = 150.
 	sites = Fraction*ExonWidth
 
-	Ne = 420000.0
+	Ne = 426200.0
 	mut_rate = 5.4e-9
 	g = 0
-
+	
 	r = mid / (4*Ne)
 	s = (1.*Ya) / (2*Ne)
 	Va = mut_rate * pa * Ya * 2
@@ -55,7 +55,6 @@ def combinedSel(params, mid, data, B, cne = False):
 	Ya = params['NeSa'] # This is 2Nes
 	pa = params['pa']
 
-
 	if cne:
 		Fraction = 1.
 		ExonWidth = 52.
@@ -64,16 +63,21 @@ def combinedSel(params, mid, data, B, cne = False):
 		ExonWidth = 150.
 	sites = Fraction*ExonWidth
 
+
 	Ne = 426200.0
+	#Ne = 1000 * 0.978
 	mut_rate = 5.4e-9
+	#mut_rate = 0.0083/4000
+
 	g = 0
 
-	r = mid / (4*Ne)
+	r = mid / (4 * Ne)
 	s = (1.*Ya) / (2*Ne)
-	Va = mut_rate * pa * Ya * 2
+#	Va = pa
+	Va = mut_rate * pa * Ya 
 
 
-	S =  2 * Ne * sites * Va *  (Ya ** (-4.*r/s))
+	S =  4 * Ne * sites * Va *  (Ya ** (-4.*r/s))
 	
 	model = 1./ ((1./B) + B*S)
 
@@ -99,7 +103,9 @@ def combinedTwoSpike(params, mid, data, B, cne = False):
 	sites = Fraction*ExonWidth
 
 	Ne = 426200.0
+#	Ne = 1000
 	mut_rate = 5.4e-9
+#	mut_rate = 0.0083/4000
 	g = 0
 	r = mid / (4*Ne)
 	S = 0
@@ -151,6 +157,7 @@ def combinedSelExpmid(params, mid, data, B, cne = False):
 
 	Ne = 426200.0
 	mut_rate = 5.4e-9
+	
 	g = 0
 
 	for m in mid:
@@ -213,13 +220,12 @@ def main():
 	args = parser.parse_args()
 	count = 0 
 
-	data = pd.read_csv(args.input).sort_values('distance').dropna(axis=0, how='any')
-
-	bgs = pd.read_csv(args.bgs).sort_values('end').dropna(axis=0, how='any')
-	bgs['B'] = bgs['pi']/0.0083
-
-	print bgs['start']
-	print data['distance']
+	data = pd.read_csv(args.input).sort_values('mid').dropna(axis=0, how='any')
+	bgs = pd.read_csv(args.bgs).sort_values('mid').dropna(axis=0, how='any')
+#	bgs['B'] = bgs['pi']/0.0083
+	bgs['B'] = bgs['Bsmooth']
+#	print bgs['mid']
+#	print data['mid']
 
 	if args.cne:
 		pass
@@ -228,15 +234,19 @@ def main():
 #		data = data[data['distance'] >0]
 #		bgs = bgs[bgs['end'] >0]
 	else:
-		data = data[abs(data['distance']) <3000]
-		bgs = bgs[bgs['end'] < 3000]
-		data = data[data['distance'] >0]
-		bgs = bgs[bgs['end'] >0]
+		data = data[abs(data['mid']) < 2500]
+		bgs = bgs[bgs['mid'] < 2500]
+ 		data = data[data['mid'] >0]
+		bgs = bgs[bgs['mid'] >0]
+		
+  	data = data[data['mid'] >1]
+ 	bgs = bgs[bgs['mid'] >1]
 
-	mid = np.array(data['distance']) # mean Rho = 0.009
-	
+	mid = np.array(data['mid']) # mean Rho = 0.009
+
 	if args.cne:
-		combined =  np.array(data['pi']/ data['rat_div_jc'])/(args.pi_0/0.1733)
+		combined = data['pi']/args.pi_0
+#		combined =  np.array(data['pi']/ data['rat_div_jc'])/(args.pi_0/0.1733)
 	else:
 	
 		combined =  np.array(data['pi'])/args.pi_0
@@ -249,11 +259,11 @@ def main():
 	if args.bgs_null:
 		B[B > 0.] = 1. # sets all values to 1
 	
-#	print bgs
+
 	params = Parameters()
 
 	params.add('pa', value = random.random(), min = 0, max = 1.0) # Give the minimiser random seeds
-	params.add('NeSa', value = random.randint(0,1000), min = 0, max = 1e8)
+	params.add('NeSa', value = random.randint(1,1000), min = 2, max = 1e8)
 
 
 
@@ -263,22 +273,22 @@ def main():
 	elif args.model =='2':
 		functionToMinimize = combinedTwoSpike
 		params.add('pa_2', value = random.random(), min = 0, max = 1) # Give the minimiser random seeds
-		params.add('NeSa_2', value = random.randint(0,1000), min = 0, max = 1e8)
-#		params.add('NeSa', value = 200, vary = False) # Give the minimiser random seeds
-	#	params.add('NeSa_2', value = 8.3*2, vary = False) # Fix the starting values
-	#	params.add('pa_2', value = 0.01, vary = False) # Fix the starting values
+		params.add('NeSa_2', value = random.randint(1,1000), min = 2, max = 1e8)
+# 	#	params.add('NeSa', value = 200, vary = False) # Give the minimiser random seeds
+# 		params.add('NeSa_2', value = 9.17*2, vary = False) # Fix the starting values
+# 		params.add('pa_2', value = 0.0098, vary = False) # Fix the starting values
 
 	elif args.model == 's':
 		functionToMinimize = combinedSel
 		
-	#	params.add('NeSa', value = 8.3*2, vary = False) # Give the minimiser random seeds
-	#	params.add('pa', value = 0.01, vary = False) # Give the minimiser random seeds
-
+	#  	params.add('NeSa', value = 100*2, vary = False) # Give the minimiser random seeds
+ 	 #	params.add('pa', value = 0.00016, vary = False) # Give the minimiser random seeds
+# #
 	elif args.model == 'sr': # Sweep recovery model
 		functionToMinimize = combinedSelSweepRecovery
 		
-	#	params.add('NeSa', value = 8.3*2, vary = False) # Give the minimiser random seeds
-	#	params.add('pa', value = 0.01, vary = False) # Give the minimiser random seeds
+	 	params.add('NeSa', value = 200*2, vary = False) # Give the minimiser random seeds
+		params.add('pa', value = 0.00016, vary = False) # Give the minimiser random seeds
 
 	minner = Minimizer(functionToMinimize, params, fcn_args=(mid, combined, B, args.cne))
 	result = minner.minimize()
@@ -306,12 +316,19 @@ def main():
 		print 'Estimate of Nes_1 =', Nes1/2
 		print 'Estimate of Nes_2 =', Nes2/2
 
+
+	myDat = { 'model':args.model,
+			  'pi_0':args.pi_0,
+			  '2Nes_1' : result.params['NeSa'].value 
+	}
+
 	if args.plot:
 		try:
 			import pylab
 			pylab.plot(mid, B, 'b')
 			pylab.plot(mid, combined, 'k+')
 			pylab.plot(mid, final, 'r')
+
 			pylab.show()
 		except:
 			pass

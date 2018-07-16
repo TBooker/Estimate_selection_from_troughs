@@ -1,0 +1,304 @@
+---
+title: "Plot DFE-alpha V. Trough Fitting scaled"
+author: "Tom Booker"
+date: "08/03/2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+rm(list=ls())
+```
+
+Start by reading in the libraries necessary for plotting the data and make my theme
+```{r libraryPrep}
+library(reshape2)
+library(ggplot2)
+library(wesanderson)
+options(scipen=10000)
+?wes_palette
+pal <- wes_palette(n = 5, name = "Royal1", type = "continuous")
+TommyTheme <-   
+    theme_bw()+
+    theme(
+    axis.title.x = element_text(size=14,angle=0),
+    axis.title.y = element_text(size=17,vjust=0.5),
+    axis.text.x = element_text(size=12,angle=90),
+    axis.text.y = element_text(size=12,angle=0),
+    strip.text.y = element_text(size = 20, face = 'italic'),
+    strip.text.x = element_text(size = 20, face = 'italic')
+  )
+
+
+
+```
+
+Now i'm going to read in the data and prepare it for plotting 
+
+```{r dataPrepBimodal}
+
+rawBoots <- read.csv('analysis/BimodalSims.csv')
+rawBoots$product1 <- rawBoots$NeSa1 * rawBoots$pa1
+rawBoots$product2 <- rawBoots$NeSa2 * rawBoots$pa2
+Boots<-melt(rawBoots, id = c('identifier'))
+
+rawSims1 <- read.csv('analysis/BGS+SWEEPS/BimodalDFE.analysisScaled.txt')
+
+Sims1<-melt(rawSims1, id = c('identifier','rep', 'AIC','Unnamed..0'))
+Sims1$identifier <- 'Bimodal'
+
+rawSims2 <- read.csv('analysis/BGS+SWEEPS/BimodalDFE_div10.analysisScaled.txt')
+Sims2<-melt(rawSims1, id = c('identifier','rep', 'AIC','Unnamed..0'))
+Sims2$identifier <- 'Bimodal_div10'
+
+rawSims3 <- read.csv('analysis/BGS+SWEEPS/BimodalDFE_div100.analysisScaled.txt')
+Sims3<-melt(rawSims1, id = c('identifier','rep', 'AIC', 'Unnamed..0'))
+Sims3$identifier <- 'Bimodal_div100'
+
+Sims <- rbind(Sims1,Sims2,Sims3)
+
+bimLabs <- c("NeSa1","NeSa2","pa1","pa2","product1","product2")
+
+Sims$variable <- factor(Sims$variable, levels = bimLabs,
+                 labels = bimLabs)
+Boots$variable <- factor(Boots$variable, levels = bimLabs,
+                 labels = bimLabs)
+Sims$source <- 'Trough-Fitting'
+
+selRaw <- read.csv('dfe-alpha/Bimodal_selectedSites.csv')
+sel<-melt(selRaw,c("Es","L","N1","N2","N3","Nw","f0", "f2n","identifier", "b",  "rep", "sa.0.","pa.0.","sa.1.","pa.1.","t2","t3"))
+sel$source <- 'DFE-alpha'
+
+sel$ID<-paste(sel$identifier)
+Sims$ID<-paste(Sims$identifier)
+
+nSims <- subset(Sims, select=c('variable', 'value', 'ID', 'source'))
+nsubset<- subset(sel, select=c('variable', 'value', 'ID', 'source'))
+new<- rbind(nSims,nsubset)
+
+vnames <-list(
+  'NeSa1' = expression(gamma[a(1)]),
+  'NeSa2' = expression(gamma[a(2)]),
+  'pa1' = expression(p[a(1)]),
+  'pa2' = expression(p[a(2)]),
+  'product1' = expression(gamma*p[a(1)]),
+  'product2' = expression(gamma*p[a(2)]),
+  'DFE-alpha' = 'DFE-alpha',
+  'Trough-Fitting' = 'Trough-Fitting')
+
+
+vlabeller <- function(variable,value){
+  return(vnames[value])
+}
+
+```
+
+Let's get this show on the road and plot 
+
+```{r fig.width=10, fig.height=8,echo=FALSE}
+
+ggplot(data = new, aes( x = ID, y =  log10(value), col = source))+
+  geom_violin( size = 0.8)+
+  geom_point(data= Boots, aes( x = identifier, y = log10(1), col = 'True\nValue'), shape = '_', size = 15)+
+  facet_grid( source ~ variable, scales = 'free', labeller = vlabeller)+
+ #  stat_summary(fun.y = median, fun.ymin = min, fun.ymax = max, colour = pal[3])+
+  scale_y_log10(expression(log[10] * '(est/sim)'))+
+  scale_x_discrete('')+
+  scale_color_manual('',values = pal)+
+  ggtitle('Bimodal DFE')+
+  TommyTheme
+
+```
+
+```{r dataPrepFixed,echo=FALSE}
+
+
+rawBoots <- read.csv('~/PhD/Coding/Estimate_selection_from_troughs/simulations/analysis/fixedClassSims.csv')
+rawBoots$product <- rawBoots$NeSa * rawBoots$pa
+Boots<-melt(rawBoots, id = c('identifier'))
+
+rawSims1 <- read.csv('~/PhD/Coding/Estimate_selection_from_troughs/simulations/analysis/BGS+SWEEPS/Nes10_dDFE.Exponential_div10.analysisScaled.txt')
+rawSims1$product <- rawSims1$NeSa * rawSims1$pa
+Sims1<-melt(rawSims1, id = c('identifier','X','rep', 'AIC'))
+Sims1$identifier <- 'Nes10 - div10'
+
+rawSims2 <- read.csv('~/PhD/Coding/Estimate_selection_from_troughs/simulations/analysis/BGS+SWEEPS/Nes10_dDFE.Exponential.analysisScaled.txt')
+rawSims2$product <- rawSims2$NeSa * rawSims2$pa
+Sims2<-melt(rawSims2, id = c('identifier','X','rep', 'AIC'))
+Sims2$identifier <- 'Nes10'
+
+rawSims3 <- read.csv('~/PhD/Coding/Estimate_selection_from_troughs/simulations/analysis/BGS+SWEEPS/Nes200_dDFE.Exponential_div10.analysisScaled.txt')
+rawSims3$product <- rawSims3$NeSa * rawSims3$pa
+Sims3<-melt(rawSims3, id = c('identifier','X','rep', 'AIC'))
+Sims3$identifier <- 'Nes200 - div10'
+
+rawSims4 <- read.csv('~/PhD/Coding/Estimate_selection_from_troughs/simulations/analysis/BGS+SWEEPS/Nes200_dDFE.Exponential.analysisScaled.txt')
+rawSims4$product <- rawSims4$NeSa * rawSims4$pa
+Sims4<-melt(rawSims4, id = c('identifier','X','rep', 'AIC'))
+Sims4$identifier <- 'Nes200'
+
+Sims <- rbind(Sims1,Sims2,Sims3,Sims4)
+str(Sims)
+bimLabs <- c("NeSa","pa","product")
+
+Sims$variable <- factor(Sims$variable, levels = bimLabs,
+                 labels = bimLabs)
+Boots$variable <- factor(Boots$variable, levels = bimLabs,
+                 labels = bimLabs)
+Sims$source <- 'Trough-Fitting'
+
+selRaw <- read.csv('dfe-alpha/Nes_selectedSites.csv')
+
+sel<-melt(selRaw,c("Es","L","N1","N2","N3","Nw","f0", "f2n","identifier", "b",  "rep", "sa.0.","pa.0.","t2","t3"))
+sel$source <- 'DFE-alpha'
+
+sel$ID<-paste(sel$identifier)
+Sims$ID<-paste(Sims$identifier)
+
+nSims <- subset(Sims, select=c('variable', 'value', 'ID', 'source'))
+nsubset<- subset(sel, select=c('variable', 'value', 'ID', 'source'))
+new<- rbind(nSims,nsubset)
+
+vnames <-list(
+  'NeSa' = expression(gamma[a]),
+  'pa' = expression(p[a]),
+  'product' = expression(gamma*p[a]),
+  'DFE-alpha' = 'DFE-alpha',
+  'Trough-Fitting' = 'Trough-Fitting')
+
+
+vlabeller <- function(variable,value){
+  return(vnames[value])
+}
+
+```
+
+```{r fig.width=7, fig.height=10,echo=FALSE}
+new$value <- round(new$value*1e8)/1e8
+
+ggplot(data = new, aes( x = ID, y =  value, col = source))+
+  geom_violin(size = 0.8)+
+  geom_point(data= Boots, aes( x = identifier, y = value, col = 'True\nValue'), shape = '_', size = 15)+
+  facet_grid(variable~source , scales = 'free',  labeller = vlabeller)+
+#   stat_summary(fun.y = median, fun.ymin = min, fun.ymax = max, colour = pal[3])+
+  scale_y_log10('')+
+  scale_x_discrete('')+
+  scale_color_manual('',values = pal)+
+  ggtitle('Fixed-Class DFE')+
+  TommyTheme
+
+
+```
+
+Now let's plot the results from the demographic comparison
+
+I'll plot likelihood differences, so keep in mind that between the 2- and 3-epoch models there is a difference of 2 parameters. This means that the threshold for statisitcal significance is a value of 2 * likelihood difference is 5.99
+
+```{r plotDemographic}
+
+demo <- read.csv('dfe-alpha/DemographicAnalysis.csv')
+demo$ratio3 <- demo$N3/demo$N1
+demo$ratio2 <- demo$N2/demo$N1
+demo$ratio1 <- demo$N1/demo$N1
+
+vars <- c("L","N1","N2","N3","Nw","dL", "epochs", "f0", "f2n", "t2", "t3", "model") 
+#vars <- c("L","N1","N2","N3","Nw", "epochs", "f0", "f2n", "t2", "t3", "model") 
+newDemo <- melt(demo, id = vars)
+#newDemo <- demo #melt(demo, id = vars)
+newDemo$Epochs <- as.factor(newDemo$epochs)
+library(ggplot2)
+
+
+ggplot(data = newDemo, aes(x = model, y = 2*dL, col = Epochs ))+
+  geom_point(size = 2)+
+  scale_color_manual('# Epochs',values = pal)+
+  geom_hline(yintercept=5.99, alpha = 0.5, lty = 2)+
+  scale_y_log10(expression('2'*Delta * 'lnL'))+
+  scale_x_discrete('')+
+  TommyTheme+
+  coord_flip()
+
+```
+
+# Now plot polyDFE stuff
+
+```{r polyDFE plotting}
+rm(list=ls())
+
+pal <- wes_palette(n = 5, name = "Royal1", type = "continuous")
+TommyTheme <-   
+    theme_bw()+
+    theme(
+    axis.title.x = element_text(size=14,angle=0),
+    axis.title.y = element_text(size=17,vjust=0.5),
+    axis.text.x = element_text(size=12,angle=90),
+    axis.text.y = element_text(size=12,angle=0),
+    strip.text.y = element_text(size = 20, face = 'italic'),
+    strip.text.x = element_text(size = 20, face = 'italic')
+  )
+
+
+polyDFEraw = read.csv('run_polyDFE/ExponentialPolyDFE.csv')
+polyDFE <- melt(polyDFEraw, id = c('model', 'number', 'b','S_d'))
+polyDFE$identifier <- polyDFE$model
+
+polyDFE$source <- 'polyDFE'
+
+Trough1raw<- read.csv('analysis/BGS+SWEEPS/Exp.Nes100_dDFE.Exponential.analysisScaled.txt')
+Trough1raw$product<-Trough1raw$NeSa*Trough1raw$pa
+Trough1<-melt(Trough1raw, id = c('AIC','identifier','rep','X'))
+Trough1$identifier<- 'Exp100'
+Trough1$source <- 'Trough-Fitting'
+
+Trough2raw<- read.csv('analysis/BGS+SWEEPS/Exp.Nes100_dDFE.Exponential_div10.analysisScaled.txt')
+Trough2raw$product<-Trough2raw$NeSa*Trough2raw$pa
+Trough2<-melt(Trough2raw, id = c('AIC','identifier','rep','X'))
+Trough2$identifier<- 'Exp100 - div10'
+Trough2$source <- 'Trough-Fitting'
+
+Trough3raw<- read.csv('analysis/BGS+SWEEPS/Exp.Nes10_dDFE.Exponential.analysisScaled.txt')
+Trough3raw$product<-Trough3raw$NeSa*Trough3raw$pa
+Trough3<-melt(Trough3raw, id = c('AIC','identifier','rep','X'))
+Trough3$identifier<- 'Exp10'
+Trough3$source <- 'Trough-Fitting'
+
+Trough4raw<- read.csv('analysis/BGS+SWEEPS/Exp.Nes10_dDFE.Exponential_div10.analysisScaled.txt')
+Trough4raw$product<-Trough4raw$NeSa*Trough4raw$pa
+Trough4<-melt(Trough4raw, id = c('AIC','identifier','rep','X'))
+Trough4$identifier<- 'Exp10 - div10'
+Trough4$source <- 'Trough-Fitting'
+
+Troughs <- rbind(Trough1, Trough2, Trough3, Trough4)
+
+rawExp <- read.csv('~/PhD/Coding/Estimate_selection_from_troughs/simulations/analysis/expSims.csv')
+rawExp$product = rawExp$NeSa * rawExp$pa
+Exp <- melt(rawExp, id = 'identifier')
+
+vnames <-list(
+  'NeSa' = expression(gamma[a]),
+  'pa' = expression(p[a]),
+  'product' = expression(gamma*p[a]),
+  'polyDFE' = 'polyDFE',
+  'Trough-Fitting' = 'Trough-Fitting')
+
+
+vlabeller <- function(variable,value){
+  return(vnames[value])
+}
+```
+
+```{r fig.width=16, fig.height=20,echo=FALSE}
+Troughs$value <- round(Troughs$value*1e8)/1e8
+polyDFE$value <- round(polyDFE$value*1e8)/1e8
+
+# ggplot(data = polyDFE , aes (x = identifier, y = value, col = source))+
+#   geom_boxplot(fill= source)+
+#   geom_boxplot(data = Troughs, aes( x = identifier, y = value, col = source))+
+#   geom_point(data= Exp, aes( x = identifier, y = value, col = 'True\nValue'), shape = '_', size = 15)+
+#   facet_grid(variable~source, scales = 'free', labeller = vlabeller)+
+#   scale_y_log10('')+
+#   scale_x_discrete('')+
+#   scale_color_manual('',values = pal)+
+#   ggtitle('Exponential DFE')+
+#   TommyTheme
+```
