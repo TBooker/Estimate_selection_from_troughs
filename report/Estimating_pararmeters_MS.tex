@@ -108,9 +108,9 @@ P_{sc,k} \approx \int \limits_{0}^{\infty} f(\gamma) V_a \tau\gamma_a^{\frac{-4r
  	
  	The simulations we used to estimate $B$ were the same as those we used in Chapter 3, except that we increased the number of simulation replicates from 2,000 to 6,000. To obtain smoothed $B$ values we fit Loess curves to the simulation data using R (v3.4.2) using a span of 0.2 and using the number of sites contributing to each analysis bin as weights.
 
-	\subsection*{Simulations to obtain uSFS}
+	\subsection*{Simulating the unfolded site frequency spectra}
 	
-	In Chapter 3, we argued that strongly selected advantageous mutations are difficult to detect by analysis of the uSFS. To these this hypothesis, we generated simulated datasets using the forward-time simulation package SLiM (v1.8; \citealt{RN148}). We simulated the evolution of 1Mbp chromosomes containing 20 evenly spaced out `genes`. Each `gene` consisted of 10 100bp exons, separated by 1Kbp of neutrally evolving intronic sequence. Nonsynonymous mutations were modelled as 75\% of mutations occurring in exons, the remaining 25\% were strictly neutral (i.e. synonymous sites). We varied the $\gamma_a$ and $p_a$ parameters across simulations, but kept the product $\gamma_a p_a$ equal to 0.1. We based this value of $\gamma_a p_a \approx 0.1$ on a recent study in \textit{D. melanogaster} \citep{RN321}. All simulations incorporated the same gamma dDFE (shape parameter $\beta$ = 0.2 and mean $\hat{\gamma_d}$ = -1,000), but the advantageous mutation parameters varied, these are listed in Table \ref{tab:advMuts}. The population-scaled mutation and recombination rates (i.e. $\theta$ = \emph{$4N_{e}\mu$} and $\rho$ = \emph{$4N_{e}r$}, respectively) were set to 0.01. Populations of $N$ = 1,000 diploid individuals were simulated for an initial burn-in of 10$N$ generations to establish equilibrium conditions. After the burn-in, 20 haploid chromosomes were sampled every 2$N$ generations for a further 100$N$ generations. We performed 10 replicate simulations for each set of selection parameters (Table \ref{tab:advMuts}). Across simulation replicates, time-points and loci we extracted the simulated nonsynonymous and synonymous sites, giving uSFS data for 10,000 `genes'. We sampled the set of 10,000 `genes' with replacement 100 times, collating the nonsynonymous and synonymous site uSFSs for each replicate.
+	In Chapter 3 of this thesis, we argued that strongly selected advantageous mutations are difficult to detect by analysis of the uSFS. To these this hypothesis, we generated simulated datasets using the forward-time simulation package SLiM (v1.8; \citealt{RN148}). We simulated the evolution of 1Mbp chromosomes containing 20 evenly spaced out `genes`. Each `gene` consisted of 10 100bp exons, separated by 1Kbp of neutrally evolving intronic sequence. Nonsynonymous mutations were modelled as 75\% of mutations occurring in exons, the remaining 25\% were strictly neutral (i.e. synonymous sites). We varied the $\gamma_a$ and $p_a$ parameters across simulations, but kept the product $\gamma_a p_a$ equal to 0.1. We based this value of $\gamma_a p_a \approx 0.1$ on a recent study in \textit{D. melanogaster} \citep{RN321}. All simulations incorporated the same gamma dDFE (shape parameter $\beta$ = 0.2 and mean $\hat{\gamma_d}$ = -1,000), but the advantageous mutation parameters varied, these are listed in Table \ref{tab:advMuts}. The population-scaled mutation and recombination rates (i.e. $\theta$ = \emph{$4N_{e}\mu$} and $\rho$ = \emph{$4N_{e}r$}, respectively) were set to 0.01. Populations of $N$ = 1,000 diploid individuals were simulated for an initial burn-in of 10$N$ generations to establish equilibrium conditions. After the burn-in, 20 haploid chromosomes were sampled every 2$N$ generations for a further 100$N$ generations. We performed 10 replicate simulations for each set of selection parameters (Table \ref{tab:advMuts}). Across simulation replicates, time-points and loci we extracted the simulated nonsynonymous and synonymous sites, giving uSFS data for 10,000 `genes'. We sampled the set of 10,000 `genes' with replacement 100 times, collating the nonsynonymous and synonymous site uSFSs for each replicate.
 	
 	We estimated our simulated DFEs by analysis of the uSFS using the methods of \cite{RN354}, as implemented in the polyDFE (v1.1) package. polyDFE fits an expression for the uSFS expected in the presence of both advantageous and deleterious mutations to data from putatively neutral and selected classes of sites, and estimates parameters by maximum likelihood. The neutral class is used to determine distortions to the uSFS caused by processes such as selection at linked sites and a history of population size change. In addition, polyDFE corrects for polymorphism misattributed to divergence, mutation rate variability and error in assigning sites as ancestral/derived. \cite{RN354} performed extensive simulations and showed that accurate estimates of the parameters for both deleterious and advantageous mutations can be obtained using their methods. However, there are a range of parameters that they did not test which may be biologically relevant, specifically when advantageous mutations are strongly selected, but infrequent.
 
@@ -196,6 +196,8 @@ P_{sc,k} \approx \int \limits_{0}^{\infty} f(\gamma) V_a \tau\gamma_a^{\frac{-4r
 
 	Across simulations, the strength of selection differed (ranging between $\gamma_a$ = 10 and $\gamma_a$ = 800), but the product $\gamma_a p_a$, which is expected to be directly proportional to the rate of sweeps, was always equal to 0.1. All simulations were subject to the same dDFE, so the extent of BGS should be fairly similar. We found that selection at linked sites reduced synonymous site diversity below the expectation value of 0.01 in all simulations (Table \ref{tab:summaryStats}),  but as the strength of selection acting on advantageous mutations increased, diversity at linked sites decreased (reflected in in the decreasing values $\pi/\pi_0$ shown in Table \ref{tab:summaryStats}). As expected, the relative fixation rate of nonsynonymous mutations (meausured using  $dN/dS$ ) did not vary systematically across simulations (Table \ref{tab:summaryStats}). From a visual inspection of the frequency spectra, it is clear that there is little information in standing variation for inferring the positive selection parameters when selection is strong (Figure \ref{fig:sfsExample}).
 	
+\input{tables/summaryStats.tex}	
+	
 	 We analysed the uSFS from our simulated populations and found that when advantageous mutations are relatively frequent ($p_a$ $>$ 0.0005), but weakly selected ($\gamma_a$ $<$ 100), both $\gamma_a$ and $p_a$ parameters can be estimated with precision (Table \ref{tab:Table2}). However, we found that when advantageous mutations were infrequent but strongly selected ($\gamma_a$ $\geq$ 100 and $p_a$ $\leq$ 0.0005) the parameters were very poorly estimated. Across all simulated datasets, when we included divergence in the analysis, the product $\gamma_a p_a$ was accurately estimated (Table REF) and likelihood ratio tests never failed to detect the presence of advantageous mutations in the uSFS. When we excluded divergence from the analysis, however, the product  $\gamma_a p_a$  was poorly estimated when $\gamma_a \geq 100$ and likelihood ratio tests typically failed to detect positive selection (Table REF). Across all simulations, we found that polyDFE gave estimates of the dDFE which were highly accurate (Table \ref{tab:dDFE}). polyDFE performed most poorly when divergence was included in the analysis, but only a dDFE was inferred. These results replicate the findings of \cite{RN354} and further emphasize the importance of specifying a full DFE model when making inferences of selection from the uSFS. 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -235,7 +237,7 @@ P_{sc,k} \approx \int \limits_{0}^{\infty} f(\gamma) V_a \tau\gamma_a^{\frac{-4r
 	
 %	 Furthermore, \cite{RN346} suggested that pleiotropy may place a burden on protein-coding genes such that adaptation most often occurs in regulatory regions. 
 
-\input{tables/FitnessExpectation.tex}
+%\input{tables/FitnessExpectation.tex}
 
 	There are a number of factors that should, perhaps, temper these conclusions. Firstly, the selection coefficient that appears in Equation \ref{eq:fitness} is the expectation of the DFE for advantageous mutations. If there were a continuous distribution of $s$ values around the point estimates we obtained, integrating over this distribution may yield a different result. Secondly, we have assumed that all elements of a particular class share a common set of selection parameters. This is slightly problematic since there are a number of sub-categorisations that could be applied to the set of CNEs we analysed (e.g. promoters and enhancers may be subject to different selective pressures). Indeed, different categories of protein-coding genes may also be subject to different selection pressures. For instance, virus interacting proteins and highly expressed genes have been estimated to have higher rates of adaptive substitutions in different organisms (Enard eLife paper; Williamson).
 
@@ -307,15 +309,17 @@ Thanks to Bret Payseur, Sally Otto, Nathaniel Sharp and the Otto labgroup at UBC
 
 \newpage
 
-\input{tables/summaryStats.tex}
 
-\input{tables/polyDFEsims_dDFE.tex}
 
 \input{tables/AIC_comparison.tex}
 
+\input{tables/GeneConversion.tex}
+
 \input{tables/BGSeffect.tex}
 
-\input{tables/FitnessChange.tex}
+\input{tables/polyDFEsims_dDFE.tex}
+
+%\input{tables/FitnessChange.tex}
 
 
 \begin{figure}[h]
